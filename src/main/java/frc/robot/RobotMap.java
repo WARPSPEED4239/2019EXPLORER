@@ -12,6 +12,6 @@ public class RobotMap {
 
   public static int liftWheelsSolenoidFrontForward = 0,
                     liftWheelsSolenoidFrontReverse = 1,
-                    liftWheelsSolenoidBackForward = 3,
-                    liftWheelsSolenoidBackReverse = 4;
+                    liftWheelsSolenoidBackForward = 2,
+                    liftWheelsSolenoidBackReverse = 3;
 }
