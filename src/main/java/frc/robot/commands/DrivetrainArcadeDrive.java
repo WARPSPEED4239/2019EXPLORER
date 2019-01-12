@@ -7,12 +7,12 @@ import frc.robot.Robot;
 
 public class DrivetrainArcadeDrive extends Command {
   public DrivetrainArcadeDrive() {
-    requires(Robot.m_drivetrain);
+    requires(Robot.m_drivetrainREV);
   }
 
   @Override
   protected void initialize() {
-    Robot.m_drivetrain.setIsAuto(false);
+    Robot.m_drivetrainREV.setIsAuto(false);
   }
 
   @Override
@@ -22,7 +22,7 @@ public class DrivetrainArcadeDrive extends Command {
     double move = -controller.getTriggerAxis(Hand.kRight) + controller.getTriggerAxis(Hand.kLeft);
     double rotate = -controller.getX(Hand.kLeft);
 
-    Robot.m_drivetrain.arcadeDrive(move, rotate);
+    Robot.m_drivetrainREV.arcadeDrive(move, rotate);
   }
 
   @Override

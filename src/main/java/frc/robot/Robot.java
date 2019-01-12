@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DrivetrainArcadeDrive;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.DrivetrainREV;
 import frc.robot.subsystems.LiftWheelsBack;
 import frc.robot.subsystems.LiftWheelsFront;
 import frc.robot.tools.RGBController;
 
 public class Robot extends TimedRobot {
-  public static Drivetrain m_drivetrain;
+  public static DrivetrainREV m_drivetrainREV;
   public static LiftWheelsBack m_liftWheelsBack;
   public static LiftWheelsFront m_liftWheelsFront;
   public static RGBController m_rgbController;
@@ -25,7 +25,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    m_drivetrain = new Drivetrain();
+    m_drivetrainREV = new DrivetrainREV();
     m_liftWheelsBack = new LiftWheelsBack();
     m_liftWheelsFront = new LiftWheelsFront();
     m_rgbController = new RGBController(new CANifier(RobotMap.canifer));
