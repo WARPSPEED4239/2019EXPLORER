@@ -1,17 +1,32 @@
 package frc.robot;
 
 public class RobotMap {
-  public static int drivetrainLeftOne = 1,
+  public static int drivetrainLeftOne = 1, //SparkMAX's
                     drivetrainLeftTwo = 2,
                     drivetrainLeftThree = 3,
                     drivetrainRightFour = 4,
                     drivetrainRightFive = 5,
-                    drivetrainRightSix = 6,
+                    drivetrainRightSix = 6;
 
-                    canifer = 1;
+  public static int liftMotor1 = 1, //SRX's
+                    liftMotor2 = 2,
+                    wristMotor = 3,
+                    cargoIntakeBottomMotor = 4, 
+                    rampMotor = 5,
 
-  public static int liftWheelsSolenoidFrontForward = 0,
-                    liftWheelsSolenoidFrontReverse = 1,
-                    liftWheelsSolenoidBackForward = 2,
-                    liftWheelsSolenoidBackReverse = 3;
+                    cargoIntakeTopMotor = 1, //SPX
+
+                    canifer = 1; //CANifier
+
+  public static int drivetrainShiftingSolenoidForward = 0, //Solenoids
+                    drivetrainShiftingSolenoidReverse = 1,
+                    hatchGrabberSolenoidForward = 2,
+                    hatchGrabberSolenoidReverse = 3,
+                    liftWheelsSolenoidFrontForward = 4,
+                    liftWheelsSolenoidFrontReverse = 5,
+                    liftWheelsSolenoidBackForward = 6,
+                    liftWheelsSolenoidBackReverse = 7;
+
+  public static int liftTopLimitSwitch = 0,
+                    liftBottomLimitSwitch = 1;
 }
