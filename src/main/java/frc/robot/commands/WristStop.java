@@ -15,6 +15,8 @@ public class WristStop extends Command {
   @Override
   protected void execute() {
     Robot.m_wrist.wristMotorStop();
+
+    Robot.m_wrist.updateSmartDashboard();
   }
 
   @Override
