@@ -9,10 +9,9 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.DrivetrainArcadeDrive;
 
-public class DrivetrainREV extends Subsystem {
-  private final int FREE_CURRENT_LIMIT = 35;
-  private final int STALL_CURRENT_LIMIT = 45;
-  private final int PEAK_CURRENT_LIMIT = 50;
+public class Drivetrain extends Subsystem {
+  private final int CURRENT_LIMIT = 40;
+  private final int PEAK_CURRENT_LIMIT = 45;
   private final int PEAK_CURRENT_DURATION_MILLIS = 100;
   
 	private final double RAMP_RATE = 0.2;
@@ -30,14 +29,14 @@ public class DrivetrainREV extends Subsystem {
 
   private DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
 
-  public DrivetrainREV() {
+  public Drivetrain() {
     leftSlave1.follow(leftMaster);
     leftSlave2.follow(leftMaster);
     rightSlave1.follow(rightMaster);
     rightSlave2.follow(rightMaster);
 
-    leftMaster.setSmartCurrentLimit(STALL_CURRENT_LIMIT, FREE_CURRENT_LIMIT);
-    rightMaster.setSmartCurrentLimit(STALL_CURRENT_LIMIT, FREE_CURRENT_LIMIT);
+    leftMaster.setSmartCurrentLimit(CURRENT_LIMIT);
+    rightMaster.setSmartCurrentLimit(CURRENT_LIMIT);
     leftMaster.setSecondaryCurrentLimit(PEAK_CURRENT_LIMIT, PEAK_CURRENT_DURATION_MILLIS);
     rightMaster.setSecondaryCurrentLimit(PEAK_CURRENT_LIMIT, PEAK_CURRENT_DURATION_MILLIS);
 
