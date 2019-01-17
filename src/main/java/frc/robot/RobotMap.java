@@ -16,7 +16,9 @@ public class RobotMap {
 
                     cargoIntakeTopMotor = 1, //SPX
 
-                    canifer = 1; //CANifier
+                    canifer = 1, //CANifier
+
+                    pigeonIMU = 1;
 
   public static int drivetrainShiftingSolenoidForward = 0, //Solenoids
                     drivetrainShiftingSolenoidReverse = 1,
