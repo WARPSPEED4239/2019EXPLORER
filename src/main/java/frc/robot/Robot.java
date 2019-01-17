@@ -18,6 +18,7 @@ import frc.robot.subsystems.LiftWheelsFront;
 import frc.robot.subsystems.Ramps;
 import frc.robot.subsystems.Wrist;
 import frc.robot.tools.RGBController;
+import frc.tools.TrajectoryBuilder;
 
 public class Robot extends TimedRobot {
   public static CargoIntake m_cargoIntake;
@@ -52,6 +53,8 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new DrivetrainArcadeDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+
+    TrajectoryBuilder.initialize();
   }
 
   @Override
