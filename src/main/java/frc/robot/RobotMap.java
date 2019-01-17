@@ -11,10 +11,9 @@ public class RobotMap {
   public static int liftMotor1 = 1, //SRX's
                     liftMotor2 = 2,
                     wristMotor = 3,
-                    cargoIntakeBottomMotor = 4, 
-                    rampMotor = 5,
+                    rampMotor = 4,
 
-                    cargoIntakeTopMotor = 1, //SPX
+                    cargoIntakeMotor = 1, //SPX
 
                     canifer = 1, //CANifier
 
@@ -31,6 +30,4 @@ public class RobotMap {
 
   public static int liftTopLimitSwitch = 0, //DIO
                     liftBottomLimitSwitch = 1;
-
-  public static int wristPotentiometer = 0; //Analog In
 }

@@ -9,8 +9,7 @@ import frc.robot.commands.CargoIntakeStop;
 
 public class CargoIntake extends Subsystem {
 
-  private WPI_TalonSRX cargoIntakeTopMotor = new WPI_TalonSRX(RobotMap.cargoIntakeTopMotor);
-  private WPI_VictorSPX cargoIntakeBottomMotor = new WPI_VictorSPX(RobotMap.cargoIntakeBottomMotor);
+  private WPI_VictorSPX cargoIntakeBottomMotor = new WPI_VictorSPX(RobotMap.cargoIntakeMotor);
 
   @Override
   public void initDefaultCommand() {
