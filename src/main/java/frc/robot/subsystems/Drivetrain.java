@@ -24,9 +24,6 @@ public class Drivetrain extends Subsystem {
   private CANSparkMax rightSlave1 = new CANSparkMax(RobotMap.drivetrainRightFive, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax rightSlave2 = new CANSparkMax(RobotMap.drivetrainRightSix, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-  private CANPIDController leftController = new CANPIDController(leftMaster);
-  private CANPIDController rightController = new CANPIDController(rightMaster);
-
   private DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
 
   public Drivetrain() {
@@ -42,16 +39,6 @@ public class Drivetrain extends Subsystem {
 
     leftMaster.setRampRate(RAMP_RATE);
     rightMaster.setRampRate(RAMP_RATE);
-    
-    leftController.setFF(0.0, 0);
-    leftController.setP(0.0, 0);
-    leftController.setI(0.0, 0);
-    leftController.setD(0.0, 0);
-
-    rightController.setFF(0.0, 0);
-    rightController.setP(0.0, 0);
-    rightController.setI(0.0, 0);
-    rightController.setD(0.0, 0);
   }
 
   public CANSparkMax getLeftController() {
@@ -87,21 +74,5 @@ public class Drivetrain extends Subsystem {
   public void stop() {
     leftMaster.stopMotor();
     rightMaster.stopMotor();
-  }
-  
-  public void setIsAuto (boolean isAuto) {
-    if (isAuto) {
-      drive.setSafetyEnabled(false);	
-      leftMaster.setInverted(true);
-      leftSlave1.setInverted(true);
-      leftSlave2.setInverted(true);
-    }
-
-    else {
-      drive.setSafetyEnabled(true);
-      leftMaster.setInverted(false);
-      leftSlave1.setInverted(false);
-      leftSlave2.setInverted(false);
-    }
   }
 }

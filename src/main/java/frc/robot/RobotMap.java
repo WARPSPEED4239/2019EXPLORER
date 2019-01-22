@@ -28,6 +28,7 @@ public class RobotMap {
                     liftWheelsSolenoidBackForward = 6,
                     liftWheelsSolenoidBackReverse = 7;
 
-  public static int liftTopLimitSwitch = 0, //DIO
-                    liftBottomLimitSwitch = 1;
+  public static int liftLimitSwitch = 0, //DIO
+                    wristLimitSwitch = 1,
+                    intakeLimitSwitch = 2;
 }

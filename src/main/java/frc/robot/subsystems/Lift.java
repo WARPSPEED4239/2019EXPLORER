@@ -13,9 +13,8 @@ public class Lift extends Subsystem {
   private WPI_TalonSRX liftMotor1 = new WPI_TalonSRX(RobotMap.liftMotor1);
   private WPI_TalonSRX liftMotor2 = new WPI_TalonSRX(RobotMap.liftMotor2);
 
-  private DigitalInput liftTopLimitSwitch = new DigitalInput(RobotMap.liftTopLimitSwitch);
-  private DigitalInput liftBottomLimitSwitch = new DigitalInput(RobotMap.liftBottomLimitSwitch);
-
+  private DigitalInput liftLimitSwitch = new DigitalInput(RobotMap.liftLimitSwitch);
+ 
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new LiftStop());
@@ -39,16 +38,11 @@ public class Lift extends Subsystem {
     liftMotor2.set(-1.0);
   }
 
-  public boolean getTopSwitch() {
-    return !liftTopLimitSwitch.get();
+  public boolean getLimitSwitch() {
+    return !liftLimitSwitch.get();
   }
   
-  public boolean getBottomSwitch() {
-    return !liftBottomLimitSwitch.get();
-  }
-
   private void updateSmartDashboard() {
-    SmartDashboard.putBoolean("Top Limit Switch", getTopSwitch());
-    SmartDashboard.putBoolean("Bottom Limit Switch", getBottomSwitch());
+    SmartDashboard.putBoolean("Limit Switch", getLimitSwitch());
   }
 }

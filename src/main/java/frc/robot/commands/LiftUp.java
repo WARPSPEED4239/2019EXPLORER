@@ -19,7 +19,7 @@ public class LiftUp extends Command {
 
   @Override
   protected boolean isFinished() {
-    return Robot.m_lift.getTopSwitch();
+    return false;
   }
 
   @Override
