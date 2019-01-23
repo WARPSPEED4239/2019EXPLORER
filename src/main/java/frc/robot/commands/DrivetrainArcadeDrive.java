@@ -18,7 +18,7 @@ public class DrivetrainArcadeDrive extends Command {
   protected void execute() {
     XboxController controller = Robot.m_oi.xbox;
 
-    double move = controller.getTriggerAxis(Hand.kRight) - controller.getTriggerAxis(Hand.kLeft);
+    double move = -controller.getTriggerAxis(Hand.kRight) + controller.getTriggerAxis(Hand.kLeft);
     double rotate = -controller.getX(Hand.kLeft);
 
     Robot.m_drivetrain.arcadeDrive(move, rotate);
