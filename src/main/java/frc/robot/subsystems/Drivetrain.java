@@ -119,14 +119,15 @@ public class Drivetrain extends Subsystem {
   }
 
   public void getIMUdata() {
-    IMU.setTemperatureCompensationDisable(true, TIMEOUT_MILLIS);
     IMU.getYawPitchRoll(ypr);
-    SmartDashboard.putNumberArray("Pigeon IMU", ypr);
+    SmartDashboard.putNumber("Pigeon IMU Yaw", ypr[0]);
+    SmartDashboard.putNumber("IMU Temp", IMU.getTemp());
   }
 
   public void resetEncoders() {
     leftEncoderBase = leftEncoder.getPosition();
     rightEncoderBase = rightEncoder.getPosition();
+    IMU.setYaw(0.0);
   }
 
   public double convertPosition(double input) {
