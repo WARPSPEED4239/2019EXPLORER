@@ -121,7 +121,6 @@ public class Drivetrain extends Subsystem {
   public void getIMUdata() {
     IMU.getYawPitchRoll(ypr);
     SmartDashboard.putNumber("Pigeon IMU Yaw", ypr[0]);
-    SmartDashboard.putNumber("IMU Temp", IMU.getTemp());
   }
 
   public void resetEncoders() {

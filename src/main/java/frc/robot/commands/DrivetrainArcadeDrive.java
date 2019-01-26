@@ -29,7 +29,7 @@ public class DrivetrainArcadeDrive extends Command {
 
     SmartDashboard.putNumber("Left Velocity (ft/s)", Robot.m_drivetrain.getLeftEncoderVelocity());
     SmartDashboard.putNumber("Right Velocity (ft/s)", Robot.m_drivetrain.getRightEncoderVelocity());
-
+    
     Robot.m_drivetrain.getIMUdata();
   }
 
