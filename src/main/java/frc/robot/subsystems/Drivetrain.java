@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 
@@ -23,6 +24,9 @@ public class Drivetrain extends Subsystem {
   private CANSparkMax rightSlave1 = new CANSparkMax(RobotMap.drivetrainRightFive, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax rightSlave2 = new CANSparkMax(RobotMap.drivetrainRightSix, CANSparkMaxLowLevel.MotorType.kBrushless);
 
+  //private CANEncoder leftEncoder = new CANEncoder(leftMaster);
+  //private CANEncoder rightEncoder = new CANEncoder(rightMaster);
+  
   private DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
 
   public Drivetrain() {
@@ -30,27 +34,35 @@ public class Drivetrain extends Subsystem {
     leftSlave2.follow(leftMaster);
     rightSlave1.follow(rightMaster);
     rightSlave2.follow(rightMaster);
-
-    leftMaster.setSmartCurrentLimit(CURRENT_LIMIT);
+    
+    /*leftMaster.setSmartCurrentLimit(CURRENT_LIMIT);
     rightMaster.setSmartCurrentLimit(CURRENT_LIMIT);
     leftMaster.setSecondaryCurrentLimit(PEAK_CURRENT_LIMIT, PEAK_CURRENT_DURATION_MILLIS);
     rightMaster.setSecondaryCurrentLimit(PEAK_CURRENT_LIMIT, PEAK_CURRENT_DURATION_MILLIS);
 
     leftMaster.setRampRate(RAMP_RATE);
-    rightMaster.setRampRate(RAMP_RATE);
+    rightMaster.setRampRate(RAMP_RATE);*/
   }
 
-  public CANSparkMax getLeftController() {
+  /*public CANSparkMax getLeftController() {
     return leftMaster;
   }
 
   public CANSparkMax getRightController() {
     return rightMaster;
+  }*/
+
+  /*public CANEncoder getLeftEncoder() {
+    return leftEncoder;
   }
 
-  @Override
+  public CANEncoder getRightEncoder() {
+    return rightEncoder;
+  }*/
+
+  /*@Override
   public void periodic() {
-  }
+  }*/
 
   @Override
   public void initDefaultCommand() {
@@ -58,7 +70,7 @@ public class Drivetrain extends Subsystem {
   }
   
   public void arcadeDrive(double move, double rotate) {
-    final double MIN_MOVE_THRESHOLD = 0.05;
+    /*final double MIN_MOVE_THRESHOLD = 0.05;
     final double MIN_ROTATE_THRESHOLD = 0.05;
 
     if (Math.abs(move) < MIN_MOVE_THRESHOLD)
@@ -66,12 +78,28 @@ public class Drivetrain extends Subsystem {
 
     if (Math.abs(rotate) < MIN_ROTATE_THRESHOLD)
       rotate = 0.0;
-
+    */
     drive.arcadeDrive(move, rotate);
   }
 
-  public void stop() {
+  /*public void stop() {
     leftMaster.stopMotor();
     rightMaster.stopMotor();
+  }*/
+
+  /*public double getLeftEncoderPosition() {
+    return leftEncoder.getPosition();
   }
+
+  public double getRightEncoderPosition() {
+    return rightEncoder.getPosition();
+  }
+
+  public double getEncoderLeftVelocity() {
+    return leftEncoder.getVelocity();
+  }
+
+  public double getEncoderRightVelocity() {
+    return rightEncoder.getVelocity();
+  }*/
 }
