@@ -91,7 +91,10 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+  if (m_oi.xbox.getBackButton()) {
+    m_drivetrain.resetEncoders();
   }
+    }
 
   @Override
   public void testPeriodic() {

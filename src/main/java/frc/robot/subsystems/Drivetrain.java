@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.sensors.PigeonIMU;
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 
@@ -11,7 +12,7 @@ import frc.robot.RobotMap;
 import frc.robot.commands.DrivetrainArcadeDrive;
 
 public class Drivetrain extends Subsystem {
-  /*private double [] ypr = new double[3];
+  private double [] ypr = new double[3];
 
   private final int CURRENT_LIMIT = 40;
   private final int PEAK_CURRENT_LIMIT = 45;
@@ -19,7 +20,7 @@ public class Drivetrain extends Subsystem {
   
 	private final double RAMP_RATE = 0.2;
 	private final int TIMEOUT_MILLIS = 10;
-  */
+  
   private CANSparkMax leftMaster = new CANSparkMax(RobotMap.drivetrainLeftOne, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax leftSlave1 = new CANSparkMax(RobotMap.drivetrainLeftTwo, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax leftSlave2 = new CANSparkMax(RobotMap.drivetrainLeftThree, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -27,12 +28,15 @@ public class Drivetrain extends Subsystem {
   private CANSparkMax rightSlave1 = new CANSparkMax(RobotMap.drivetrainRightFive, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax rightSlave2 = new CANSparkMax(RobotMap.drivetrainRightSix, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-  //private PigeonIMU IMU = new PigeonIMU(RobotMap.pigeonIMU);
+  private PigeonIMU IMU = new PigeonIMU(RobotMap.pigeonIMU);
 
-  //private CANEncoder leftEncoder = new CANEncoder(leftMaster);
-  //private CANEncoder rightEncoder = new CANEncoder(rightMaster);
-  
+  private CANEncoder leftEncoder = new CANEncoder(leftMaster);
+  private CANEncoder rightEncoder = new CANEncoder(rightMaster);
+
   private DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
+
+  private double leftEncoderBase;
+  private double rightEncoderBase;
 
   public Drivetrain() {
     leftSlave1.follow(leftMaster);
@@ -40,34 +44,36 @@ public class Drivetrain extends Subsystem {
     rightSlave1.follow(rightMaster);
     rightSlave2.follow(rightMaster);
     
-    /*leftMaster.setSmartCurrentLimit(CURRENT_LIMIT);
+    leftMaster.setSmartCurrentLimit(CURRENT_LIMIT);
     rightMaster.setSmartCurrentLimit(CURRENT_LIMIT);
     leftMaster.setSecondaryCurrentLimit(PEAK_CURRENT_LIMIT, PEAK_CURRENT_DURATION_MILLIS);
     rightMaster.setSecondaryCurrentLimit(PEAK_CURRENT_LIMIT, PEAK_CURRENT_DURATION_MILLIS);
 
     leftMaster.setRampRate(RAMP_RATE);
-    rightMaster.setRampRate(RAMP_RATE);*/
+    rightMaster.setRampRate(RAMP_RATE);
+
+    resetEncoders();
   }
 
-  /*public CANSparkMax getLeftController() {
+  public CANSparkMax getLeftController() {
     return leftMaster;
   }
 
   public CANSparkMax getRightController() {
     return rightMaster;
-  }*/
+  }
 
-  /*public CANEncoder getLeftEncoder() {
+  public CANEncoder getLeftEncoder() {
     return leftEncoder;
   }
 
   public CANEncoder getRightEncoder() {
     return rightEncoder;
-  }*/
+  }
 
-  /*@Override
+  @Override
   public void periodic() {
-  }*/
+  }
 
   @Override
   public void initDefaultCommand() {
@@ -75,7 +81,7 @@ public class Drivetrain extends Subsystem {
   }
   
   public void arcadeDrive(double move, double rotate) {
-    /*final double MIN_MOVE_THRESHOLD = 0.05;
+    final double MIN_MOVE_THRESHOLD = 0.05;
     final double MIN_ROTATE_THRESHOLD = 0.05;
 
     if (Math.abs(move) < MIN_MOVE_THRESHOLD)
@@ -83,33 +89,51 @@ public class Drivetrain extends Subsystem {
 
     if (Math.abs(rotate) < MIN_ROTATE_THRESHOLD)
       rotate = 0.0;
-    */
+    
     drive.arcadeDrive(move, rotate);
   }
 
-  /*public void stop() {
+  public void stop() {
     leftMaster.stopMotor();
     rightMaster.stopMotor();
-  }*/
+  }
 
-  /*public double getLeftEncoderPosition() {
-    return leftEncoder.getPosition();
+  public double getLeftEncoderPosition() {
+    double revs = -(leftEncoder.getPosition() - leftEncoderBase);
+    return convertPosition(revs);
   }
 
   public double getRightEncoderPosition() {
-    return rightEncoder.getPosition();
+     double revs = rightEncoder.getPosition() - rightEncoderBase;
+     return convertPosition(revs);
   }
 
-  public double getEncoderLeftVelocity() {
-    return leftEncoder.getVelocity();
+  public double getLeftEncoderVelocity() {
+     double input = -leftEncoder.getVelocity();
+     return convertVelocity(input);
   }
 
-  public double getEncoderRightVelocity() {
-    return rightEncoder.getVelocity();
-  }*/
+  public double getRightEncoderVelocity() {
+    double input = rightEncoder.getVelocity();
+    return convertVelocity(input);
+  }
 
-  /*public void getIMUdata() {
+  public void getIMUdata() {
+    IMU.setTemperatureCompensationDisable(true, TIMEOUT_MILLIS);
     IMU.getYawPitchRoll(ypr);
     SmartDashboard.putNumberArray("Pigeon IMU", ypr);
-  }*/
+  }
+
+  public void resetEncoders() {
+    leftEncoderBase = leftEncoder.getPosition();
+    rightEncoderBase = rightEncoder.getPosition();
+  }
+
+  public double convertPosition(double input) {
+    return 2.0 * Math.PI * 0.25 * input / 7.08; 
+  }
+
+  public double convertVelocity(double input) {
+    return 2.0 * Math.PI * 0.25 * input / 7.08 / 60; 
+  }
 }
