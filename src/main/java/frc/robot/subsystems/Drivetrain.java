@@ -1,28 +1,33 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANEncoder;
+import com.ctre.phoenix.sensors.PigeonIMU;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.DrivetrainArcadeDrive;
 
 public class Drivetrain extends Subsystem {
+  /*private double [] ypr = new double[3];
+
   private final int CURRENT_LIMIT = 40;
   private final int PEAK_CURRENT_LIMIT = 45;
   private final int PEAK_CURRENT_DURATION_MILLIS = 100;
   
 	private final double RAMP_RATE = 0.2;
 	private final int TIMEOUT_MILLIS = 10;
-  
+  */
   private CANSparkMax leftMaster = new CANSparkMax(RobotMap.drivetrainLeftOne, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax leftSlave1 = new CANSparkMax(RobotMap.drivetrainLeftTwo, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax leftSlave2 = new CANSparkMax(RobotMap.drivetrainLeftThree, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax rightMaster = new CANSparkMax(RobotMap.drivetrainRightFour, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax rightSlave1 = new CANSparkMax(RobotMap.drivetrainRightFive, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax rightSlave2 = new CANSparkMax(RobotMap.drivetrainRightSix, CANSparkMaxLowLevel.MotorType.kBrushless);
+
+  //private PigeonIMU IMU = new PigeonIMU(RobotMap.pigeonIMU);
 
   //private CANEncoder leftEncoder = new CANEncoder(leftMaster);
   //private CANEncoder rightEncoder = new CANEncoder(rightMaster);
@@ -101,5 +106,10 @@ public class Drivetrain extends Subsystem {
 
   public double getEncoderRightVelocity() {
     return rightEncoder.getVelocity();
+  }*/
+
+  /*public void getIMUdata() {
+    IMU.getYawPitchRoll(ypr);
+    SmartDashboard.putNumberArray("Pigeon IMU", ypr);
   }*/
 }
