@@ -19,7 +19,7 @@ public class LiftDown extends Command {
 
   @Override
   protected boolean isFinished() {
-    return Robot.m_lift.getLimitSwitch();
+    return Robot.m_lift.getLiftLimitSwitch();
   }
 
   @Override

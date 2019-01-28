@@ -17,7 +17,7 @@ public class RobotMap {
 
                     canifer = 1, //CANifier
 
-                    pigeonIMU = 1;
+                    pigeonIMU = 1; //Pigeon IMU
 
   public static int drivetrainShiftingSolenoidForward = 0, //Solenoids
                     drivetrainShiftingSolenoidReverse = 1,
@@ -29,6 +29,5 @@ public class RobotMap {
                     liftWheelsSolenoidBackReverse = 7;
 
   public static int liftLimitSwitch = 0, //DIO
-                    wristLimitSwitch = 1,
-                    intakeLimitSwitch = 2;
+                    wristLimitSwitch = 1;
 }

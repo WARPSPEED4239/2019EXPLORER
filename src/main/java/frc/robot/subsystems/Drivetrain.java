@@ -19,7 +19,10 @@ public class Drivetrain extends Subsystem {
   private final int PEAK_CURRENT_DURATION_MILLIS = 100;
   
 	private final double RAMP_RATE = 0.2;
-	private final int TIMEOUT_MILLIS = 10;
+	//private final int TIMEOUT_MILLIS = 10;
+  
+  private double leftEncoderBase;
+  private double rightEncoderBase;
   
   private CANSparkMax leftMaster = new CANSparkMax(RobotMap.drivetrainLeftOne, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax leftSlave1 = new CANSparkMax(RobotMap.drivetrainLeftTwo, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -35,9 +38,6 @@ public class Drivetrain extends Subsystem {
 
   private DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
 
-  private double leftEncoderBase;
-  private double rightEncoderBase;
-
   public Drivetrain() {
     leftSlave1.follow(leftMaster);
     leftSlave2.follow(leftMaster);
@@ -52,7 +52,7 @@ public class Drivetrain extends Subsystem {
     leftMaster.setRampRate(RAMP_RATE);
     rightMaster.setRampRate(RAMP_RATE);
 
-    resetEncoders();
+    resetSensors();
   }
 
   public CANSparkMax getLeftController() {
@@ -123,7 +123,7 @@ public class Drivetrain extends Subsystem {
     SmartDashboard.putNumber("Pigeon IMU Yaw", ypr[0]);
   }
 
-  public void resetEncoders() {
+  public void resetSensors() {
     leftEncoderBase = leftEncoder.getPosition();
     rightEncoderBase = rightEncoder.getPosition();
     IMU.setYaw(0.0);

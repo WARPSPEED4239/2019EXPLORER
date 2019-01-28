@@ -2,6 +2,8 @@ package frc.robot;
 
 import com.ctre.phoenix.CANifier;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -32,8 +34,8 @@ public class Robot extends TimedRobot {
   public static Wrist m_wrist;
   public static OI m_oi;
 
-  Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  private Command m_autonomousCommand;
+  private SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   @Override
   public void robotInit() {
@@ -48,6 +50,10 @@ public class Robot extends TimedRobot {
     m_ramps = new Ramps();
     m_wrist = new Wrist();
     m_oi = new OI();
+    
+    UsbCamera cam0 = CameraServer.getInstance().startAutomaticCapture(0);
+    cam0.setResolution(320, 240);
+    cam0.setFPS(10);
     
     m_chooser.setDefaultOption("Default Auto", new DrivetrainArcadeDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -91,10 +97,11 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-  if (m_oi.xbox.getBackButton()) {
-    m_drivetrain.resetEncoders();
-  }
+  
+    if (m_oi.xbox.getBackButton()) {
+     m_drivetrain.resetSensors();
     }
+  }
 
   @Override
   public void testPeriodic() {

@@ -15,6 +15,10 @@ public class Lift extends Subsystem {
 
   private DigitalInput liftLimitSwitch = new DigitalInput(RobotMap.liftLimitSwitch);
  
+  public Lift() {
+    liftMotor2.follow(liftMotor1);
+  }
+
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new LiftStop());
@@ -23,26 +27,23 @@ public class Lift extends Subsystem {
   public void liftStop() {
     updateSmartDashboard();
     liftMotor1.set(0.0);
-    liftMotor2.set(0.0);
   }
 
   public void liftUp() {
     updateSmartDashboard();
     liftMotor1.set(1.0);
-    liftMotor2.set(1.0);
   }
 
   public void liftDown() {
     updateSmartDashboard();
     liftMotor1.set(-1.0);
-    liftMotor2.set(-1.0);
   }
 
-  public boolean getLimitSwitch() {
+  public boolean getLiftLimitSwitch() {
     return !liftLimitSwitch.get();
   }
   
   private void updateSmartDashboard() {
-    SmartDashboard.putBoolean("Limit Switch", getLimitSwitch());
+    SmartDashboard.putBoolean("Lift Limit Switch", getLiftLimitSwitch());
   }
 }
