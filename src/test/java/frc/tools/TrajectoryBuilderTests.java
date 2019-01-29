@@ -34,8 +34,8 @@ public class TrajectoryBuilderTests {
             }
 
             CoupledWheelState[] state = builder.follow(t);
-            System.out.println("left: " + toString(state[CoupledCausalTrajGen.LEFT]));
-            System.out.println("right: " + toString(state[CoupledCausalTrajGen.RIGHT]));
+            //System.out.println("left: " + toString(state[CoupledCausalTrajGen.LEFT]));
+            //System.out.println("right: " + toString(state[CoupledCausalTrajGen.RIGHT]));
 
             t += 0.01;
         }
