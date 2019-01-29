@@ -1,6 +1,6 @@
 package frc.tools;
 
-class UnitConversion {
+public class UnitConversion {
     public static final double PI = 3.141592;
 
     public static final double METERS_PER_FEET = 0.3048;
