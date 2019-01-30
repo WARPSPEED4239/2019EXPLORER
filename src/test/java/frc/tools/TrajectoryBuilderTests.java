@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import frc.robot.tools.TrajectoryBuilder;
+import frc.robot.tools.UnitConversion;
 import grpl.pathfinder.Vec2;
 import grpl.pathfinder.coupled.CoupledCausalTrajGen;
 import grpl.pathfinder.coupled.CoupledState;

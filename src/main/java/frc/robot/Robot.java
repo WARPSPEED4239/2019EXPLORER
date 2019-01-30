@@ -20,7 +20,6 @@ import frc.robot.subsystems.LiftWheelsFront;
 import frc.robot.subsystems.Ramps;
 import frc.robot.subsystems.Wrist;
 import frc.robot.tools.RGBController;
-import frc.tools.TrajectoryBuilder;
 
 public class Robot extends TimedRobot {
   public static CargoIntake m_cargoIntake;
