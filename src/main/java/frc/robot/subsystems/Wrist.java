@@ -10,10 +10,22 @@ import frc.robot.commands.WristStop;
 
 public class Wrist extends Subsystem {
 
-  private WPI_TalonSRX wristMotor = new WPI_TalonSRX(RobotMap.wristMotor);
+  private WPI_TalonSRX mWristMotor;
   
-  private DigitalInput wristLimitSwitch = new DigitalInput(RobotMap.wristLimitSwitch);
+  private DigitalInput mWristLimitSwitch;
 
+  public Wrist (WPI_TalonSRX wristMotor, DigitalInput wristLimitSwitch) {
+    mWristMotor = wristMotor;
+    mWristLimitSwitch = wristLimitSwitch;
+
+  }
+
+  public static Wrist create() {
+    WPI_TalonSRX mWristMotor = new WPI_TalonSRX(RobotMap.wristMotor);
+    DigitalInput mWristLimitSwitch = new DigitalInput(RobotMap.wristLimitSwitch);
+
+    return new Wrist(mWristMotor, mWristLimitSwitch);
+  }
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new WristStop());
@@ -21,25 +33,25 @@ public class Wrist extends Subsystem {
 
   public void wristMotorStop() {
     updateSmartDashboard();
-    wristMotor.set(0.0);
+    mWristMotor.set(0.0);
   }
 
   public void wristMotorUp() {
     updateSmartDashboard();
-    wristMotor.set(1.0);
+    mWristMotor.set(1.0);
   }
 
   public void wristMotorDown() {
     updateSmartDashboard();
-    wristMotor.set(-1.0);
+    mWristMotor.set(-1.0);
   }
 
   public boolean getWristLimitSwitch() {
     updateSmartDashboard();
-    return !wristLimitSwitch.get();
+    return !mWristLimitSwitch.get();
   }
 
   public void updateSmartDashboard() {
-    SmartDashboard.putBoolean("Wrist Limit Switch", wristLimitSwitch.get());
+    SmartDashboard.putBoolean("Wrist Limit Switch", mWristLimitSwitch.get());
   }
 }

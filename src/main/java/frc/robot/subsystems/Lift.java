@@ -10,13 +10,26 @@ import frc.robot.commands.LiftStop;
 
 public class Lift extends Subsystem {
 
-  private WPI_TalonSRX liftMotor1 = new WPI_TalonSRX(RobotMap.liftMotor1);
-  private WPI_TalonSRX liftMotor2 = new WPI_TalonSRX(RobotMap.liftMotor2);
+  private WPI_TalonSRX mLiftMaster;
+  private WPI_TalonSRX mLiftSlave;
 
-  private DigitalInput liftLimitSwitch = new DigitalInput(RobotMap.liftLimitSwitch);
- 
-  public Lift() {
-    liftMotor2.follow(liftMotor1);
+  private DigitalInput mLiftLimitSwitch;
+  
+  public Lift(WPI_TalonSRX liftMaster, WPI_TalonSRX liftSlave, DigitalInput liftLimitSwitch) {
+    mLiftMaster = liftMaster;
+    mLiftSlave = liftSlave;
+    mLiftLimitSwitch = liftLimitSwitch;
+    
+    mLiftSlave.follow(mLiftMaster);
+  }
+
+  public static Lift create() {
+    WPI_TalonSRX liftMaster = new WPI_TalonSRX(RobotMap.liftMotor1);
+    WPI_TalonSRX liftSlave = new WPI_TalonSRX(RobotMap.liftMotor2);
+
+    DigitalInput liftLimitSwitch = new DigitalInput(RobotMap.liftLimitSwitch);
+
+    return new Lift(liftMaster, liftSlave, liftLimitSwitch);
   }
 
   @Override
@@ -26,21 +39,21 @@ public class Lift extends Subsystem {
 
   public void liftStop() {
     updateSmartDashboard();
-    liftMotor1.set(0.0);
+    mLiftMaster.set(0.0);
   }
 
   public void liftUp() {
     updateSmartDashboard();
-    liftMotor1.set(1.0);
+    mLiftMaster.set(1.0);
   }
 
   public void liftDown() {
     updateSmartDashboard();
-    liftMotor1.set(-1.0);
+    mLiftMaster.set(-1.0);
   }
 
   public boolean getLiftLimitSwitch() {
-    return !liftLimitSwitch.get();
+    return !mLiftLimitSwitch.get();
   }
   
   private void updateSmartDashboard() {

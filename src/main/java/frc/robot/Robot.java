@@ -42,13 +42,13 @@ public class Robot extends TimedRobot {
     m_cargoIntake = new CargoIntake();
     m_drivetrainShifting = new DrivetrainShifting();
     m_hatchGrabber = new HatchGrabber();
-    m_lift = new Lift();
+    m_lift = Lift.create();
     m_drivetrain = new Drivetrain();
     m_liftWheelsBack = new LiftWheelsBack();
     m_liftWheelsFront = new LiftWheelsFront();
     m_rgbController = new RGBController(new CANifier(RobotMap.canifer));
     m_ramps = new Ramps();
-    m_wrist = new Wrist();
+    m_wrist = Wrist.create();
     m_oi = new OI();
     
     UsbCamera cam0 = CameraServer.getInstance().startAutomaticCapture(0);
