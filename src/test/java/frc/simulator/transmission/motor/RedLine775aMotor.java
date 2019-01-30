@@ -1,6 +1,6 @@
 package frc.simulator.transmission.motor;
 
-public class NeoMotor implements DCMotor {
+public class RedLine775aMotor implements DCMotor {
 
     @Override
     public double getNominalVoltage() {
@@ -9,22 +9,22 @@ public class NeoMotor implements DCMotor {
 
     @Override
     public double getFreeSpeed() {
-        return 5676.0;
+        return 21020.0;
     }
 
     @Override
     public double getFreeCurrent() {
-        return 1.8;
+        return 3.81;
     }
 
     @Override
     public double getStallCurrent() {
-        return 105.0;
+        return 130.12;
     }
 
     @Override
     public double getStallTorque() {
-        return 2.6;
+        return 0.7;
     }
     
 }
