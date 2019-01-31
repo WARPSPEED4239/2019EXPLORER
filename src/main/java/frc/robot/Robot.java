@@ -4,6 +4,7 @@ import com.ctre.phoenix.CANifier;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -20,6 +21,7 @@ import frc.robot.subsystems.LiftWheelsFront;
 import frc.robot.subsystems.Ramps;
 import frc.robot.subsystems.Wrist;
 import frc.robot.tools.RGBController;
+import frc.robot.tools.VisionProcessor;
 
 public class Robot extends TimedRobot {
   public static CargoIntake m_cargoIntake;
@@ -31,6 +33,7 @@ public class Robot extends TimedRobot {
   public static LiftWheelsFront m_liftWheelsFront;
   public static RGBController m_rgbController;
   public static Ramps m_ramps;
+  public static VisionProcessor m_visionProcessor;
   public static Wrist m_wrist;
   public static OI m_oi;
 
@@ -48,9 +51,13 @@ public class Robot extends TimedRobot {
     m_liftWheelsFront = new LiftWheelsFront();
     m_rgbController = new RGBController(new CANifier(RobotMap.canifer));
     m_ramps = new Ramps();
+    m_visionProcessor = new VisionProcessor();
     m_wrist = Wrist.create();
     m_oi = new OI();
     
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
+
     UsbCamera cam0 = CameraServer.getInstance().startAutomaticCapture(0);
     cam0.setResolution(320, 240);
     cam0.setFPS(10);
@@ -98,6 +105,8 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
   
+    m_visionProcessor.update();
+
     if (m_oi.xbox.getBackButton()) {
      m_drivetrain.resetSensors();
     }
