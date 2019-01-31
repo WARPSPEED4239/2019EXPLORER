@@ -54,14 +54,14 @@ public class Robot extends TimedRobot {
     m_visionProcessor = new VisionProcessor();
     m_wrist = Wrist.create();
     m_oi = new OI();
-    
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
+
+    //NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+    //NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
 
     UsbCamera cam0 = CameraServer.getInstance().startAutomaticCapture(0);
     cam0.setResolution(320, 240);
     cam0.setFPS(10);
-    
+
     m_chooser.setDefaultOption("Default Auto", new DrivetrainArcadeDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
@@ -83,7 +83,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_chooser.getSelected();
-     
+
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
     }
@@ -105,7 +105,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
   
-    m_visionProcessor.update();
+      m_visionProcessor.update();
 
     if (m_oi.xbox.getBackButton()) {
      m_drivetrain.resetSensors();
