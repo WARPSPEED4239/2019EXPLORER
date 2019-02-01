@@ -4,7 +4,6 @@ import com.ctre.phoenix.CANifier;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -105,7 +104,8 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
   
-      m_visionProcessor.update();
+    m_visionProcessor.update();
+    System.out.println(m_visionProcessor.getPose());
 
     if (m_oi.xbox.getBackButton()) {
      m_drivetrain.resetSensors();

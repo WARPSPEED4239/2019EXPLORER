@@ -21,6 +21,9 @@ public class VisionProcessor {
     private MatOfPoint3f mObjectPoints;
     private Mat mCameraMatrix;
     private MatOfDouble mDistortionCoefficients;
+
+    private PoseEstimate mPoseEstimate;
+
     private NetworkTable limelightTable;
 
     public VisionProcessor() {
@@ -47,6 +50,10 @@ public class VisionProcessor {
         limelightTable.getEntry("ledMode").setNumber(3);
     }
 
+    public synchronized PoseEstimate getPose() {
+        return mPoseEstimate;
+    }
+
     public void update() {
         double[] cornX = limelightTable.getEntry("tcornx").getDoubleArray(new double[0]);
         double[] cornY = limelightTable.getEntry("tcorny").getDoubleArray(new double[0]);
@@ -68,6 +75,12 @@ public class VisionProcessor {
 
         System.out.println("rotationVector: " + rotationVector.dump());
         System.out.println("translationVector: " + translationVector.dump());
+
+        synchronized(this) {
+            mPoseEstimate.x = translationVector.get(0, 0)[0] / 12.0;
+            mPoseEstimate.y = translationVector.get(2, 0)[0] / 12.0;
+            mPoseEstimate.theta = rotationVector.get(1, 0)[0] * 180.0 / Math.PI;
+        }
     }
 
     class PointFinder {
@@ -141,6 +154,16 @@ public class VisionProcessor {
             return mBottomRight;
         }
 
+    }
+
+    class PoseEstimate {
+        public double x;
+        public double y;
+        public double theta;
+
+        public String toString() {
+            return "x = " + x + ", y = " + y + ", theta = " + theta;
+        }
     }
     
 }
