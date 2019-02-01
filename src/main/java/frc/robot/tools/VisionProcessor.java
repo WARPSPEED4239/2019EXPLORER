@@ -45,6 +45,8 @@ public class VisionProcessor {
         mDistortionCoefficients = new MatOfDouble(2.9684613693070039e-01, -1.4380252254747885e+00,
                 -2.2098421479494509e-03, -3.3894563533907176e-03, 2.5344430354806740e+00);
 
+        mPoseEstimate = new PoseEstimate();
+        
         limelightTable.getEntry("pipeline").setNumber(0);
         limelightTable.getEntry("camMode").setNumber(0);
         limelightTable.getEntry("ledMode").setNumber(3);
