@@ -72,6 +72,11 @@ public class VisionProcessor {
             pointFinder.getTopLeft(), 
             pointFinder.getTopRight()
         );
+        
+        System.out.println(pointFinder.getBottomRight());
+        System.out.println(pointFinder.getBottomLeft());
+        System.out.println(pointFinder.getTopLeft());
+        System.out.println(pointFinder.getTopRight());
 
         Mat rotationVector = new Mat();
         Mat translationVector = new Mat();
