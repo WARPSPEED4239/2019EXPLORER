@@ -20,7 +20,8 @@ import frc.robot.subsystems.LiftWheelsFront;
 import frc.robot.subsystems.Ramps;
 import frc.robot.subsystems.Wrist;
 import frc.robot.tools.RGBController;
-import frc.robot.tools.VisionProcessor;
+import frc.robot.tools.vision.VisionData;
+import frc.robot.tools.vision.VisionProcessor;
 
 public class Robot extends TimedRobot {
   public static CargoIntake m_cargoIntake;
@@ -50,9 +51,10 @@ public class Robot extends TimedRobot {
     m_liftWheelsFront = new LiftWheelsFront();
     m_rgbController = new RGBController(new CANifier(RobotMap.canifer));
     m_ramps = new Ramps();
-    m_visionProcessor = new VisionProcessor();
     m_wrist = Wrist.create();
     m_oi = new OI();
+
+    m_visionProcessor = new VisionProcessor();
 
     //NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
     //NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
@@ -105,7 +107,15 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
   
     m_visionProcessor.update();
-    System.out.println(m_visionProcessor.getPose());
+    final VisionData vd = m_visionProcessor.getVisionData();
+    System.out.println("=============================");
+    System.out.println("X = " + vd.getX());
+    System.out.println("Y = " + vd.getY());
+    System.out.println("Z = " + vd.getZ());
+    System.out.println("ROLL = " + vd.getRoll());
+    System.out.println("PITCH = " + vd.getPitch());
+    System.out.println("YAW = " + vd.getYaw());
+    System.out.println("=============================");
 
     if (m_oi.xbox.getBackButton()) {
      m_drivetrain.resetSensors();

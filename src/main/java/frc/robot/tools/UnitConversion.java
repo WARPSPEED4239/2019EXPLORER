@@ -29,4 +29,20 @@ public class UnitConversion {
         return rpm * 2.0 * PI / 60;
     }
 
+    public static double convertRadiansToDegrees(double radians) {
+        return 180.0 * radians / Math.PI;
+    }
+
+    public static double convertDegreesToRadians(double degrees) {
+        return Math.PI * degrees / 180.0;
+    }
+
+    public static double convertInchesToFeet(double inches) {
+        return inches / 12.0;
+    }
+
+    public static double convertFeetToInches(double feet) {
+        return feet * 12.0;
+    }
+
 }
