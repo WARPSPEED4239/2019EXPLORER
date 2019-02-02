@@ -77,7 +77,8 @@ public class VisionProcessor {
         Mat rotationMatrix = new Mat();
         Calib3d.Rodrigues(rotationVector, rotationMatrix);
 
-        Mat projectionMatrix = new MatOfDouble(
+        Mat projectionMatrix = new Mat(3, 4, CvType.CV_64F);
+        projectionMatrix.put(0, 0,
             rotationMatrix.get(0, 0)[0], rotationMatrix.get(0, 1)[0], rotationMatrix.get(0, 2)[0], 0,
             rotationMatrix.get(1, 0)[0], rotationMatrix.get(1, 1)[0], rotationMatrix.get(1, 2)[0], 0,
             rotationMatrix.get(2, 0)[0], rotationMatrix.get(2, 1)[0], rotationMatrix.get(2, 2)[0], 0
