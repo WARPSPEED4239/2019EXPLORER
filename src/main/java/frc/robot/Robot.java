@@ -108,7 +108,6 @@ public class Robot extends TimedRobot {
   
     m_visionProcessor.update();
     final VisionData vd = m_visionProcessor.getVisionData();
-    System.out.println("=============================");
     System.out.println("X = " + vd.getX());
     System.out.println("Y = " + vd.getY());
     System.out.println("Z = " + vd.getZ());
