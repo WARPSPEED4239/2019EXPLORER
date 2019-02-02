@@ -1,6 +1,6 @@
-package frc.simulator.transmission.motor;
+package frc.robot.simulator.transmission.motor;
 
-public class CimMotor implements DCMotor {
+public class VEX775proMotor implements DCMotor {
 
     @Override
     public double getNominalVoltage() {
@@ -9,22 +9,22 @@ public class CimMotor implements DCMotor {
 
     @Override
     public double getFreeSpeed() {
-        return 5330.0;
+        return 18730.0;
     }
 
     @Override
     public double getFreeCurrent() {
-        return 2.7;
+        return 0.7;
     }
 
     @Override
     public double getStallCurrent() {
-        return 131.0;
+        return 134.0;
     }
 
     @Override
     public double getStallTorque() {
-        return 2.41;
+        return 0.71;
     }
     
 }

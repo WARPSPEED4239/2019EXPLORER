@@ -50,10 +50,14 @@ public class VisionProcessor {
         mLimelightTable.getEntry("camMode").setNumber(0);
         mLimelightTable.getEntry("ledMode").setNumber(3);
     }
-
+    
     public void update() {
         double[] cornX = mLimelightTable.getEntry("tcornx").getDoubleArray(new double[0]);
         double[] cornY = mLimelightTable.getEntry("tcorny").getDoubleArray(new double[0]);
+        update(cornX, cornY);
+    }
+
+    public void update(double[] cornX, double[] cornY) {
 
         if (cornX.length != 4 || cornY.length != 4) {
             System.out.println("[ERROR] Could not find 4 points from image");

@@ -1,6 +1,6 @@
-package frc.simulator;
+package frc.robot.simulator;
 
-import frc.simulator.transmission.Transmission;
+import frc.robot.simulator.transmission.Transmission;
 
 public class ElevatorSimulator {
 

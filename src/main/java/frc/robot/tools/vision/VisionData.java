@@ -30,18 +30,15 @@ public class VisionData {
     }
 
     public double getRoll() {
-        double rollInRadians = mEulerAngles.get(2, 0)[0];
-        return UnitConversion.convertRadiansToDegrees(rollInRadians);
+        return mEulerAngles.get(2, 0)[0];
     }
 
     public double getPitch() {
-        double pitchInRadians = mEulerAngles.get(0, 0)[0];
-        return UnitConversion.convertRadiansToDegrees(pitchInRadians);
+        return mEulerAngles.get(0, 0)[0];
     }
 
     public double getYaw() {
-        double yawInRadians = mEulerAngles.get(1, 0)[0];
-        return UnitConversion.convertRadiansToDegrees(yawInRadians);
+        return mEulerAngles.get(1, 0)[0];
     }
 
 }

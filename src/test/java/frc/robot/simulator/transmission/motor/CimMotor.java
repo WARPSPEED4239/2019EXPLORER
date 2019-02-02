@@ -1,6 +1,6 @@
-package frc.simulator.transmission.motor;
+package frc.robot.simulator.transmission.motor;
 
-public class RedLine775aMotor implements DCMotor {
+public class CimMotor implements DCMotor {
 
     @Override
     public double getNominalVoltage() {
@@ -9,22 +9,22 @@ public class RedLine775aMotor implements DCMotor {
 
     @Override
     public double getFreeSpeed() {
-        return 21020.0;
+        return 5330.0;
     }
 
     @Override
     public double getFreeCurrent() {
-        return 3.81;
+        return 2.7;
     }
 
     @Override
     public double getStallCurrent() {
-        return 130.12;
+        return 131.0;
     }
 
     @Override
     public double getStallTorque() {
-        return 0.7;
+        return 2.41;
     }
     
 }

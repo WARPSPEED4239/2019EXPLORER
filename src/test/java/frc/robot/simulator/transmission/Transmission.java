@@ -1,7 +1,7 @@
-package frc.simulator.transmission;
+package frc.robot.simulator.transmission;
 
 import frc.robot.tools.UnitConversion;
-import frc.simulator.transmission.motor.DCMotor;
+import frc.robot.simulator.transmission.motor.DCMotor;
 
 public class Transmission {
     private final double kNominalVoltage;

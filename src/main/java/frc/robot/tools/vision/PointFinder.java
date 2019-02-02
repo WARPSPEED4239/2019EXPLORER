@@ -40,36 +40,36 @@ class PointFinder {
             }
         }
 
-        double groupOneX = groupOne[0].x + groupOne[1].x;
-        double groupTwoX = groupTwo[0].x + groupTwo[1].x;
+        double groupOneY = groupOne[0].y + groupOne[1].y;
+        double groupTwoY = groupTwo[0].y + groupTwo[1].y;
 
-        Point[] left;
-        Point[] right;
-        if (groupOneX > groupTwoX) {
-            left = groupTwo;
-            right = groupOne;
+        Point[] top;
+        Point[] bottom;
+        if (groupOneY > groupTwoY) {
+            top = groupTwo;
+            bottom = groupOne;
         }
         else {
-            left = groupOne;
-            right = groupTwo;
+            top = groupOne;
+            bottom = groupTwo;
         }
 
-        if (left[0].y < left[1].y) {
-            mTopLeft = left[0];
-            mBottomLeft = left[1];
+        if (top[0].x > top[1].x) {
+            mTopLeft = top[1];
+            mTopRight = top[0];
         }
         else {
-            mTopLeft = left[1];
-            mBottomLeft = left[0];
+            mTopLeft = top[0];
+            mTopRight = top[1];
         }
 
-        if (right[0].y < right[1].y) {
-            mTopRight = right[0];
-            mBottomRight = right[1];
+        if (bottom[0].x > bottom[1].x) {
+            mBottomLeft = bottom[1];
+            mBottomRight = bottom[0];
         }
         else {
-            mTopRight = right[1];
-            mBottomRight = right[0];
+            mBottomLeft = bottom[0];
+            mBottomRight = bottom[1];
         }
     }
 
