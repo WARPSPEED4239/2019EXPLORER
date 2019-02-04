@@ -1,5 +1,8 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -15,12 +18,40 @@ public class Lift extends Subsystem {
 
   private DigitalInput mLiftLimitSwitch;
   
+  private final int PEAK_CURRENT_LIMIT = 45;
+	private final int CONTINUOUS_CURRENT_LIMIT = 40;
+  private final int TIMEOUT_MILLIS = 10;
+
+  private final int MAX_VELOCITY = 15000; //CALCULATE THESE VALUES
+  private final int MAX_ACELLERATION = 6000; //CALCULATE THESE VALUES
+
+  private final double HOME_POSITION_INCHES = 1.0;
+
+  private double targetPosition;
+  
   public Lift(WPI_TalonSRX liftMaster, WPI_TalonSRX liftSlave, DigitalInput liftLimitSwitch) {
     mLiftMaster = liftMaster;
     mLiftSlave = liftSlave;
     mLiftLimitSwitch = liftLimitSwitch;
     
     mLiftSlave.follow(mLiftMaster);
+    
+    mLiftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, TIMEOUT_MILLIS);
+    mLiftMaster.configPeakCurrentLimit(PEAK_CURRENT_LIMIT, TIMEOUT_MILLIS);
+    mLiftMaster.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT, TIMEOUT_MILLIS);
+
+    //mLiftSlave.setSensorPhase(true);
+    //mLiftMaster.setInverted(true);
+
+    mLiftMaster.config_kF(0, 0.0, TIMEOUT_MILLIS);
+    mLiftMaster.config_kP(0, 0.0, TIMEOUT_MILLIS);
+    mLiftMaster.config_kI(0, 0.0, TIMEOUT_MILLIS);
+    mLiftMaster.config_kD(0, 0.0, TIMEOUT_MILLIS);
+
+    mLiftMaster.configMotionCruiseVelocity(MAX_VELOCITY, TIMEOUT_MILLIS);
+    mLiftMaster.configMotionAcceleration(MAX_ACELLERATION, TIMEOUT_MILLIS);
+    
+    mLiftMaster.setNeutralMode(NeutralMode.Brake);
   }
 
   public static Lift create() {
@@ -58,5 +89,13 @@ public class Lift extends Subsystem {
   
   private void updateSmartDashboard() {
     SmartDashboard.putBoolean("Lift Limit Switch", getLiftLimitSwitch());
+  }
+
+  public void zeroLiftPosition() {
+      mLiftMaster.setSelectedSensorPosition(0, 0, TIMEOUT_MILLIS);
+  }
+
+  public void liftSetPosition() {
+    mLiftMaster.set(ControlMode.MotionMagic, targetPosition);
   }
 }
