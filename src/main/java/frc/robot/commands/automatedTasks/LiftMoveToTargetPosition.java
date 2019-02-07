@@ -10,11 +10,14 @@ public class LiftMoveToTargetPosition extends Command {
 
   @Override
   protected void initialize() {
+    if (Robot.m_lift.getLiftIsZeroed() == false) {
+      Robot.m_lift.zeroLiftPosition();
+    }
   }
 
   @Override
   protected void execute() {
-    Robot.m_lift.liftSetPosition();
+    Robot.m_lift.liftMoveTargetToPosition();
   }
 
   @Override

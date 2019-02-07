@@ -1,5 +1,7 @@
 package frc.robot.commands.automatedTasks;
 
+import static org.mockito.Mockito.timeout;
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -11,7 +13,7 @@ public class LiftZeroPosition extends Command {
   @Override
   protected void initialize() {
     if (Robot.m_lift.getLiftIsZeroed() == true) {
-      return;
+      end();
     }
   }
 

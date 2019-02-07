@@ -99,14 +99,13 @@ public class Lift extends Subsystem {
 
   private void updateSmartDashboard() {
     SmartDashboard.putBoolean("Lift Limit Switch", getLiftLimitSwitch());
+    SmartDashboard.putBoolean("Lift Zeroed", getLiftIsZeroed());
   }
 
   public void zeroLiftPosition() {
     updateSmartDashboard();
-    if (getLiftIsZeroed() == false) {
-      mLiftMaster.set(ControlMode.PercentOutput, -0.2);
-    } else {
-      return;
+    while (getLiftLimitSwitch() == false) {
+      mLiftMaster.set(ControlMode.PercentOutput, -0.2); 
     }
   }
   
@@ -115,7 +114,7 @@ public class Lift extends Subsystem {
     mLiftMaster.setSelectedSensorPosition(0, 0, TIMEOUT_MILLIS);
   }
 
-  public void liftSetPosition() {
+  public void liftMoveTargetToPosition() {
     updateSmartDashboard();
     mLiftMaster.set(ControlMode.MotionMagic, targetPosition);
   }
