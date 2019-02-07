@@ -3,18 +3,21 @@ package frc.robot.commands.automatedTasks;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftMoveToTargetPosition extends Command {
-  public LiftMoveToTargetPosition() {
+public class LiftZeroPosition extends Command {
+  public LiftZeroPosition() {
     requires(Robot.m_lift);
   }
 
   @Override
   protected void initialize() {
+    if (Robot.m_lift.getLiftIsZeroed() == true) {
+      return;
+    }
   }
 
   @Override
   protected void execute() {
-    Robot.m_lift.liftSetPosition();
+    Robot.m_lift.zeroLiftPosition();
   }
 
   @Override
@@ -24,6 +27,7 @@ public class LiftMoveToTargetPosition extends Command {
 
   @Override
   protected void end() {
+    Robot.m_lift.zeroLiftPositionSensor();
   }
 
   @Override

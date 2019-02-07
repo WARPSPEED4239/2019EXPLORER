@@ -17,40 +17,41 @@ public class Lift extends Subsystem {
   private WPI_TalonSRX mLiftSlave;
 
   private DigitalInput mLiftLimitSwitch;
-  
+
   private final int PEAK_CURRENT_LIMIT = 45;
-	private final int CONTINUOUS_CURRENT_LIMIT = 40;
+  private final int CONTINUOUS_CURRENT_LIMIT = 40;
   private final int TIMEOUT_MILLIS = 10;
 
-  private final int MAX_VELOCITY = 15000; //CALCULATE THESE VALUES
-  private final int MAX_ACELLERATION = 6000; //CALCULATE THESE VALUES
+  private final int MAX_VELOCITY = 15000; // CALCULATE THESE VALUES (HALF)
+  private final int MAX_ACELLERATION = 6000; // CALCULATE THESE VALUES (HALF)
 
-  private final double HOME_POSITION_INCHES = 1.0;
-
+  private double currentPosition;
   private double targetPosition;
-  
+
+  private boolean isZeroed;
+
   public Lift(WPI_TalonSRX liftMaster, WPI_TalonSRX liftSlave, DigitalInput liftLimitSwitch) {
     mLiftMaster = liftMaster;
     mLiftSlave = liftSlave;
     mLiftLimitSwitch = liftLimitSwitch;
-    
+
     mLiftSlave.follow(mLiftMaster);
-    
+
     mLiftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, TIMEOUT_MILLIS);
     mLiftMaster.configPeakCurrentLimit(PEAK_CURRENT_LIMIT, TIMEOUT_MILLIS);
     mLiftMaster.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT, TIMEOUT_MILLIS);
 
-    //mLiftSlave.setSensorPhase(true);
-    //mLiftMaster.setInverted(true);
+    // mLiftSlave.setSensorPhase(true);
+    // mLiftMaster.setInverted(true);
 
-    mLiftMaster.config_kF(0, 0.0, TIMEOUT_MILLIS);
+    mLiftMaster.config_kF(0, 0.0, TIMEOUT_MILLIS); // THIS ONE FIRST
     mLiftMaster.config_kP(0, 0.0, TIMEOUT_MILLIS);
     mLiftMaster.config_kI(0, 0.0, TIMEOUT_MILLIS);
     mLiftMaster.config_kD(0, 0.0, TIMEOUT_MILLIS);
 
     mLiftMaster.configMotionCruiseVelocity(MAX_VELOCITY, TIMEOUT_MILLIS);
     mLiftMaster.configMotionAcceleration(MAX_ACELLERATION, TIMEOUT_MILLIS);
-    
+
     mLiftMaster.setNeutralMode(NeutralMode.Brake);
   }
 
@@ -86,16 +87,36 @@ public class Lift extends Subsystem {
   public boolean getLiftLimitSwitch() {
     return !mLiftLimitSwitch.get();
   }
-  
+
+  public double getLiftCurrentPosition() {
+    currentPosition = mLiftMaster.getSelectedSensorPosition();
+    return currentPosition;
+  }
+
+  public boolean getLiftIsZeroed() {
+    return isZeroed;
+  }
+
   private void updateSmartDashboard() {
     SmartDashboard.putBoolean("Lift Limit Switch", getLiftLimitSwitch());
   }
 
   public void zeroLiftPosition() {
-      mLiftMaster.setSelectedSensorPosition(0, 0, TIMEOUT_MILLIS);
+    updateSmartDashboard();
+    if (getLiftIsZeroed() == false) {
+      mLiftMaster.set(ControlMode.PercentOutput, -0.2);
+    } else {
+      return;
+    }
+  }
+  
+  public void zeroLiftPositionSensor() {
+    isZeroed = true;
+    mLiftMaster.setSelectedSensorPosition(0, 0, TIMEOUT_MILLIS);
   }
 
   public void liftSetPosition() {
+    updateSmartDashboard();
     mLiftMaster.set(ControlMode.MotionMagic, targetPosition);
   }
 }
