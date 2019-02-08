@@ -9,8 +9,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.LiftStop;
-import frc.robot.commands.automatedTasks.LiftMoveToTargetPosition;
+import frc.robot.commands.automated.LiftMoveToTargetPosition;
 
 public class Lift extends Subsystem {
 
@@ -26,8 +25,7 @@ public class Lift extends Subsystem {
   private final int MAX_VELOCITY = 15000; // CALCULATE THESE VALUES (HALF)
   private final int MAX_ACELLERATION = 6000; // CALCULATE THESE VALUES (HALF)
 
-  private double currentPosition;
-  private double targetPosition;  //TODO Do the math on how many ticks per inch of lift movement (4096 ticks per rev)
+  private double currentPosition;  //TODO Do the math on how many ticks per inch of lift movement (4096 ticks per rev)
 
   private boolean isZeroed;
 
@@ -105,8 +103,14 @@ public class Lift extends Subsystem {
 
   public void zeroLiftPosition() { //TODO Implement Saftey Timeout
     updateSmartDashboard();
-    while (getLiftLimitSwitch() == false) {
-      mLiftMaster.set(ControlMode.PercentOutput, -0.2); 
+    if (getLiftIsZeroed()) {
+      return;
+    }
+    else {
+      while (getLiftLimitSwitch() == false) {
+        mLiftMaster.set(ControlMode.PercentOutput, -0.2); 
+      } 
+      zeroLiftPositionSensor();
     }
   }
   
