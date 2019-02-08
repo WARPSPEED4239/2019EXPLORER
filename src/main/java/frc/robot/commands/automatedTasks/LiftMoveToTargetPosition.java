@@ -17,7 +17,19 @@ public class LiftMoveToTargetPosition extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_lift.liftMoveTargetToPosition();
+    if (Robot.m_oi.bButton1.get()) {
+      Robot.m_lift.liftMoveTargetToPosition(5000);
+    }
+    else if (Robot.m_oi.bButton2.get()) {
+      Robot.m_lift.liftMoveTargetToPosition(400);
+    }
+
+    else if (Robot.m_oi.bButton3.get()) {
+      Robot.m_lift.liftMoveTargetToPosition(10000);
+    }
+    else if (Robot.m_oi.bButton4.get()) {
+      Robot.m_lift.liftMoveTargetToPosition(0);
+    }
   }
 
   @Override

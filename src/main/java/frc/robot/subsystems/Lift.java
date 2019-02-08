@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.LiftStop;
+import frc.robot.commands.automatedTasks.LiftMoveToTargetPosition;
 
 public class Lift extends Subsystem {
 
@@ -26,7 +27,7 @@ public class Lift extends Subsystem {
   private final int MAX_ACELLERATION = 6000; // CALCULATE THESE VALUES (HALF)
 
   private double currentPosition;
-  private double targetPosition;
+  private double targetPosition;  //TODO Do the math on how many ticks per inch of lift movement (4096 ticks per rev)
 
   private boolean isZeroed;
 
@@ -66,7 +67,7 @@ public class Lift extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new LiftStop());
+    setDefaultCommand(new LiftMoveToTargetPosition());
   }
 
   public void liftStop() {
@@ -102,7 +103,7 @@ public class Lift extends Subsystem {
     SmartDashboard.putBoolean("Lift Zeroed", getLiftIsZeroed());
   }
 
-  public void zeroLiftPosition() {
+  public void zeroLiftPosition() { //TODO Implement Saftey Timeout
     updateSmartDashboard();
     while (getLiftLimitSwitch() == false) {
       mLiftMaster.set(ControlMode.PercentOutput, -0.2); 
@@ -114,7 +115,7 @@ public class Lift extends Subsystem {
     mLiftMaster.setSelectedSensorPosition(0, 0, TIMEOUT_MILLIS);
   }
 
-  public void liftMoveTargetToPosition() {
+  public void liftMoveTargetToPosition(double targetPosition) { //TODO Have targetPosition actually be set via the state and button press while not breaking itself
     updateSmartDashboard();
     mLiftMaster.set(ControlMode.MotionMagic, targetPosition);
   }

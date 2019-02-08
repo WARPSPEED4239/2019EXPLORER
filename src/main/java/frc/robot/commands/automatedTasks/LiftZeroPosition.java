@@ -1,7 +1,5 @@
 package frc.robot.commands.automatedTasks;
 
-import static org.mockito.Mockito.timeout;
-
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
