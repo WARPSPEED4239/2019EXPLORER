@@ -101,7 +101,7 @@ public class Lift extends Subsystem {
     SmartDashboard.putBoolean("Lift Zeroed", getLiftIsZeroed());
   }
 
-  public void zeroLiftPosition() { //TODO Implement Saftey Timeout
+  public void zeroLiftPosition() {
     updateSmartDashboard();
     mLiftMaster.set(ControlMode.PercentOutput, -0.2); 
   }

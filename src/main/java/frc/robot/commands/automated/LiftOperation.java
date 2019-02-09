@@ -8,13 +8,13 @@ public class LiftOperation extends CommandGroup {
   public LiftOperation() {
     if (Robot.m_lift.getLiftIsZeroed() == false) {
       if (Robot.m_oi.bButton1.get()) {
-        addSequential(new LiftZeroPosition());
+        addSequential(new LiftZeroPosition(), 5.0);
       } else if (Robot.m_oi.bButton2.get()) {
-        addSequential(new LiftZeroPosition());
+        addSequential(new LiftZeroPosition(), 5.0);
       } else if (Robot.m_oi.bButton3.get()) {
-        addSequential(new LiftZeroPosition());
+        addSequential(new LiftZeroPosition(), 5.0);
       } else if (Robot.m_oi.bButton4.get()) {
-        addSequential(new LiftZeroPosition());
+        addSequential(new LiftZeroPosition(), 5.0);
       } else if (Robot.m_lift.getLiftLimitSwitch()) {
         Robot.m_lift.liftStop();
         Robot.m_lift.zeroLiftPositionSensor();
