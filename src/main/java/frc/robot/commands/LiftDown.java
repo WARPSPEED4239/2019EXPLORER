@@ -10,6 +10,9 @@ public class LiftDown extends Command {
 
   @Override
   protected void initialize() {
+    if (Robot.m_lift.getLiftLimitSwitch()) {
+      end();
+    }
   }
 
   @Override
