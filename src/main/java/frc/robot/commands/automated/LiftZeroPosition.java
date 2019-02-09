@@ -29,7 +29,10 @@ public class LiftZeroPosition extends Command {
 
   @Override
   protected void end() {
-    Robot.m_lift.zeroLiftPositionSensor();
+    if (Robot.m_lift.getLiftLimitSwitch()) {
+      Robot.m_lift.liftStop();
+      Robot.m_lift.zeroLiftPositionSensor();
+    }
   }
 
   @Override
