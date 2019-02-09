@@ -10,11 +10,16 @@ public class LiftZeroPosition extends Command {
 
   @Override
   protected void initialize() {
+    if (Robot.m_lift.getLiftIsZeroed()) {
+      end();
+    }
   }
 
   @Override
   protected void execute() {
-    Robot.m_lift.zeroLiftPosition();
+    while (Robot.m_lift.getLiftLimitSwitch() == false) {
+      Robot.m_lift.zeroLiftPosition();
+    }
   }
 
   @Override

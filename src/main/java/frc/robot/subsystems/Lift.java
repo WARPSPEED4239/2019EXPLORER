@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.automated.LiftMoveToTargetPosition;
+import frc.robot.commands.automated.LiftOperation;
 
 public class Lift extends Subsystem {
 
@@ -65,7 +65,7 @@ public class Lift extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new LiftMoveToTargetPosition());
+    setDefaultCommand(new LiftOperation());
   }
 
   public void liftStop() {
@@ -103,15 +103,7 @@ public class Lift extends Subsystem {
 
   public void zeroLiftPosition() { //TODO Implement Saftey Timeout
     updateSmartDashboard();
-    if (getLiftIsZeroed()) {
-      return;
-    }
-    else {
-      while (getLiftLimitSwitch() == false) {
-        mLiftMaster.set(ControlMode.PercentOutput, -0.2); 
-      } 
-      zeroLiftPositionSensor();
-    }
+    mLiftMaster.set(ControlMode.PercentOutput, -0.2); 
   }
   
   public void zeroLiftPositionSensor() {
