@@ -27,7 +27,7 @@ public class Lift extends Subsystem {
 
   private double currentPosition;  //TODO Do the math on how many ticks per inch of lift movement (4096 ticks per rev)
 
-  private boolean isZeroed;
+  private boolean isZeroed = false;
 
   public Lift(WPI_TalonSRX liftMaster, WPI_TalonSRX liftSlave, DigitalInput liftLimitSwitch) {
     mLiftMaster = liftMaster;
