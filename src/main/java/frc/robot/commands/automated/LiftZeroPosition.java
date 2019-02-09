@@ -2,10 +2,15 @@ package frc.robot.commands.automated;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.States;
 
 public class LiftZeroPosition extends Command {
-  public LiftZeroPosition() {
+
+  private double mTimeout;
+
+  public LiftZeroPosition(double timeout) {
     requires(Robot.m_lift);
+    mTimeout = timeout;
   }
 
   @Override
@@ -13,6 +18,8 @@ public class LiftZeroPosition extends Command {
     if (Robot.m_lift.getLiftIsZeroed()) {
       end();
     }
+
+    setTimeout(mTimeout);
   }
 
   @Override
@@ -22,7 +29,7 @@ public class LiftZeroPosition extends Command {
 
   @Override
   protected boolean isFinished() {
-    return Robot.m_lift.getLiftLimitSwitch();
+    return Robot.m_lift.getLiftLimitSwitch() || isTimedOut();
   }
 
   @Override
@@ -30,6 +37,9 @@ public class LiftZeroPosition extends Command {
     if (Robot.m_lift.getLiftLimitSwitch()) {
       Robot.m_lift.liftStop();
       Robot.m_lift.zeroLiftPositionSensor();
+    }
+    if (isTimedOut()) {
+      States.liftOperationState.MANUEL;
     }
   }
 

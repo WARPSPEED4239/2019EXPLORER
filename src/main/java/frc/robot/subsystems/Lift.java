@@ -115,4 +115,13 @@ public class Lift extends Subsystem {
     updateSmartDashboard();
     mLiftMaster.set(ControlMode.MotionMagic, targetPosition);
   }
+
+  switch (liftOperationState) {
+    case value:
+      
+      break;
+  
+    default:
+      break;
+  }
 }

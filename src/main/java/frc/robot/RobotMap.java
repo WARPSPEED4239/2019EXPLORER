@@ -9,8 +9,8 @@ public class RobotMap {
                     drivetrainRightSix = 6;
 
   public static int liftMotor1 = 1, //SRX's
-                    liftMotor2 = 2,
-                    wristMotor = 3,
+                    wristMotor = 2,
+                    liftMotor2 = 3,
                     rampMotor = 4,
 
                     cargoIntakeMotor = 1, //SPX
