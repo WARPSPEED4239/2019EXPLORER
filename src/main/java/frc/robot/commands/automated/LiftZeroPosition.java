@@ -2,7 +2,6 @@ package frc.robot.commands.automated;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.States;
 
 public class LiftZeroPosition extends Command {
 
@@ -39,7 +38,7 @@ public class LiftZeroPosition extends Command {
       Robot.m_lift.zeroLiftPositionSensor();
     }
     if (isTimedOut()) {
-      States.liftOperationState.MANUEL;
+      return;
     }
   }
 

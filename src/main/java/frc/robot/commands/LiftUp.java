@@ -24,6 +24,7 @@ public class LiftUp extends Command {
 
   @Override
   protected void end() {
+    Robot.m_lift.liftStop();
   }
 
   @Override

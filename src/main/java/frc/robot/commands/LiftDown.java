@@ -27,6 +27,8 @@ public class LiftDown extends Command {
 
   @Override
   protected void end() {
+    Robot.m_lift.liftStop();
+    
     if (Robot.m_lift.getLiftLimitSwitch()) {
       Robot.m_lift.zeroLiftPositionSensor();
     }

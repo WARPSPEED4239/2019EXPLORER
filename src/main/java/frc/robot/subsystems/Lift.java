@@ -36,6 +36,8 @@ public class Lift extends Subsystem {
 
     mLiftSlave.follow(mLiftMaster);
 
+    mLiftMaster.configFactoryDefault();
+
     mLiftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, TIMEOUT_MILLIS);
     mLiftMaster.configPeakCurrentLimit(PEAK_CURRENT_LIMIT, TIMEOUT_MILLIS);
     mLiftMaster.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT, TIMEOUT_MILLIS);
@@ -70,20 +72,22 @@ public class Lift extends Subsystem {
 
   public void liftStop() {
     updateSmartDashboard();
-    mLiftMaster.set(0.0);
+    mLiftMaster.set(ControlMode.PercentOutput, 0.0);
   }
 
   public void liftUp() {
     updateSmartDashboard();
-    mLiftMaster.set(1.0);
+    mLiftMaster.set(ControlMode.PercentOutput, 0.5);
+    mLiftSlave.set(ControlMode.PercentOutput, 0.5);
   }
 
   public void liftDown() {
     updateSmartDashboard();
-    mLiftMaster.set(-1.0);
+    mLiftMaster.set(ControlMode.PercentOutput, -0.5);
   }
 
   public boolean getLiftLimitSwitch() {
+    //updateSmartDashboard();
     return !mLiftLimitSwitch.get();
   }
 
@@ -96,11 +100,6 @@ public class Lift extends Subsystem {
     return isZeroed;
   }
 
-  private void updateSmartDashboard() {
-    SmartDashboard.putBoolean("Lift Limit Switch", getLiftLimitSwitch());
-    SmartDashboard.putBoolean("Lift Zeroed", getLiftIsZeroed());
-  }
-
   public void zeroLiftPosition() {
     updateSmartDashboard();
     mLiftMaster.set(ControlMode.PercentOutput, -0.2); 
@@ -108,6 +107,7 @@ public class Lift extends Subsystem {
   
   public void zeroLiftPositionSensor() {
     isZeroed = true;
+    updateSmartDashboard();
     mLiftMaster.setSelectedSensorPosition(0, 0, TIMEOUT_MILLIS);
   }
 
@@ -116,12 +116,8 @@ public class Lift extends Subsystem {
     mLiftMaster.set(ControlMode.MotionMagic, targetPosition);
   }
 
-  switch (liftOperationState) {
-    case value:
-      
-      break;
-  
-    default:
-      break;
+  private void updateSmartDashboard() {
+    SmartDashboard.putBoolean("Lift Limit Switch", getLiftLimitSwitch());
+    SmartDashboard.putBoolean("Lift Zeroed", getLiftIsZeroed());
   }
 }
