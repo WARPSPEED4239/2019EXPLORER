@@ -29,4 +29,19 @@ public class UnitConversion {
         return rpm * 2.0 * PI / 60;
     }
 
+    public static double convertSRXUnitsToRotations(double units) {
+        return units / 4096.0;
+    }
+
+    public static double convertRotationsToSRXUnits(double rotations) {
+        return rotations * 4096.0;
+    }
+
+    public static double convertRotationsToPositionInInches(double rotations, double pulleyDiameter) {
+        return rotations * Math.PI * pulleyDiameter;
+    }
+
+    public static double convertPositionInInchesToRotations(double positionInInches, double pulleyDiameter) {
+        return positionInInches / (pulleyDiameter * Math.PI);
+    }
 }

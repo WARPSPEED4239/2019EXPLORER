@@ -8,9 +8,9 @@ public class RobotMap {
                     drivetrainRightFive = 5,
                     drivetrainRightSix = 6;
 
-  public static int liftMotor1 = 1, //SRX's
+  public static int elevatorMotorOne = 1, //SRX's
                     wristMotor = 2,
-                    liftMotor2 = 3,
+                    elevatorMotorTwo = 3,
                     rampMotor = 4,
 
                     cargoIntakeMotor = 1, //SPX
@@ -28,6 +28,6 @@ public class RobotMap {
                     liftWheelsSolenoidBackForward = 6,
                     liftWheelsSolenoidBackReverse = 7;
 
-  public static int liftLimitSwitch = 0, //DIO
+  public static int elevatorLimitSwitch = 0, //DIO
                     wristLimitSwitch = 1;
 }

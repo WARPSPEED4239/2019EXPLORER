@@ -13,8 +13,8 @@ import frc.robot.commands.DrivetrainArcadeDrive;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.DrivetrainShifting;
+import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.HatchGrabber;
-import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.LiftWheelsBack;
 import frc.robot.subsystems.LiftWheelsFront;
 import frc.robot.subsystems.Ramps;
@@ -24,8 +24,8 @@ import frc.robot.tools.RGBController;
 public class Robot extends TimedRobot {
   public static CargoIntake m_cargoIntake;
   public static DrivetrainShifting m_drivetrainShifting;
+  public static Elevator m_elevator;
   public static HatchGrabber m_hatchGrabber;
-  public static Lift m_lift;
   public static Drivetrain m_drivetrain;
   public static LiftWheelsBack m_liftWheelsBack;
   public static LiftWheelsFront m_liftWheelsFront;
@@ -41,8 +41,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_cargoIntake = new CargoIntake();
     m_drivetrainShifting = new DrivetrainShifting();
+    m_elevator = Elevator.create();
     m_hatchGrabber = new HatchGrabber();
-    m_lift = Lift.create();
     m_drivetrain = new Drivetrain();
     m_liftWheelsBack = new LiftWheelsBack();
     m_liftWheelsFront = new LiftWheelsFront();
@@ -62,6 +62,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putNumber("Elevator Position", m_elevator.getPositionInInches());
+    SmartDashboard.putNumber("Elevator Velocity", m_elevator.getVelocityInchesPerSecond());
+    SmartDashboard.putBoolean("Elevator Limit Switch", m_elevator.getLimitSwitch());
   }
 
   @Override
