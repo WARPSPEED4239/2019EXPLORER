@@ -7,8 +7,6 @@ import frc.robot.commands.CargoIntakeIn;
 import frc.robot.commands.CargoIntakeOut;
 import frc.robot.commands.DrivetrainShiftingHighGear;
 import frc.robot.commands.DrivetrainShiftingLowGear;
-import frc.robot.commands.LiftDown;
-import frc.robot.commands.LiftUp;
 import frc.robot.commands.LiftWheelsBackDown;
 import frc.robot.commands.LiftWheelsFrontDown;
 import frc.robot.commands.RampsDown;
@@ -62,9 +60,6 @@ public class OI {
 
 		jButton1.whileHeld(new CargoIntakeOut());
 		jButton2.whileHeld(new CargoIntakeIn());
-		jButton9.whileHeld(new LiftDown());
-		jButton10.whileHeld(new LiftUp());
-
 
 		xButtonX.whileHeld(new RampsUp());
 		xButtonA.whileHeld(new RampsDown());
