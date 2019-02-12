@@ -14,7 +14,7 @@ public class ElevatorManualControl extends Command {
 
   @Override
   protected void execute() {
-    double output = -Robot.m_oi.getJoystick().getY();
+    double output = -Robot.m_oi.getJoystick().getX();
 
     if (Robot.m_elevator.getBottomLimitSwitch() && output < 0.0) {
       output = 0.0;

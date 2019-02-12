@@ -52,8 +52,8 @@ public class Wrist extends Subsystem {
 
     mMotor.configNominalOutputForward(0.0);
     mMotor.configNominalOutputReverse(0.0);
-    mMotor.configPeakOutputForward(0.2);
-    mMotor.configPeakOutputReverse(-0.2);
+    mMotor.configPeakOutputForward(1.0);
+    mMotor.configPeakOutputReverse(-1.0);
 
     mMotor.selectProfileSlot(kSlotIdx, kPIDIdx);
     mMotor.config_kF(kSlotIdx, 0.0);
