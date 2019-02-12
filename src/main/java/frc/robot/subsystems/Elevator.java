@@ -19,7 +19,7 @@ public class Elevator extends Subsystem {
 
   private final WPI_TalonSRX mMaster;
   private final WPI_TalonSRX mSlave;
-  private final CANifier mCanifier;
+  //private final CANifier mCanifier;
 
   private final int kPeakCurrentLimit = 45;
   private final int kContinuousCurrentLimit = 40;
@@ -33,10 +33,10 @@ public class Elevator extends Subsystem {
   private final double kDrumDiameter = 1.65;
   private final double kGearRatio = 12.0 / 15.0; //may not have a sprocket reduction
 
-  public Elevator(WPI_TalonSRX master, WPI_TalonSRX slave, CANifier canifier) {
+  public Elevator(WPI_TalonSRX master, WPI_TalonSRX slave/*, CANifier canifier*/) {
     mMaster = master;
     mSlave = slave;
-    mCanifier = canifier;
+    //mCanifier = canifier;
 
     mMaster.configFactoryDefault();
     mSlave.configFactoryDefault();
@@ -50,11 +50,11 @@ public class Elevator extends Subsystem {
     mMaster.configPeakCurrentLimit(kPeakCurrentLimit);
     mMaster.configContinuousCurrentLimit(kContinuousCurrentLimit);
 
-    mMaster.setInverted(false); //SET THIS LATER
-    mMaster.setSensorPhase(false); //SET THIS LATER
+    mMaster.setInverted(false);
+    mMaster.setSensorPhase(true);
 
-    mMaster.configForwardLimitSwitchSource(RemoteLimitSwitchSource.RemoteCANifier, LimitSwitchNormal.NormallyOpen, RobotMap.elevatorCanifier);
-    mMaster.configReverseLimitSwitchSource(RemoteLimitSwitchSource.RemoteCANifier, LimitSwitchNormal.NormallyOpen, RobotMap.elevatorCanifier);
+    //mMaster.configForwardLimitSwitchSource(RemoteLimitSwitchSource.RemoteCANifier, LimitSwitchNormal.NormallyOpen, RobotMap.elevatorCanifier);
+    //mMaster.configReverseLimitSwitchSource(RemoteLimitSwitchSource.RemoteCANifier, LimitSwitchNormal.NormallyOpen, RobotMap.elevatorCanifier);
 
     mMaster.configNominalOutputForward(0.0);
     mMaster.configNominalOutputReverse(0.0);
@@ -74,9 +74,9 @@ public class Elevator extends Subsystem {
   public static Elevator create() {
     WPI_TalonSRX master = new WPI_TalonSRX(RobotMap.elevatorMotorOne);
     WPI_TalonSRX slave = new WPI_TalonSRX(RobotMap.elevatorMotorTwo);
-    CANifier canifier = new CANifier(RobotMap.elevatorCanifier);
+    //CANifier canifier = new CANifier(RobotMap.elevatorCanifier);
 
-    return new Elevator(master, slave, canifier);
+    return new Elevator(master, slave/*, canifier*/);
   }
 
   @Override
@@ -85,11 +85,11 @@ public class Elevator extends Subsystem {
   }
 
   public boolean getTopLimitSwitch() {
-    return mCanifier.getGeneralInput(GeneralPin.LIMF);
+    return false;//mCanifier.getGeneralInput(GeneralPin.LIMF);
   }
 
   public boolean getBottomLimitSwitch() {
-    return mCanifier.getGeneralInput(GeneralPin.LIMR);
+    return false;//mCanifier.getGeneralInput(GeneralPin.LIMR);
   }
 
   public void setPercentOutput(double output) {
