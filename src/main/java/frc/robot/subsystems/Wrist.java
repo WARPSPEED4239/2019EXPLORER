@@ -4,7 +4,9 @@ import com.ctre.phoenix.CANifier;
 import com.ctre.phoenix.CANifier.GeneralPin;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -28,8 +30,9 @@ public class Wrist extends Subsystem {
 
   private final double kGearRatio = 12.0 / 15.0;
 
-  public Wrist (WPI_TalonSRX wristMotor, CANifier wristCanifier) {
+  public Wrist (WPI_TalonSRX wristMotor, CANifier canifier) {
     mMotor = wristMotor;
+    mCanifier = canifier;
 
     mMotor.configFactoryDefault();
 
@@ -42,6 +45,10 @@ public class Wrist extends Subsystem {
 
     mMotor.setInverted(false); //SET THIS LATER
     mMotor.setSensorPhase(false); //SET THIS LATER
+
+    mMotor.configForwardLimitSwitchSource(RemoteLimitSwitchSource.RemoteCANifier, LimitSwitchNormal.NormallyOpen, RobotMap.wristCanifier);
+    mMotor.configReverseLimitSwitchSource(RemoteLimitSwitchSource.RemoteCANifier, LimitSwitchNormal.NormallyOpen, RobotMap.wristCanifier);
+
 
     mMotor.configNominalOutputForward(0.0);
     mMotor.configNominalOutputReverse(0.0);
