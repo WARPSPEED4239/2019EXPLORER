@@ -9,6 +9,8 @@ public class UnitConversion {
     public static final double KILOGRAMS_PER_POUND = 0.453592;
     public static final double POUNDS_PER_KILOGRAM = 2.20462;
 
+    public static final int SRX_UNITS_PER_ROTATION = 4096;
+
     public static double convertMetersToFeet(double meters) {
         return meters * FEET_PER_METER;
     }
@@ -30,18 +32,26 @@ public class UnitConversion {
     }
 
     public static double convertSRXUnitsToRotations(double units) {
-        return units / 4096.0;
+        return units / SRX_UNITS_PER_ROTATION;
     }
 
     public static double convertRotationsToSRXUnits(double rotations) {
-        return rotations * 4096.0;
+        return rotations * SRX_UNITS_PER_ROTATION;
     }
 
-    public static double convertRotationsToPositionInInches(double rotations, double pulleyDiameter) {
+    public static double convertRotationsToInches(double rotations, double pulleyDiameter) {
         return rotations * Math.PI * pulleyDiameter;
     }
 
     public static double convertPositionInInchesToRotations(double positionInInches, double pulleyDiameter) {
         return positionInInches / (pulleyDiameter * Math.PI);
+    }
+
+    public static double convertSRXUnitsToDegrees(double units) {
+        return units / SRX_UNITS_PER_ROTATION * 360;
+    }
+
+    public static double convertPositionInDegreesToSRXUnits(double positionInDegrees) {
+        return positionInDegrees / 360 * SRX_UNITS_PER_ROTATION;
     }
 }

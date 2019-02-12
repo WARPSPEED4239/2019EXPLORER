@@ -3,8 +3,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class WristDown extends Command {
-  public WristDown() {
+public class WristManualControl extends Command {
+  public WristManualControl() {
     requires(Robot.m_wrist);
   }
 
@@ -14,7 +14,16 @@ public class WristDown extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_wrist.wristMotorDown();
+    double output = -Robot.m_oi.getJoystick().getX();
+    
+    if (Robot.m_wrist.getBottomLimitSwitch() && output < 0.0) {
+      output = 0.0;
+    }
+    else if (Robot.m_wrist.getTopLimitSwitch() && output > 0.0) {
+      output = 0.0;
+    }
+
+    Robot.m_wrist.setPercentOutput(output);
   }
 
   @Override
@@ -28,6 +37,5 @@ public class WristDown extends Command {
 
   @Override
   protected void interrupted() {
-    end();
   }
 }

@@ -15,7 +15,8 @@ public class RobotMap {
 
                     cargoIntakeMotor = 1, //SPX
 
-                    canifer = 1, //CANifier
+                    elevatorCanifier = 1, //CANifiers
+                    wristCanifier = 2,
 
                     pigeonIMU = 1; //Pigeon IMU
 
@@ -27,7 +28,4 @@ public class RobotMap {
                     liftWheelsSolenoidFrontReverse = 5,
                     liftWheelsSolenoidBackForward = 6,
                     liftWheelsSolenoidBackReverse = 7;
-
-  public static int elevatorLimitSwitch = 0, //DIO
-                    wristLimitSwitch = 1;
 }

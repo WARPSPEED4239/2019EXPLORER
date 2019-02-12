@@ -1,13 +1,14 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.CANifier;
+import com.ctre.phoenix.CANifier.GeneralPin;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
-import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorManualControl;
@@ -17,8 +18,7 @@ public class Elevator extends Subsystem {
 
   private final WPI_TalonSRX mMaster;
   private final WPI_TalonSRX mSlave;
-
-  private final DigitalInput mLimitSwitch;
+  private final CANifier mCanifier;
 
   private final int kPeakCurrentLimit = 45;
   private final int kContinuousCurrentLimit = 40;
@@ -32,10 +32,10 @@ public class Elevator extends Subsystem {
   private final double kDrumDiameter = 1.65;
   private final double kGearRatio = 12.0 / 15.0; //may not have a sprocket reduction
 
-  public Elevator(WPI_TalonSRX master, WPI_TalonSRX slave, DigitalInput limitSwitch) {
+  public Elevator(WPI_TalonSRX master, WPI_TalonSRX slave, CANifier canifier) {
     mMaster = master;
     mSlave = slave;
-    mLimitSwitch = limitSwitch;
+    mCanifier = canifier;
 
     mMaster.configFactoryDefault();
     mSlave.configFactoryDefault();
@@ -52,6 +52,9 @@ public class Elevator extends Subsystem {
     mMaster.setInverted(false); //SET THIS LATER
     mMaster.setSensorPhase(false); //SET THIS LATER
 
+    mMaster.configForwardLimitSwitchSource(RemoteLimitSwitchSource.RemoteCANifier, LimitSwitchNormal.NormallyOpen, RobotMap.elevatorCanifier);
+    mMaster.configReverseLimitSwitchSource(RemoteLimitSwitchSource.RemoteCANifier, LimitSwitchNormal.NormallyOpen, RobotMap.elevatorCanifier);
+
     mMaster.configNominalOutputForward(0.0);
     mMaster.configNominalOutputReverse(0.0);
     mMaster.configPeakOutputForward(1.0);
@@ -65,17 +68,14 @@ public class Elevator extends Subsystem {
 
     mMaster.configMotionCruiseVelocity(kMaxVelocity);
     mMaster.configMotionAcceleration(kMaxAcceleration);
-
-    mMaster.setSelectedSensorPosition(0);
   }
 
   public static Elevator create() {
-    WPI_TalonSRX liftMaster = new WPI_TalonSRX(RobotMap.elevatorMotorOne);
-    WPI_TalonSRX liftSlave = new WPI_TalonSRX(RobotMap.elevatorMotorTwo);
+    WPI_TalonSRX master = new WPI_TalonSRX(RobotMap.elevatorMotorOne);
+    WPI_TalonSRX slave = new WPI_TalonSRX(RobotMap.elevatorMotorTwo);
+    CANifier canifier = new CANifier(RobotMap.elevatorCanifier);
 
-    DigitalInput liftLimitSwitch = new DigitalInput(RobotMap.elevatorLimitSwitch);
-
-    return new Elevator(liftMaster, liftSlave, liftLimitSwitch);
+    return new Elevator(master, slave, canifier);
   }
 
   @Override
@@ -83,8 +83,12 @@ public class Elevator extends Subsystem {
     setDefaultCommand(new ElevatorManualControl());
   }
 
-  public boolean getLimitSwitch() {
-    return !mLimitSwitch.get();
+  public boolean getTopLimitSwitch() {
+    return mCanifier.getGeneralInput(GeneralPin.LIMF);
+  }
+
+  public boolean getBottomLimitSwitch() {
+    return mCanifier.getGeneralInput(GeneralPin.LIMR);
   }
 
   public void setPercentOutput(double output) {
@@ -101,15 +105,15 @@ public class Elevator extends Subsystem {
   public double getPositionInInches() {
     double positionInSRXUnits = mMaster.getSelectedSensorPosition();
     double positionInRotations = UnitConversion.convertSRXUnitsToRotations(positionInSRXUnits) * kGearRatio;
-    double positionInInches = UnitConversion.convertRotationsToPositionInInches(positionInRotations, kDrumDiameter);
+    double positionInInches = UnitConversion.convertRotationsToInches(positionInRotations, kDrumDiameter);
     
     return positionInInches;
   }
 
-  public double getVelocityInchesPerSecond() {
+  public double getVelocityInInchesPerSecond() {
     double velocityInSRXUnitsPerSec = mMaster.getSelectedSensorVelocity() / 10;
     double velocityInRotationsPerSec = UnitConversion.convertSRXUnitsToRotations(velocityInSRXUnitsPerSec) * kGearRatio;
-    double velocityInInchesPerSec = UnitConversion.convertRotationsToPositionInInches(velocityInRotationsPerSec, kDrumDiameter);
+    double velocityInInchesPerSec = UnitConversion.convertRotationsToInches(velocityInRotationsPerSec, kDrumDiameter);
 
     return velocityInInchesPerSec;
   }

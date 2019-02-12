@@ -19,11 +19,12 @@ public class ElevatorSetPosition extends Command {
 
   @Override
   protected void execute() {
-    if (Robot.m_elevator.getLimitSwitch() && Robot.m_elevator.getVelocityInchesPerSecond() <= 0) {
+    if (Robot.m_elevator.getBottomLimitSwitch() && Robot.m_elevator.getVelocityInInchesPerSecond() <= 0.0) {
       Robot.m_elevator.setPercentOutput(0.0);
-    }
-    else {
-      Robot.m_elevator.setPosition(mPositionInInches); //If this doesn't work, call only this
+    } else if (Robot.m_elevator.getTopLimitSwitch() && Robot.m_elevator.getVelocityInInchesPerSecond() >= 0.0) {
+      Robot.m_elevator.setPercentOutput(0.0);
+    } else {
+      Robot.m_elevator.setPosition(mPositionInInches); // If this doesn't work, call only this
     }
   }
 

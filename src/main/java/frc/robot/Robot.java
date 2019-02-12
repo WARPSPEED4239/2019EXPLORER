@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
     m_drivetrain = new Drivetrain();
     m_liftWheelsBack = new LiftWheelsBack();
     m_liftWheelsFront = new LiftWheelsFront();
-    m_rgbController = new RGBController(new CANifier(RobotMap.canifer));
+    m_rgbController = new RGBController(new CANifier(RobotMap.elevatorCanifier));
     m_ramps = new Ramps();
     m_wrist = Wrist.create();
     m_oi = new OI();
@@ -63,8 +63,14 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     SmartDashboard.putNumber("Elevator Position", m_elevator.getPositionInInches());
-    SmartDashboard.putNumber("Elevator Velocity", m_elevator.getVelocityInchesPerSecond());
-    SmartDashboard.putBoolean("Elevator Limit Switch", m_elevator.getLimitSwitch());
+    SmartDashboard.putNumber("Elevator Velocity", m_elevator.getVelocityInInchesPerSecond());
+    SmartDashboard.putBoolean("Elevator Bottom Limit Switch", m_elevator.getBottomLimitSwitch());
+    SmartDashboard.putBoolean("Elevator Top Limit Switch", m_elevator.getTopLimitSwitch());
+
+    SmartDashboard.putNumber("Wrist Position", m_wrist.getPositionInDegrees());
+    SmartDashboard.putNumber("Wrist Velocity", m_wrist.getVelocityInDegreesPerSecond());
+    SmartDashboard.putBoolean("Wrist Bottom Limit Switch", m_wrist.getBottomLimitSwitch());
+    SmartDashboard.putBoolean("Wrist Top Limit Switch", m_wrist.getTopLimitSwitch());
   }
 
   @Override
