@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorManualControl;
+import frc.robot.tools.Logger;
 import frc.robot.tools.UnitConversion;
 
 public class Elevator extends Subsystem {
@@ -93,6 +94,7 @@ public class Elevator extends Subsystem {
 
   public void setPercentOutput(double output) {
     mMaster.set(ControlMode.PercentOutput, output);
+    Logger.log(output);
   }
 
   public void setPosition(double positionInInches) {

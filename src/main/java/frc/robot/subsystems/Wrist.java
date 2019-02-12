@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.WristManualControl;
+import frc.robot.tools.Logger;
 import frc.robot.tools.UnitConversion;
 
 public class Wrist extends Subsystem {
@@ -86,6 +87,7 @@ public class Wrist extends Subsystem {
 
   public void setPercentOutput(double output) {
     mMotor.set(ControlMode.PercentOutput, output);
+    Logger.log(output);
   }
 
   public void setPositionInDegrees(double positionInDegrees) {
