@@ -26,6 +26,8 @@ public class Wrist extends Subsystem {
   private final int kSlotIdx = 0;
   private final int kPIDIdx = 0;
 
+  private final double kGearRatio = 12.0 / 15.0;
+
   public Wrist (WPI_TalonSRX wristMotor, CANifier wristCanifier) {
     mMotor = wristMotor;
 
@@ -80,21 +82,21 @@ public class Wrist extends Subsystem {
   }
 
   public void setPositionInDegrees(double positionInDegrees) {
-    double positionInSRXUnits = UnitConversion.convertRotationsToSRXUnits(positionInDegrees);
+    double positionInSRXUnits = UnitConversion.convertRotationsToSRXUnits(positionInDegrees) / kGearRatio;
 
     mMotor.set(ControlMode.MotionMagic, positionInSRXUnits);
   }
 
   public double getPositionInDegrees() {
     double positionInSRXUnits = mMotor.getSelectedSensorPosition();
-    double positionInDegrees = UnitConversion.convertSRXUnitsToDegrees(positionInSRXUnits);
+    double positionInDegrees = UnitConversion.convertSRXUnitsToDegrees(positionInSRXUnits) * kGearRatio;
 
     return positionInDegrees;
   }
 
   public double getVelocityInDegreesPerSecond() {
     double velocityInSrxUnitsPerSec = mMotor.getSelectedSensorVelocity() / 10;
-    double velocityInDegreesPerSecond = UnitConversion.convertSRXUnitsToDegrees(velocityInSrxUnitsPerSec);
+    double velocityInDegreesPerSecond = UnitConversion.convertSRXUnitsToDegrees(velocityInSrxUnitsPerSec) * kGearRatio;
 
     return velocityInDegreesPerSecond;
   }
