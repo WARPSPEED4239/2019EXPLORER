@@ -7,7 +7,6 @@ import com.revrobotics.CANSparkMaxLowLevel;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.DrivetrainArcadeDrive;
 
@@ -19,7 +18,6 @@ public class Drivetrain extends Subsystem {
   private final int PEAK_CURRENT_DURATION_MILLIS = 100;
   
 	private final double RAMP_RATE = 0.2;
-	//private final int TIMEOUT_MILLIS = 10;
   
   private double leftEncoderBase;
   private double rightEncoderBase;
@@ -118,9 +116,9 @@ public class Drivetrain extends Subsystem {
     return convertVelocity(input);
   }
 
-  public void getIMUdata() {
+  public double getIMUYaw() {
     IMU.getYawPitchRoll(ypr);
-    SmartDashboard.putNumber("Pigeon IMU Yaw", ypr[0]);
+    return ypr[0];
   }
 
   public void resetSensors() {

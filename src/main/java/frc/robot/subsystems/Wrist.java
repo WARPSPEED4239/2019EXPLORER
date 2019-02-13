@@ -44,8 +44,8 @@ public class Wrist extends Subsystem {
     mMotor.configPeakCurrentLimit(kPeakCurrentLimit);
     mMotor.configContinuousCurrentLimit(kContinuousCurrentLimit);
 
-    mMotor.setInverted(false); //SET THIS LATER
-    mMotor.setSensorPhase(false); //SET THIS LATER
+    mMotor.setInverted(false);
+    mMotor.setSensorPhase(false);
 
     //mMotor.configForwardLimitSwitchSource(RemoteLimitSwitchSource.RemoteCANifier, LimitSwitchNormal.NormallyOpen, RobotMap.wristCanifier);
     //mMotor.configReverseLimitSwitchSource(RemoteLimitSwitchSource.RemoteCANifier, LimitSwitchNormal.NormallyOpen, RobotMap.wristCanifier);

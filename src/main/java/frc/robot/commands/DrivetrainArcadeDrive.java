@@ -22,14 +22,6 @@ public class DrivetrainArcadeDrive extends Command {
     double rotate = -controller.getX(Hand.kLeft);
 
     Robot.m_drivetrain.arcadeDrive(move, rotate);
-
-    /*SmartDashboard.putNumber("Left Position (ft)", Robot.m_drivetrain.getLeftEncoderPosition());
-    SmartDashboard.putNumber("Right Position (ft)", Robot.m_drivetrain.getRightEncoderPosition());
-
-    SmartDashboard.putNumber("Left Velocity (ft/s)", Robot.m_drivetrain.getLeftEncoderVelocity());
-    SmartDashboard.putNumber("Right Velocity (ft/s)", Robot.m_drivetrain.getRightEncoderVelocity());
-    
-    Robot.m_drivetrain.getIMUdata();*/
   }
 
   @Override

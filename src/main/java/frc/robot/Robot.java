@@ -62,6 +62,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putNumber("Left Position (ft)", Robot.m_drivetrain.getLeftEncoderPosition());
+    SmartDashboard.putNumber("Right Position (ft)", Robot.m_drivetrain.getRightEncoderPosition());
+    SmartDashboard.putNumber("Left Velocity (ft/s)", Robot.m_drivetrain.getLeftEncoderVelocity());
+    SmartDashboard.putNumber("Right Velocity (ft/s)", Robot.m_drivetrain.getRightEncoderVelocity());
+    SmartDashboard.putNumber("Gyro Yaw (deg)", Robot.m_drivetrain.getIMUYaw());
+    
     SmartDashboard.putNumber("Elevator Position", m_elevator.getPositionInInches());
     SmartDashboard.putNumber("Elevator Velocity", m_elevator.getVelocityInInchesPerSecond());
     SmartDashboard.putBoolean("Elevator Bottom Limit Switch", m_elevator.getBottomLimitSwitch());
@@ -107,9 +113,13 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
   
-    /*if (m_oi.xbox.getBackButton()) {
+    if (m_oi.xbox.getBackButton()) {
      m_drivetrain.resetSensors();
-    }*/
+    }
+
+    if (m_oi.xbox.getStartButton()) {
+      m_wrist.resetEncoder();
+    }
   }
 
   @Override
