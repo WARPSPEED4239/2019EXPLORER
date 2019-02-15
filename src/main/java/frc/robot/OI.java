@@ -7,8 +7,7 @@ import frc.robot.commands.CargoIntakeIn;
 import frc.robot.commands.CargoIntakeOut;
 import frc.robot.commands.DrivetrainShiftingHighGear;
 import frc.robot.commands.DrivetrainShiftingLowGear;
-import frc.robot.commands.LiftWheelsBackDown;
-import frc.robot.commands.LiftWheelsFrontDown;
+import frc.robot.commands.LiftWheelDown;
 import frc.robot.commands.RampsDown;
 import frc.robot.commands.RampsUp;
 
@@ -65,8 +64,7 @@ public class OI {
 		xButtonA.whileHeld(new RampsDown());
 		xButtonY.whenPressed(new DrivetrainShiftingHighGear());
 		xButtonB.whenPressed(new DrivetrainShiftingLowGear());
-		xButtonLeftStick.whileHeld(new LiftWheelsBackDown());
-		xButtonRightStick.whileHeld(new LiftWheelsFrontDown());
+		xButtonRightStick.whileHeld(new LiftWheelDown());
 	}
 
 	public XboxController getController() {

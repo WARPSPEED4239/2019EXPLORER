@@ -15,17 +15,20 @@ public class RobotMap {
                     
                     cargoIntakeMotor = 1, //SPX
 
-                    elevatorCanifier = 1, //CANifiers
-                    wristCanifier = 2,
+                    canifier = 1, //CANifiers
 
                     pigeonIMU = 1; //Pigeon IMU
+
+  public static int liftBottomLimitSwitch = 0,
+                    liftTop2To1LimitSwitch = 1,
+                    liftTop3To2LimitSwitch = 2;
 
   public static int drivetrainShiftingSolenoidForward = 0, //Solenoids
                     drivetrainShiftingSolenoidReverse = 1,
                     hatchGrabberSolenoidForward = 2,
                     hatchGrabberSolenoidReverse = 3,
-                    liftWheelsSolenoidFrontForward = 4,
-                    liftWheelsSolenoidFrontReverse = 5,
-                    liftWheelsSolenoidBackForward = 6,
-                    liftWheelsSolenoidBackReverse = 7;
+                    liftWheelSolenoidForward = 4,
+                    liftWheelSolenoidReverse = 5,
+                    rampSolenoidForward = 6,
+                    rampSolenoidReverse = 7;
 }

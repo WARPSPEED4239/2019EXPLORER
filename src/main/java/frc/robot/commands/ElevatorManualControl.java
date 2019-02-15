@@ -19,7 +19,7 @@ public class ElevatorManualControl extends Command {
     if (Robot.m_elevator.getBottomLimitSwitch() && output < 0.0) {
       output = 0.0;
     }
-    else if (Robot.m_elevator.getTopLimitSwitch() && output > 0.0) {
+    else if (Robot.m_elevator.getTop2To1LimitSwitch() && Robot.m_elevator.getTop3To2LimitSwitch() && output > 0.0) {
       output = 0.0;
     }
 

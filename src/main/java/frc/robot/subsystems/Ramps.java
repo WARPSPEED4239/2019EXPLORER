@@ -8,7 +8,7 @@ import frc.robot.commands.RampsStop;
 
 public class Ramps extends Subsystem {
 
-  private WPI_TalonSRX rampMotor = new WPI_TalonSRX(RobotMap.rampMotor);
+  private WPI_TalonSRX motor = new WPI_TalonSRX(RobotMap.rampMotor);
 
   @Override
   public void initDefaultCommand() {
@@ -16,14 +16,14 @@ public class Ramps extends Subsystem {
   }
 
   public void rampsStop() {
-    rampMotor.set(0.0);
+    motor.set(0.0);
   }
 
   public void rampsDown() {
-    rampMotor.set(-1.0);
+    motor.set(-1.0);
   }
 
   public void rampsUp() {
-    rampMotor.set(1.0);
+    motor.set(1.0);
   }
 }

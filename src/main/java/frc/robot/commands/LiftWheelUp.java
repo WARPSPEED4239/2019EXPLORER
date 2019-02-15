@@ -3,14 +3,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftWheelsFrontDown extends Command {
-  public LiftWheelsFrontDown() {
-    requires(Robot.m_liftWheelsFront);
+public class LiftWheelUp extends Command {
+  public LiftWheelUp() {
+    requires(Robot.m_liftWheel);
   }
 
   @Override
   protected void initialize() {
-    Robot.m_liftWheelsFront.liftWheelsPistonFrontDown();
+    Robot.m_liftWheel.liftWheelPistionUp();
   }
 
   @Override

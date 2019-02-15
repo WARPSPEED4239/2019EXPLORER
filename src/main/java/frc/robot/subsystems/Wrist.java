@@ -18,7 +18,7 @@ import frc.robot.tools.UnitConversion;
 public class Wrist extends Subsystem {
 
   private WPI_TalonSRX mMotor;
-  //private CANifier mCanifier;
+  private CANifier mCanifier;
 
   private final int kPeakCurrentLimit = 35;
   private final int kContinuousCurrentLimit = 30;
@@ -31,9 +31,9 @@ public class Wrist extends Subsystem {
 
   private final double kGearRatio = 12.0 / 15.0;
 
-  public Wrist (WPI_TalonSRX wristMotor/*, CANifier canifier*/) {
+  public Wrist (WPI_TalonSRX wristMotor, CANifier canifier) {
     mMotor = wristMotor;
-    //mCanifier = canifier;
+    mCanifier = canifier;
 
     mMotor.configFactoryDefault();
 
@@ -47,13 +47,13 @@ public class Wrist extends Subsystem {
     mMotor.setInverted(false);
     mMotor.setSensorPhase(false);
 
-    //mMotor.configForwardLimitSwitchSource(RemoteLimitSwitchSource.RemoteCANifier, LimitSwitchNormal.NormallyOpen, RobotMap.wristCanifier);
-    //mMotor.configReverseLimitSwitchSource(RemoteLimitSwitchSource.RemoteCANifier, LimitSwitchNormal.NormallyOpen, RobotMap.wristCanifier);
+    mMotor.configForwardLimitSwitchSource(RemoteLimitSwitchSource.RemoteCANifier, LimitSwitchNormal.NormallyOpen, RobotMap.canifier);
+    mMotor.configReverseLimitSwitchSource(RemoteLimitSwitchSource.RemoteCANifier, LimitSwitchNormal.NormallyOpen, RobotMap.canifier);
 
     mMotor.configNominalOutputForward(0.0);
     mMotor.configNominalOutputReverse(0.0);
-    mMotor.configPeakOutputForward(1.0);
-    mMotor.configPeakOutputReverse(-1.0);
+    mMotor.configPeakOutputForward(0.5);
+    mMotor.configPeakOutputReverse(-0.5);
 
     mMotor.selectProfileSlot(kSlotIdx, kPIDIdx);
     mMotor.config_kF(kSlotIdx, 0.0);
@@ -67,9 +67,9 @@ public class Wrist extends Subsystem {
 
   public static Wrist create() {
     WPI_TalonSRX mMotor = new WPI_TalonSRX(RobotMap.wristMotor);
-    //CANifier mCanifier = new CANifier(RobotMap.wristCanifier);
+    CANifier mCanifier = new CANifier(RobotMap.canifier);
 
-    return new Wrist(mMotor/*, mCanifier*/);
+    return new Wrist(mMotor, mCanifier);
   }
   @Override
   public void initDefaultCommand() {
@@ -77,11 +77,11 @@ public class Wrist extends Subsystem {
   }
 
   public boolean getTopLimitSwitch() {
-    return false;//mCanifier.getGeneralInput(GeneralPin.LIMF);
+    return mCanifier.getGeneralInput(GeneralPin.LIMF);
   }
 
   public boolean getBottomLimitSwitch() {
-    return false;//mCanifier.getGeneralInput(GeneralPin.LIMR);
+    return mCanifier.getGeneralInput(GeneralPin.LIMR);
   }
 
   public void setPercentOutput(double output) {

@@ -21,7 +21,7 @@ public class WristSetPosition extends Command {
   protected void execute() {
     if (Robot.m_wrist.getBottomLimitSwitch() && Robot.m_wrist.getVelocityInDegreesPerSecond() <= 0.0) {
       Robot.m_wrist.setPercentOutput(0.0);
-    } else if (Robot.m_elevator.getTopLimitSwitch() && Robot.m_wrist.getVelocityInDegreesPerSecond() >= 0.0) {
+    } else if (Robot.m_wrist.getTopLimitSwitch() && Robot.m_wrist.getVelocityInDegreesPerSecond() >= 0.0) {
       Robot.m_elevator.setPercentOutput(0.0);
     } else {
       Robot.m_elevator.setPosition(mPositionInDegrees); // If this doesn't work, call only this
