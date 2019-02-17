@@ -10,7 +10,7 @@ public class DrivetrainShiftingLowGear extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_drivetrainShifting.drivetrainShiftingLowGear();
+    Robot.m_drivetrainShifting.lowGear();
   }
 
   @Override
