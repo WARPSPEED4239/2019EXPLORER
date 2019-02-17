@@ -14,12 +14,12 @@ public class WristManualControl extends Command {
 
   @Override
   protected void execute() {
-    double output = -Robot.m_oi.getJoystick().getY();
+    double output = 0.0;//-Robot.m_oi.getJoystick().getY();
     
-    if (Robot.m_wrist.getBottomLimitSwitch() && output < 0.0) {
+    if (Robot.m_wrist.getBottomLimitSwitch() && output > 0.0) {
       output = 0.0;
     }
-    else if (Robot.m_wrist.getTopLimitSwitch() && output > 0.0) {
+    else if (Robot.m_wrist.getTopLimitSwitch() && output < 0.0) {
       output = 0.0;
     }
 

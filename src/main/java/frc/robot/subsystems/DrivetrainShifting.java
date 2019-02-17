@@ -8,17 +8,17 @@ import frc.robot.commands.DrivetrainShiftingHighGear;
 
 public class DrivetrainShifting extends Subsystem {
 
-  private DoubleSolenoid drivetrainShiftingSolenoid = new DoubleSolenoid(RobotMap.drivetrainShiftingSolenoidForward, RobotMap.drivetrainShiftingSolenoidReverse);
+  private DoubleSolenoid mPiston = new DoubleSolenoid(RobotMap.drivetrainShiftingSolenoidForward, RobotMap.drivetrainShiftingSolenoidReverse);
 
     public void initDefaultCommand() {
         setDefaultCommand(new DrivetrainShiftingHighGear());
     }
     
-    public void drivetrainShiftingHighGear() {
-    	drivetrainShiftingSolenoid.set(Value.kForward);
+    public void highGear() {
+    	mPiston.set(Value.kForward);
     }
     
-    public void drivetrainShiftingLowGear() {
-    	drivetrainShiftingSolenoid.set(Value.kReverse);
+    public void lowGear() {
+    	mPiston.set(Value.kReverse);
     }
 }

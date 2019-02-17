@@ -8,18 +8,18 @@ import frc.robot.commands.LiftWheelUp;
 
 public class LiftWheel extends Subsystem {
 
-  private DoubleSolenoid liftWheelsSolenoidFront = new DoubleSolenoid(RobotMap.liftWheelSolenoidForward, RobotMap.liftWheelSolenoidReverse);
+  private DoubleSolenoid mPiston = new DoubleSolenoid(RobotMap.liftWheelSolenoidForward, RobotMap.liftWheelSolenoidReverse);
   
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new LiftWheelUp());
   }
 
-  public void liftWheelPistonDown() {
-    liftWheelsSolenoidFront.set(Value.kReverse);
+  public void down() {
+    mPiston.set(Value.kReverse);
   }
 
-  public void liftWheelPistionUp() {
-    liftWheelsSolenoidFront.set(Value.kForward);
+  public void up() {
+    mPiston.set(Value.kForward);
   }
 }

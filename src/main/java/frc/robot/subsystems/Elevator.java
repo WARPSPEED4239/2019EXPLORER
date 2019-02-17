@@ -83,7 +83,7 @@ public class Elevator extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ElevatorManualControl());
+    setDefaultCommand(new ElevatorManualControl(0.0));
   }
 
   public double getMotorOutputVoltage() {
@@ -91,15 +91,15 @@ public class Elevator extends Subsystem {
   }
 
   public boolean getTop3To2LimitSwitch() {
-    return mTop3To2.get();
+    return !mTop3To2.get();
   }
 
   public boolean getTop2To1LimitSwitch() {
-    return mTop2To1.get();
+    return !mTop2To1.get();
   }
 
   public boolean getBottomLimitSwitch() {
-    return mBottom.get();
+    return !mBottom.get();
   }
 
   public void setPercentOutput(double output) {

@@ -10,7 +10,7 @@ public class LiftWheelDown extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_liftWheel.liftWheelPistonDown();
+    Robot.m_liftWheel.down();
   }
 
   @Override

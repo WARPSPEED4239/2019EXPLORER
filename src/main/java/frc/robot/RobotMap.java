@@ -9,7 +9,7 @@ public class RobotMap {
                     drivetrainRightSix = 6;
 
   public static int elevatorMotorOne = 1, //SRX's
-                    rampMotor = 2,
+                    //rampMotor = 2,
                     elevatorMotorTwo = 3,
                     wristMotor = 4,
                     
@@ -28,7 +28,5 @@ public class RobotMap {
                     hatchGrabberSolenoidForward = 2,
                     hatchGrabberSolenoidReverse = 3,
                     liftWheelSolenoidForward = 4,
-                    liftWheelSolenoidReverse = 5,
-                    rampSolenoidForward = 6,
-                    rampSolenoidReverse = 7;
+                    liftWheelSolenoidReverse = 5;
 }

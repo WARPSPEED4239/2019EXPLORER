@@ -4,8 +4,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ElevatorManualControl extends Command {
-  public ElevatorManualControl() {
+
+  private double mOutput;
+
+  public ElevatorManualControl(double output) {
     requires(Robot.m_elevator);
+
+    mOutput = output;
   }
 
   @Override
@@ -14,16 +19,13 @@ public class ElevatorManualControl extends Command {
 
   @Override
   protected void execute() {
-    double output = 0;//-Robot.m_oi.getJoystick().getY();
-
-    if (Robot.m_elevator.getBottomLimitSwitch() && output < 0.0) {
-      output = 0.0;
-    }
-    else if (Robot.m_elevator.getTop2To1LimitSwitch() && Robot.m_elevator.getTop3To2LimitSwitch() && output > 0.0) {
-      output = 0.0;
-    }
-
-    Robot.m_elevator.setPercentOutput(output);
+      if (Robot.m_elevator.getBottomLimitSwitch() && mOutput < 0.0) {
+        mOutput = 0.0;
+      }
+      else if (Robot.m_elevator.getTop2To1LimitSwitch() && Robot.m_elevator.getTop3To2LimitSwitch() && mOutput > 0.0) {
+        mOutput = 0.0;
+      }
+      Robot.m_elevator.setPercentOutput(mOutput);
   }
 
   @Override

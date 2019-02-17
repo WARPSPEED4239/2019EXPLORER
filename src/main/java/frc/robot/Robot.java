@@ -16,8 +16,6 @@ import frc.robot.subsystems.DrivetrainShifting;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.HatchGrabber;
 import frc.robot.subsystems.LiftWheel;
-import frc.robot.subsystems.RampPiston;
-import frc.robot.subsystems.Ramps;
 import frc.robot.subsystems.Wrist;
 import frc.robot.tools.RGBController;
 
@@ -29,8 +27,6 @@ public class Robot extends TimedRobot {
   public static Drivetrain m_drivetrain;
   public static LiftWheel m_liftWheel;
   public static RGBController m_rgbController;
-  public static Ramps m_ramps;
-  public static RampPiston m_rampPiston;
   public static Wrist m_wrist;
   public static OI m_oi;
 
@@ -46,8 +42,6 @@ public class Robot extends TimedRobot {
     m_drivetrain = new Drivetrain();
     m_liftWheel = new LiftWheel();
     m_rgbController = new RGBController(new CANifier(RobotMap.canifier));
-    m_ramps = new Ramps();
-    m_rampPiston = new RampPiston();
     m_wrist = Wrist.create();
     m_oi = new OI();
     
@@ -57,7 +51,7 @@ public class Robot extends TimedRobot {
     
     m_chooser.setDefaultOption("Default Auto", new DrivetrainArcadeDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    //SmartDashboard.putData("Auto mode", m_chooser);
   }
 
   @Override

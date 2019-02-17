@@ -10,7 +10,7 @@ public class LiftWheelUp extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_liftWheel.liftWheelPistionUp();
+    Robot.m_liftWheel.up();
   }
 
   @Override

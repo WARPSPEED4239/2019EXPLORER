@@ -7,9 +7,11 @@ import frc.robot.commands.CargoIntakeIn;
 import frc.robot.commands.CargoIntakeOut;
 import frc.robot.commands.DrivetrainShiftingHighGear;
 import frc.robot.commands.DrivetrainShiftingLowGear;
+import frc.robot.commands.ElevatorManualControl;
+import frc.robot.commands.HatchGrabberExtend;
+import frc.robot.commands.HatchGrabberRetract;
 import frc.robot.commands.LiftWheelDown;
-import frc.robot.commands.RampsDown;
-import frc.robot.commands.RampsUp;
+import frc.robot.commands.WristSetPostitionWithJoystick;
 
 public class OI {
 	public XboxController xbox = new XboxController(0);
@@ -18,7 +20,7 @@ public class OI {
 
 	public JoystickButton xButtonA, xButtonB, xButtonX, xButtonY, xButtonLeftStick, xButtonRightStick;
 
-	public JoystickButton jButton1, jButton2, jButton3, jButton4, jButton5, jButton6, jbutton7, jButton8, jButton9,
+	public JoystickButton jButton1, jButton2, jButton3, jButton4, jButton5, jButton6, jButton7, jButton8, jButton9,
 			jButton10, jButton11, jButton12;
 
 	public JoystickButton bButton1, bButton2, bButton3, bButton4, bButton5, bButton6, bButton7, bButton8, bButton9,
@@ -38,7 +40,7 @@ public class OI {
 		jButton4 = new JoystickButton(joystick, 4);
 		jButton5 = new JoystickButton(joystick, 5);
 		jButton6 = new JoystickButton(joystick, 6);
-		jbutton7 = new JoystickButton(joystick, 7);
+		jButton7 = new JoystickButton(joystick, 7);
 		jButton8 = new JoystickButton(joystick, 8);
 		jButton9 = new JoystickButton(joystick, 9);
 		jButton10 = new JoystickButton(joystick, 10);
@@ -59,13 +61,19 @@ public class OI {
 
 		jButton1.whileHeld(new CargoIntakeOut());
 		jButton2.whileHeld(new CargoIntakeIn());
+		jButton3.whenPressed(new HatchGrabberRetract());
+		jButton4.whenPressed(new HatchGrabberExtend());
+		jButton9.whileHeld(new ElevatorManualControl(-1.0));
+		jButton10.whileHeld(new ElevatorManualControl(1.0));
 
-		xButtonX.whileHeld(new RampsUp());
-		xButtonA.whileHeld(new RampsDown());
+		//xButtonX.whileHeld(new RampsUp());
+		//xButtonA.whileHeld(new RampsDown());
 		xButtonY.whenPressed(new DrivetrainShiftingHighGear());
 		xButtonB.whenPressed(new DrivetrainShiftingLowGear());
 		xButtonRightStick.whileHeld(new LiftWheelDown());
-	}
+
+		jButton5.whileHeld(new WristSetPostitionWithJoystick());
+		}
 
 	public XboxController getController() {
 		return xbox;
