@@ -8,10 +8,17 @@ import frc.robot.commands.CargoIntakeOut;
 import frc.robot.commands.DrivetrainShiftingHighGear;
 import frc.robot.commands.DrivetrainShiftingLowGear;
 import frc.robot.commands.ElevatorManualControl;
+import frc.robot.commands.ElevatorSetPercentOutput;
+import frc.robot.commands.ElevatorSetPosition;
+import frc.robot.commands.ElevatorSetPostitionWithJoystick;
 import frc.robot.commands.HatchGrabberExtend;
 import frc.robot.commands.HatchGrabberRetract;
 import frc.robot.commands.LiftWheelDown;
+import frc.robot.commands.WristManualControl;
+import frc.robot.commands.WristSetPercentOutput;
+import frc.robot.commands.WristSetPosition;
 import frc.robot.commands.WristSetPostitionWithJoystick;
+import frc.robot.commands.automated.GoToPosition;
 
 public class OI {
 	public XboxController xbox = new XboxController(0);
@@ -63,8 +70,6 @@ public class OI {
 		jButton2.whileHeld(new CargoIntakeIn());
 		jButton3.whenPressed(new HatchGrabberRetract());
 		jButton4.whenPressed(new HatchGrabberExtend());
-		jButton9.whileHeld(new ElevatorManualControl(-1.0));
-		jButton10.whileHeld(new ElevatorManualControl(1.0));
 
 		//xButtonX.whileHeld(new RampsUp());
 		//xButtonA.whileHeld(new RampsDown());
@@ -72,7 +77,24 @@ public class OI {
 		xButtonB.whenPressed(new DrivetrainShiftingLowGear());
 		xButtonRightStick.whileHeld(new LiftWheelDown());
 
-		jButton5.whileHeld(new WristSetPostitionWithJoystick());
+		/*jButton5.whenPressed(new WristSetPosition(0.0));
+		jButton6.whenPressed(new WristManualControl());
+		bButton1.whileHeld(new ElevatorSetPostitionWithJoystick());
+		bButton2.whileHeld(new ElevatorSetPosition(30.0));*/
+
+		bButton1.whenPressed(new ElevatorSetPercentOutput(0.0));
+		bButton1.whenPressed(new WristSetPercentOutput(0.0));
+		bButton6.whenPressed(new GoToPosition(States.Positions.HatchFloor));
+		bButton7.whenPressed(new GoToPosition(States.Positions.HatchLevelOne));
+		bButton8.whenPressed(new GoToPosition(States.Positions.HatchLevelTwo));
+		bButton9.whenPressed(new GoToPosition(States.Positions.HatchLevelThree));
+
+		bButton2.whenPressed(new GoToPosition(States.Positions.CargoFloor));
+		bButton4.whenPressed(new GoToPosition(States.Positions.CargoRocketOne));
+		bButton3.whenPressed(new GoToPosition(States.Positions.CargoRocketTwo));
+		bButton5.whenPressed(new GoToPosition(States.Positions.CargoRocketThree));
+		bButton11.whenPressed(new GoToPosition(States.Positions.CargoPlayerStation));
+		bButton10.whenPressed(new GoToPosition(States.Positions.CargoCargoShip));
 		}
 
 	public XboxController getController() {

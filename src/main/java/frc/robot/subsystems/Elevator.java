@@ -7,8 +7,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorManualControl;
+import frc.robot.commands.ElevatorSetPostitionWithJoystick;
 import frc.robot.tools.Logger;
 import frc.robot.tools.UnitConversion;
 
@@ -24,8 +26,8 @@ public class Elevator extends Subsystem {
   private final int kPeakCurrentLimit = 45;
   private final int kContinuousCurrentLimit = 40;
 
-  private final int kMaxVelocity = 15000; // CALCULATE THESE VALUES (HALF)
-  private final int kMaxAcceleration = 6000; // CALCULATE THESE VALUES (HALF)
+  private final int kMaxVelocity = 2000; // CALCULATE THESE VALUES (HALF)
+  private final int kMaxAcceleration = 2000; // CALCULATE THESE VALUES (HALF)
 
   private final int kSlotIdx = 0;
   private final int kPIDIdx = 0;
@@ -61,8 +63,8 @@ public class Elevator extends Subsystem {
     mMaster.configPeakOutputReverse(-1.0);
 
     mMaster.selectProfileSlot(kSlotIdx, kPIDIdx);
-    mMaster.config_kF(kSlotIdx, 0.0);
-    mMaster.config_kP(kSlotIdx, 0.0);
+    mMaster.config_kF(kSlotIdx, 1023.0 / 4000.0);
+    mMaster.config_kP(kSlotIdx, 0.1);
     mMaster.config_kI(kSlotIdx, 0.0);
     mMaster.config_kD(kSlotIdx, 0.0);
 
@@ -83,7 +85,7 @@ public class Elevator extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ElevatorManualControl(0.0));
+    setDefaultCommand(new ElevatorManualControl());
   }
 
   public double getMotorOutputVoltage() {
@@ -102,9 +104,21 @@ public class Elevator extends Subsystem {
     return !mBottom.get();
   }
 
+  public double getActiveTrajetoryPositionInInches() {
+    double positionInSRXUnits = mMaster.getActiveTrajectoryPosition();
+    double positionInRotations = UnitConversion.convertSRXUnitsToRotations(positionInSRXUnits);
+    double positionInInches = UnitConversion.convertRotationsToInches(positionInRotations, kDrumDiameter);
+    
+    return positionInInches;
+  }
+
   public void setPercentOutput(double output) {
+    if (output < -1) {
+      output = -1;
+    } else if (output > 1) {
+      output = 1;
+    }
     mMaster.set(ControlMode.PercentOutput, output);
-    Logger.log(output);
   }
 
   public void setPosition(double positionInInches) {

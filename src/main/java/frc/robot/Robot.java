@@ -5,6 +5,7 @@ import com.ctre.phoenix.CANifier;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -52,6 +53,9 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new DrivetrainArcadeDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
+
+    m_wrist.resetEncoder();
+    m_elevator.resetEncoder();
   }
 
   @Override
@@ -72,6 +76,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Wrist Velocity", m_wrist.getVelocityInDegreesPerSecond());
     SmartDashboard.putBoolean("Wrist Bottom Limit Switch", m_wrist.getBottomLimitSwitch());
     SmartDashboard.putBoolean("Wrist Top Limit Switch", m_wrist.getTopLimitSwitch());
+
+    SmartDashboard.putData("Elevator Command", m_elevator);
   }
 
   @Override
@@ -115,6 +121,11 @@ public class Robot extends TimedRobot {
     if (m_oi.xbox.getStartButton()) {
       m_wrist.resetEncoder();
     }
+
+    if(m_oi.xbox.getBumper(Hand.kRight)) {
+      m_elevator.resetEncoder();
+    }
+
   }
 
   @Override

@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.WristManualControl;
+import frc.robot.commands.WristSetPosition;
 import frc.robot.tools.Logger;
 import frc.robot.tools.UnitConversion;
 
@@ -35,7 +36,7 @@ public class Wrist extends Subsystem {
 
     mMotor.configFactoryDefault();
 
-    mMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    mMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
 
     mMotor.setNeutralMode(NeutralMode.Brake);
 
@@ -54,9 +55,10 @@ public class Wrist extends Subsystem {
     mMotor.configPeakOutputReverse(-1.0);
 
     mMotor.selectProfileSlot(kSlotIdx, kPIDIdx);
+    mMotor.config_IntegralZone(kSlotIdx, 50);
     mMotor.config_kF(kSlotIdx, 1023.0 / 550.0);
     mMotor.config_kP(kSlotIdx, 4.0);
-    mMotor.config_kI(kSlotIdx, 0.0);
+    mMotor.config_kI(kSlotIdx, 0.005);
     mMotor.config_kD(kSlotIdx, 40.0);
 
     mMotor.configMotionCruiseVelocity(kMaxVelocity);
@@ -83,8 +85,12 @@ public class Wrist extends Subsystem {
   }
 
   public void setPercentOutput(double output) {
+    if (output < -1) {
+      output = -1;
+    } else if (output > 1) {
+      output = 1;
+    }
     mMotor.set(ControlMode.PercentOutput, output);
-    Logger.log(output);
   }
 
   public void setPositionInDegrees(double positionInDegrees) {
@@ -95,6 +101,13 @@ public class Wrist extends Subsystem {
 
   public double getPositionInDegrees() {
     double positionInSRXUnits = mMotor.getSelectedSensorPosition();
+    double positionInDegrees = UnitConversion.convertSRXUnitsToDegrees(positionInSRXUnits);
+
+    return positionInDegrees;
+  }
+
+  public double getActiveTrajectoryPositionInDegrees() {
+    double positionInSRXUnits = mMotor.getActiveTrajectoryPosition();
     double positionInDegrees = UnitConversion.convertSRXUnitsToDegrees(positionInSRXUnits);
 
     return positionInDegrees;
