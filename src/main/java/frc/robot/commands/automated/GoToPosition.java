@@ -20,7 +20,7 @@ public class GoToPosition extends CommandGroup {
         targetWristPosition = 90;
         break;
       case HatchLevelTwo:
-        targetElevatorPosition = 30.0; // SET
+        targetElevatorPosition = 30.0;
         targetWristPosition = 90;
         break;
       case HatchLevelThree:
@@ -43,23 +43,18 @@ public class GoToPosition extends CommandGroup {
         targetElevatorPosition = 65;
         targetWristPosition = 60;
         break;
-      case CargoCargoShip:
-        targetElevatorPosition = 30;
-        targetWristPosition = 60;
-        break;
       case CargoFloor:
-        targetElevatorPosition = 10;
+        targetElevatorPosition = 15;
         targetWristPosition = 0;
         break;
-      case CargoPlayerStation:
-        targetElevatorPosition = 37;
-        targetWristPosition = 20;
+      case CargoPlayerStationAndCargoShip:
+        targetElevatorPosition = 40;
+        targetWristPosition = 0;
         break;
-      case StartingPosition:
+      case StoredPosition:
         targetElevatorPosition = 0;
         targetWristPosition = 0;//146;
         break;
-  
       default:
         unkownState = true;
         break;

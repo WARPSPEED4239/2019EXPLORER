@@ -4,12 +4,13 @@ import com.ctre.phoenix.CANifier;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.States.StartingConfig;
 import frc.robot.commands.DrivetrainArcadeDrive;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Drivetrain;
@@ -32,7 +33,7 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
 
   private Command m_autonomousCommand;
-  private SendableChooser<Command> m_chooser = new SendableChooser<>();
+  private SendableChooser<Command> m_startingConfig = new SendableChooser<>();
 
   @Override
   public void robotInit() {
@@ -50,8 +51,8 @@ public class Robot extends TimedRobot {
     cam0.setResolution(320, 240);
     cam0.setFPS(10);
     
-    m_chooser.setDefaultOption("Default Auto", new DrivetrainArcadeDrive());
-    // chooser.addOption("My Auto", new MyAutoCommand());
+    m_startingConfig.setDefaultOption("Hatch Pannel", StartingConfig.HatchPannel());
+    m_startingConfig.addObject("Cargo", StartingConfig.Cargo);
     //SmartDashboard.putData("Auto mode", m_chooser);
 
     m_wrist.resetEncoder();
@@ -91,7 +92,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    m_autonomousCommand = m_startingConfig.getSelected();
      
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
