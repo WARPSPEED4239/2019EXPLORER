@@ -47,8 +47,8 @@ public class Drivetrain extends Subsystem {
     leftMaster.setSecondaryCurrentLimit(PEAK_CURRENT_LIMIT, PEAK_CURRENT_DURATION_MILLIS);
     rightMaster.setSecondaryCurrentLimit(PEAK_CURRENT_LIMIT, PEAK_CURRENT_DURATION_MILLIS);
 
-    leftMaster.setRampRate(RAMP_RATE);
-    rightMaster.setRampRate(RAMP_RATE);
+    leftMaster.setOpenLoopRampRate(RAMP_RATE);
+    rightMaster.setOpenLoopRampRate(RAMP_RATE);
 
     resetSensors();
   }

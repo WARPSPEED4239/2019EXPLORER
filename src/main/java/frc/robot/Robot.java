@@ -51,8 +51,8 @@ public class Robot extends TimedRobot {
     cam0.setResolution(320, 240);
     cam0.setFPS(10);
     
-    m_startingConfig.setDefaultOption("Hatch Pannel", StartingConfig.HatchPannel());
-    m_startingConfig.addObject("Cargo", StartingConfig.Cargo);
+    m_startingConfig.setDefaultOption("Hatch Pannel", new DrivetrainArcadeDrive());//StartingConfig.HatchPannel());
+    //m_startingConfig.addObject("Cargo", StartingConfig.Cargo);
     //SmartDashboard.putData("Auto mode", m_chooser);
 
     m_wrist.resetEncoder();
