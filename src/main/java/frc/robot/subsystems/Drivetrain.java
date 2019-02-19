@@ -118,7 +118,7 @@ public class Drivetrain extends Subsystem {
 
   public double getIMURoll() {
     IMU.getYawPitchRoll(ypr);
-    return ypr[3];
+    return ypr[2];
   }
 
   public void resetSensors() {

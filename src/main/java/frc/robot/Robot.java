@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.DrivetrainArcadeDrive;
+import frc.robot.States.StartingConfig;
+import frc.robot.commands.autonomous.AutonomousCommand;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.DrivetrainShifting;
@@ -32,7 +33,7 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
 
   private Command m_autonomousCommand;
-  private SendableChooser<Command> m_startingConfig = new SendableChooser<>();
+  private SendableChooser<StartingConfig> m_startingConfigChooser = new SendableChooser<>();
 
   @Override
   public void robotInit() {
@@ -50,9 +51,9 @@ public class Robot extends TimedRobot {
     cam0.setResolution(320, 240);
     cam0.setFPS(10);
     
-    m_startingConfig.setDefaultOption("Hatch Pannel", new DrivetrainArcadeDrive());//StartingConfig.HatchPannel());
-    //m_startingConfig.addObject("Cargo", StartingConfig.Cargo);
-    //SmartDashboard.putData("Auto mode", m_chooser);
+    m_startingConfigChooser.setDefaultOption("Hatch Pannel", StartingConfig.HatchPannel);
+    m_startingConfigChooser.addOption("Cargo", StartingConfig.Cargo);
+    SmartDashboard.putData("Starting Config", m_startingConfigChooser);
 
     m_wrist.resetEncoder();
     m_elevator.resetEncoder();
@@ -91,7 +92,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_startingConfig.getSelected();
+    StartingConfig startingConfig = m_startingConfigChooser.getSelected();
+    m_autonomousCommand = new AutonomousCommand(startingConfig);
      
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();

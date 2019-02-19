@@ -2,7 +2,7 @@ package frc.robot;
 
 public class States { //TODO Implement states functionality
 
-    public static enum StartingConfig {
+    public enum StartingConfig {
         HatchPannel, Cargo
     }
 
