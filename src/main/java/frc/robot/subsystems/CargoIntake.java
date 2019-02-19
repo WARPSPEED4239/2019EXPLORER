@@ -13,6 +13,8 @@ public class CargoIntake extends Subsystem {
 
   public CargoIntake() {
     mMotor.configFactoryDefault();
+
+    mMotor.setInverted(false);
     mMotor.setNeutralMode(NeutralMode.Brake);
   }
   @Override

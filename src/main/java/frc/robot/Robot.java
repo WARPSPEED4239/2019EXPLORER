@@ -17,7 +17,8 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.DrivetrainShifting;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.HatchGrabber;
-import frc.robot.subsystems.LiftWheel;
+import frc.robot.subsystems.LiftWheelsMotor;
+import frc.robot.subsystems.LiftWheelsPiston;
 import frc.robot.subsystems.Wrist;
 import frc.robot.tools.RGBController;
 
@@ -27,7 +28,8 @@ public class Robot extends TimedRobot {
   public static Elevator m_elevator;
   public static HatchGrabber m_hatchGrabber;
   public static Drivetrain m_drivetrain;
-  public static LiftWheel m_liftWheel;
+  public static LiftWheelsMotor m_liftWheelsMotor;
+  public static LiftWheelsPiston m_liftWheelsPiston;
   public static RGBController m_rgbController;
   public static Wrist m_wrist;
   public static OI m_oi;
@@ -42,7 +44,8 @@ public class Robot extends TimedRobot {
     m_elevator = Elevator.create();
     m_hatchGrabber = new HatchGrabber();
     m_drivetrain = new Drivetrain();
-    m_liftWheel = new LiftWheel();
+    m_liftWheelsMotor = new LiftWheelsMotor();
+    m_liftWheelsPiston = new LiftWheelsPiston();
     m_rgbController = new RGBController(new CANifier(RobotMap.canifier));
     m_wrist = Wrist.create();
     m_oi = new OI();
@@ -55,7 +58,7 @@ public class Robot extends TimedRobot {
     m_startingConfigChooser.addOption("Cargo", StartingConfig.Cargo);
     SmartDashboard.putData("Starting Config", m_startingConfigChooser);
 
-    m_wrist.resetEncoder();
+    m_wrist.resetEncoder(); //TODO Take these out
     m_elevator.resetEncoder();
   }
 

@@ -10,7 +10,9 @@ import frc.robot.commands.DrivetrainShiftingLowGear;
 import frc.robot.commands.ElevatorSetPercentOutput;
 import frc.robot.commands.HatchGrabberExtend;
 import frc.robot.commands.HatchGrabberRetract;
-import frc.robot.commands.LiftWheelDown;
+import frc.robot.commands.LiftWheelsMotorForward;
+import frc.robot.commands.LiftWheelsMotorReverse;
+import frc.robot.commands.LiftWheelsPistonDown;
 import frc.robot.commands.WristSetPercentOutput;
 import frc.robot.commands.automated.GoToPosition;
 
@@ -19,7 +21,7 @@ public class OI {
 	public Joystick joystick = new Joystick(1);
 	public Joystick board = new Joystick(2);
 
-	public JoystickButton xButtonA, xButtonB, xButtonX, xButtonY, xButtonLeftStick, xButtonRightStick;
+	public JoystickButton xButtonA, xButtonB, xButtonX, xButtonY, xButtonLeftBumper, xButtonRightBumper;
 
 	public JoystickButton jButton1, jButton2, jButton3, jButton4, jButton5, jButton6, jButton7, jButton8, jButton9,
 			jButton10, jButton11, jButton12;
@@ -32,8 +34,8 @@ public class OI {
 		xButtonB = new JoystickButton(xbox, 2);
 		xButtonX = new JoystickButton(xbox, 3);
 		xButtonY = new JoystickButton(xbox, 4);
-		xButtonLeftStick = new JoystickButton(xbox, 9);
-		xButtonRightStick = new JoystickButton(xbox, 10);
+		xButtonLeftBumper = new JoystickButton(xbox, 5);
+		xButtonRightBumper = new JoystickButton(xbox, 6);
 
 		jButton1 = new JoystickButton(joystick, 1);
 		jButton2 = new JoystickButton(joystick, 2);
@@ -60,14 +62,16 @@ public class OI {
 		bButton10 = new JoystickButton(board, 10);
 		bButton11 = new JoystickButton(board, 11);
 
+		xButtonA.whenPressed(new DrivetrainShiftingLowGear());
+		xButtonB.whenPressed(new DrivetrainShiftingHighGear());
+		xButtonX.toggleWhenPressed(new LiftWheelsPistonDown());
+		xButtonLeftBumper.whileHeld(new LiftWheelsMotorForward());
+		xButtonRightBumper.whileHeld(new LiftWheelsMotorReverse());
+
 		jButton1.whileHeld(new CargoIntakeOut());
 		jButton2.whileHeld(new CargoIntakeIn());
 		jButton3.whenPressed(new HatchGrabberRetract());
 		jButton4.whenPressed(new HatchGrabberExtend());
-
-		xButtonY.whenPressed(new DrivetrainShiftingHighGear());
-		xButtonB.whenPressed(new DrivetrainShiftingLowGear());
-		xButtonX.whileHeld(new LiftWheelDown());
 
 		/*jButton5.whenPressed(new WristSetPosition(0.0));
 		jButton6.whenPressed(new WristManualControl());
