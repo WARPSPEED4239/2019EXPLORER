@@ -13,11 +13,11 @@ import frc.robot.commands.DrivetrainArcadeDrive;
 public class Drivetrain extends Subsystem {
   private double [] ypr = new double[3];
 
-  private final int CURRENT_LIMIT = 40;
-  private final int PEAK_CURRENT_LIMIT = 45;
-  private final int PEAK_CURRENT_DURATION_MILLIS = 100;
+  private final int kCurrentLimit = 40;
+  private final int kPeakCurrentLimit = 45;
+  private final int kPeakCurrentDurationMills = 100;
   
-	private final double RAMP_RATE = 0.2;
+	private final double kRampRate = 0.2;
   
   private double leftEncoderBase;
   private double rightEncoderBase;
@@ -42,13 +42,13 @@ public class Drivetrain extends Subsystem {
     rightSlave1.follow(rightMaster);
     rightSlave2.follow(rightMaster);
     
-    leftMaster.setSmartCurrentLimit(CURRENT_LIMIT);
-    rightMaster.setSmartCurrentLimit(CURRENT_LIMIT);
-    leftMaster.setSecondaryCurrentLimit(PEAK_CURRENT_LIMIT, PEAK_CURRENT_DURATION_MILLIS);
-    rightMaster.setSecondaryCurrentLimit(PEAK_CURRENT_LIMIT, PEAK_CURRENT_DURATION_MILLIS);
+    leftMaster.setSmartCurrentLimit(kCurrentLimit);
+    rightMaster.setSmartCurrentLimit(kCurrentLimit);
+    leftMaster.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
+    rightMaster.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
 
-    leftMaster.setOpenLoopRampRate(RAMP_RATE);
-    rightMaster.setOpenLoopRampRate(RAMP_RATE);
+    leftMaster.setOpenLoopRampRate(kRampRate);
+    rightMaster.setOpenLoopRampRate(kRampRate);
 
     resetSensors();
   }
@@ -116,9 +116,9 @@ public class Drivetrain extends Subsystem {
     return convertVelocity(input);
   }
 
-  public double getIMUYaw() {
+  public double getIMURoll() {
     IMU.getYawPitchRoll(ypr);
-    return ypr[0];
+    return ypr[3];
   }
 
   public void resetSensors() {

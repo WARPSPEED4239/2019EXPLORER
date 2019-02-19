@@ -64,7 +64,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Right Position (ft)", Robot.m_drivetrain.getRightEncoderPosition());
     SmartDashboard.putNumber("Left Velocity (ft/s)", Robot.m_drivetrain.getLeftEncoderVelocity());
     SmartDashboard.putNumber("Right Velocity (ft/s)", Robot.m_drivetrain.getRightEncoderVelocity());
-    SmartDashboard.putNumber("Gyro Yaw (deg)", Robot.m_drivetrain.getIMUYaw());
+    SmartDashboard.putNumber("Gyro Yaw (deg)", Robot.m_drivetrain.getIMURoll());
     
     SmartDashboard.putNumber("Elevator Position", m_elevator.getPositionInInches());
     SmartDashboard.putNumber("Elevator Velocity", m_elevator.getVelocityInInchesPerSecond());
