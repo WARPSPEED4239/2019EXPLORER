@@ -7,17 +7,11 @@ import frc.robot.commands.CargoIntakeIn;
 import frc.robot.commands.CargoIntakeOut;
 import frc.robot.commands.DrivetrainShiftingHighGear;
 import frc.robot.commands.DrivetrainShiftingLowGear;
-import frc.robot.commands.ElevatorManualControl;
 import frc.robot.commands.ElevatorSetPercentOutput;
-import frc.robot.commands.ElevatorSetPosition;
-import frc.robot.commands.ElevatorSetPostitionWithJoystick;
 import frc.robot.commands.HatchGrabberExtend;
 import frc.robot.commands.HatchGrabberRetract;
 import frc.robot.commands.LiftWheelDown;
-import frc.robot.commands.WristManualControl;
 import frc.robot.commands.WristSetPercentOutput;
-import frc.robot.commands.WristSetPosition;
-import frc.robot.commands.WristSetPostitionWithJoystick;
 import frc.robot.commands.automated.GoToPosition;
 
 public class OI {
