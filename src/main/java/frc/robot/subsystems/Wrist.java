@@ -118,7 +118,13 @@ public class Wrist extends Subsystem {
     return velocityInDegreesPerSecond;
   }
 
-  public void resetEncoder() {
+  public void zeroEncoder() {
     mMotor.setSelectedSensorPosition(0);
+  }
+
+  public void setEncoderValueInDegrees(double positionInDegrees) {
+    int positionInSRXUnits = (int) UnitConversion.convertPositionInDegreesToSRXUnits(positionInDegrees);
+    
+    mMotor.setSelectedSensorPosition(positionInSRXUnits);
   }
 }

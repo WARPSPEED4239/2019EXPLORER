@@ -7,13 +7,11 @@ import frc.robot.commands.CargoIntakeIn;
 import frc.robot.commands.CargoIntakeOut;
 import frc.robot.commands.DrivetrainShiftingHighGear;
 import frc.robot.commands.DrivetrainShiftingLowGear;
-import frc.robot.commands.ElevatorSetPercentOutput;
 import frc.robot.commands.HatchGrabberExtend;
 import frc.robot.commands.HatchGrabberRetract;
 import frc.robot.commands.LiftWheelsMotorForward;
 import frc.robot.commands.LiftWheelsMotorReverse;
 import frc.robot.commands.LiftWheelsPistonDown;
-import frc.robot.commands.WristSetPercentOutput;
 import frc.robot.commands.automated.GoToPosition;
 
 public class OI {
@@ -73,24 +71,20 @@ public class OI {
 		jButton3.whenPressed(new HatchGrabberRetract());
 		jButton4.whenPressed(new HatchGrabberExtend());
 
-		/*jButton5.whenPressed(new WristSetPosition(0.0));
-		jButton6.whenPressed(new WristManualControl());
-		bButton1.whileHeld(new ElevatorSetPostitionWithJoystick());
-		bButton2.whileHeld(new ElevatorSetPosition(30.0));*/
+		bButton1.whenPressed(new GoToPosition(States.Positions.Estop));
 
-		bButton1.whenPressed(new ElevatorSetPercentOutput(0.0));
-		bButton1.whenPressed(new WristSetPercentOutput(0.0));
+		bButton2.whenPressed(new GoToPosition(States.Positions.Floor));
+		bButton3.whenPressed(new GoToPosition(States.Positions.Stored));
 		
-		bButton6.whenPressed(new GoToPosition(States.Positions.HatchFloor));
-		bButton7.whenPressed(new GoToPosition(States.Positions.HatchLevelOne));
-		bButton8.whenPressed(new GoToPosition(States.Positions.HatchLevelTwo));
-		bButton9.whenPressed(new GoToPosition(States.Positions.HatchLevelThree));
+		bButton4.whenPressed(new GoToPosition(States.Positions.HatchLevelOne));
+		bButton5.whenPressed(new GoToPosition(States.Positions.HatchLevelTwo));
+		bButton6.whenPressed(new GoToPosition(States.Positions.HatchLevelThree));
 
-		bButton2.whenPressed(new GoToPosition(States.Positions.CargoFloor));
-		bButton4.whenPressed(new GoToPosition(States.Positions.CargoRocketOne));
-		bButton3.whenPressed(new GoToPosition(States.Positions.CargoRocketTwo));
-		bButton5.whenPressed(new GoToPosition(States.Positions.CargoRocketThree));
-		bButton10.whenPressed(new GoToPosition(States.Positions.CargoPlayerStationAndCargoShip));
+		bButton7.whenPressed(new GoToPosition(States.Positions.CargoRocketOne));
+		bButton8.whenPressed(new GoToPosition(States.Positions.CargoRocketTwo));
+		bButton9.whenPressed(new GoToPosition(States.Positions.CargoRocketThree));
+		bButton10.whenPressed(new GoToPosition(States.Positions.CargoIntakeElevated));
+		bButton11.whenPressed(new GoToPosition(States.Positions.CargoPlayerStationAndCargoShip));
 		}
 
 	public XboxController getController() {

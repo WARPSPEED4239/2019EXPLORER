@@ -4,7 +4,6 @@ import com.ctre.phoenix.CANifier;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -49,7 +48,7 @@ public class Robot extends TimedRobot {
     m_rgbController = new RGBController(new CANifier(RobotMap.canifier));
     m_wrist = Wrist.create();
     m_oi = new OI();
-    
+
     UsbCamera cam0 = CameraServer.getInstance().startAutomaticCapture(0);
     cam0.setResolution(320, 240);
     cam0.setFPS(10);
@@ -58,8 +57,8 @@ public class Robot extends TimedRobot {
     m_startingConfigChooser.addOption("Cargo", StartingConfig.Cargo);
     SmartDashboard.putData("Starting Config", m_startingConfigChooser);
 
-    m_wrist.resetEncoder(); //TODO Take these out
-    m_elevator.resetEncoder();
+    m_wrist.setEncoderValueInDegrees(146.0); //TODO Take these out
+    m_elevator.zeroEncoder();
   }
 
   @Override
@@ -80,8 +79,20 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Wrist Velocity", m_wrist.getVelocityInDegreesPerSecond());
     SmartDashboard.putBoolean("Wrist Bottom Limit Switch", m_wrist.getBottomLimitSwitch());
     SmartDashboard.putBoolean("Wrist Top Limit Switch", m_wrist.getTopLimitSwitch());
-
-    SmartDashboard.putData("Elevator Command", m_elevator);
+    
+    if (Constants.kCodeTestingState) {
+      if (m_oi.xbox.getPOV() == 0) {
+        m_drivetrain.resetSensors();
+       }
+   
+       if (m_oi.xbox.getPOV() == 90) {
+         m_wrist.zeroEncoder();
+       }
+   
+       if (m_oi.xbox.getPOV() == 270) {
+         m_elevator.zeroEncoder();
+       }
+    }
   }
 
   @Override
@@ -118,19 +129,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-  
-    if (m_oi.xbox.getBackButton()) {
-     m_drivetrain.resetSensors();
-    }
-
-    if (m_oi.xbox.getStartButton()) {
-      m_wrist.resetEncoder();
-    }
-
-    if(m_oi.xbox.getBumper(Hand.kRight)) {
-      m_elevator.resetEncoder();
-    }
-
   }
 
   @Override

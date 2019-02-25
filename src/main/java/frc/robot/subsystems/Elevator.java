@@ -141,7 +141,14 @@ public class Elevator extends Subsystem {
     return velocityInInchesPerSec;
   }
 
-  public void resetEncoder() {
+  public void zeroEncoder() {
     mMaster.setSelectedSensorPosition(0);
+  }
+  
+  public void setEncoderValueInDegrees(double positionInInches) {
+    double positionInRotations = UnitConversion.convertPositionInInchesToRotations(positionInInches, kDrumDiameter);
+    int positionInSRXUnits = (int) UnitConversion.convertRotationsToSRXUnits(positionInRotations);
+
+    mMaster.setSelectedSensorPosition(positionInSRXUnits);
   }
 }

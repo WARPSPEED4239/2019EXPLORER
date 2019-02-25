@@ -18,10 +18,7 @@ public class Drivetrain extends Subsystem {
   private final int kPeakCurrentDurationMills = 100;
   
 	private final double kRampRate = 0.2;
-  
-  private double leftEncoderBase;
-  private double rightEncoderBase;
-  
+
   private CANSparkMax leftMaster = new CANSparkMax(RobotMap.drivetrainLeftOne, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax leftSlave1 = new CANSparkMax(RobotMap.drivetrainLeftTwo, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax leftSlave2 = new CANSparkMax(RobotMap.drivetrainLeftThree, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -50,6 +47,8 @@ public class Drivetrain extends Subsystem {
     leftMaster.setOpenLoopRampRate(kRampRate);
     rightMaster.setOpenLoopRampRate(kRampRate);
 
+    leftEncoder.setPosition(0.0);
+    rightEncoder.setPosition(0.0);
     resetSensors();
   }
 
@@ -78,7 +77,7 @@ public class Drivetrain extends Subsystem {
     setDefaultCommand(new DrivetrainArcadeDrive());
   }
   
-  public void arcadeDrive(double move, double rotate) {
+  public void arcadeDrive(double move, double rotate) { //TODO scale the rotate axis
     final double MIN_MOVE_THRESHOLD = 0.05;
     final double MIN_ROTATE_THRESHOLD = 0.05;
 
@@ -97,12 +96,12 @@ public class Drivetrain extends Subsystem {
   }
 
   public double getLeftEncoderPosition() {
-    double revs = -(leftEncoder.getPosition() - leftEncoderBase);
+    double revs = -(leftEncoder.getPosition());
     return convertPosition(revs);
   }
 
   public double getRightEncoderPosition() {
-     double revs = rightEncoder.getPosition() - rightEncoderBase;
+     double revs = rightEncoder.getPosition();
      return convertPosition(revs);
   }
 
@@ -122,8 +121,8 @@ public class Drivetrain extends Subsystem {
   }
 
   public void resetSensors() {
-    leftEncoderBase = leftEncoder.getPosition();
-    rightEncoderBase = rightEncoder.getPosition();
+    leftEncoder.setPosition(0.0);
+    rightEncoder.setPosition(0.0);
     IMU.setYaw(0.0);
   }
 
