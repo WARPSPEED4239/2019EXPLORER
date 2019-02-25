@@ -16,15 +16,15 @@ public class Elevator extends Subsystem {
   private final WPI_TalonSRX mMaster;
   private final WPI_TalonSRX mSlave;
 
-  private final DigitalInput mBottom;
+  private final DigitalInput mBottom; //TODO implement Limit Switches (zeroing and stopping) 
   private final DigitalInput mTop2To1;
   private final DigitalInput mTop3To2;
 
   private final int kPeakCurrentLimit = 45;
   private final int kContinuousCurrentLimit = 40;
 
-  private final int kMaxVelocity = 2000; // CALCULATE THESE VALUES (HALF)
-  private final int kMaxAcceleration = 2000; // CALCULATE THESE VALUES (HALF)
+  private final int kMaxVelocity = 2000; //TODO make faster?
+  private final int kMaxAcceleration = 2000;
 
   private final int kSlotIdx = 0;
   private final int kPIDIdx = 0;
