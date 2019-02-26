@@ -5,12 +5,17 @@ import com.ctre.phoenix.CANifier;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+<<<<<<< HEAD
 import frc.robot.States.StartingConfig;
 import frc.robot.commands.autonomous.AutonomousCommand;
+=======
+import frc.robot.commands.DrivetrainArcadeDrive;
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.DrivetrainShifting;
@@ -34,7 +39,11 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
 
   private Command m_autonomousCommand;
+<<<<<<< HEAD
   private SendableChooser<StartingConfig> m_startingConfigChooser = new SendableChooser<>();
+=======
+  private SendableChooser<Command> m_chooser = new SendableChooser<>();
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 
   @Override
   public void robotInit() {
@@ -53,9 +62,15 @@ public class Robot extends TimedRobot {
     cam0.setResolution(320, 240);
     cam0.setFPS(10);
     
+<<<<<<< HEAD
     m_startingConfigChooser.setDefaultOption("Hatch Pannel", StartingConfig.HatchPannel);
     m_startingConfigChooser.addOption("Cargo", StartingConfig.Cargo);
     SmartDashboard.putData("Starting Config", m_startingConfigChooser);
+=======
+    m_chooser.setDefaultOption("Default Auto", new DrivetrainArcadeDrive());
+    // chooser.addOption("My Auto", new MyAutoCommand());
+    //SmartDashboard.putData("Auto mode", m_chooser);
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 
     m_wrist.setEncoderValueInDegrees(146.0); //TODO Take these out
     m_elevator.zeroEncoder();
@@ -106,8 +121,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+<<<<<<< HEAD
     StartingConfig startingConfig = m_startingConfigChooser.getSelected();
     m_autonomousCommand = new AutonomousCommand(startingConfig);
+=======
+    m_autonomousCommand = m_chooser.getSelected();
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
      
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();

@@ -71,6 +71,7 @@ public class OI {
 		jButton3.whenPressed(new HatchGrabberRetract());
 		jButton4.whenPressed(new HatchGrabberExtend());
 
+<<<<<<< HEAD
 		bButton1.whenPressed(new GoToPosition(States.Positions.Estop));
 
 		bButton2.whenPressed(new GoToPosition(States.Positions.Floor));
@@ -85,6 +86,32 @@ public class OI {
 		bButton9.whenPressed(new GoToPosition(States.Positions.CargoRocketThree));
 		bButton10.whenPressed(new GoToPosition(States.Positions.CargoIntakeElevated));
 		bButton11.whenPressed(new GoToPosition(States.Positions.CargoPlayerStationAndCargoShip));
+=======
+		//xButtonX.whileHeld(new RampsUp());
+		//xButtonA.whileHeld(new RampsDown());
+		xButtonY.whenPressed(new DrivetrainShiftingHighGear());
+		xButtonB.whenPressed(new DrivetrainShiftingLowGear());
+		xButtonRightStick.whileHeld(new LiftWheelDown());
+
+		/*jButton5.whenPressed(new WristSetPosition(0.0));
+		jButton6.whenPressed(new WristManualControl());
+		bButton1.whileHeld(new ElevatorSetPostitionWithJoystick());
+		bButton2.whileHeld(new ElevatorSetPosition(30.0));*/
+
+		bButton1.whenPressed(new ElevatorSetPercentOutput(0.0));
+		bButton1.whenPressed(new WristSetPercentOutput(0.0));
+		bButton6.whenPressed(new GoToPosition(States.Positions.HatchFloor));
+		bButton7.whenPressed(new GoToPosition(States.Positions.HatchLevelOne));
+		bButton8.whenPressed(new GoToPosition(States.Positions.HatchLevelTwo));
+		bButton9.whenPressed(new GoToPosition(States.Positions.HatchLevelThree));
+
+		bButton2.whenPressed(new GoToPosition(States.Positions.CargoFloor));
+		bButton4.whenPressed(new GoToPosition(States.Positions.CargoRocketOne));
+		bButton3.whenPressed(new GoToPosition(States.Positions.CargoRocketTwo));
+		bButton5.whenPressed(new GoToPosition(States.Positions.CargoRocketThree));
+		bButton11.whenPressed(new GoToPosition(States.Positions.CargoPlayerStation));
+		bButton10.whenPressed(new GoToPosition(States.Positions.CargoCargoShip));
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 		}
 
 	public XboxController getController() {
