@@ -75,6 +75,7 @@ public class Robot extends TimedRobot {
     m_startingConfigChooser.setDefaultOption("Hatch Pannel", StartingConfig.HatchPannel);
     m_startingConfigChooser.addOption("Cargo", StartingConfig.Cargo);
     SmartDashboard.putData("Starting Config", m_startingConfigChooser);
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
@@ -82,6 +83,8 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
+=======
+>>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
 
     m_wrist.resetEncoder(); //TODO Take these out
     m_elevator.resetEncoder();

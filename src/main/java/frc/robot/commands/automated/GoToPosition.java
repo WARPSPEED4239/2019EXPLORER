@@ -17,6 +17,7 @@ public class GoToPosition extends CommandGroup {
     switch (positions) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     case HatchLevelOne:
       targetElevatorPosition = 0.0;
       targetWristPosition = 90.0;
@@ -67,13 +68,19 @@ public class GoToPosition extends CommandGroup {
 =======
 =======
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
+=======
+>>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
       case HatchLevelOne:
         targetElevatorPosition = 0;
         targetWristPosition = 90;
         break;
       case HatchLevelTwo:
 <<<<<<< HEAD
+<<<<<<< HEAD
         targetElevatorPosition = 30.0; // SET
+=======
+        targetElevatorPosition = 30.0;
+>>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
 =======
         targetElevatorPosition = 30.0;
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
@@ -100,6 +107,7 @@ public class GoToPosition extends CommandGroup {
         targetWristPosition = 60;
         break;
 <<<<<<< HEAD
+<<<<<<< HEAD
       case CargoCargoShip:
         targetElevatorPosition = 30;
         targetWristPosition = 60;
@@ -118,6 +126,8 @@ public class GoToPosition extends CommandGroup {
         break;
   
 =======
+=======
+>>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
       case CargoFloor:
         targetElevatorPosition = 15;
         targetWristPosition = 0;
@@ -130,6 +140,9 @@ public class GoToPosition extends CommandGroup {
         targetElevatorPosition = 0;
         targetWristPosition = 0;//146;
         break;
+<<<<<<< HEAD
+>>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
+=======
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
       default:
         unkownState = true;
@@ -145,6 +158,7 @@ public class GoToPosition extends CommandGroup {
         addSequential(new ElevatorSetPosition(targetElevatorPosition));
       }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
     }
 
@@ -158,6 +172,8 @@ public class GoToPosition extends CommandGroup {
     } else {
       addParallel(new ElevatorSetPosition(targetElevatorPosition));
       addSequential(new WristSetPosition(targetWristPosition));
+=======
+>>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
 =======
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
     }

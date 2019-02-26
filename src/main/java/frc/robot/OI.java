@@ -76,17 +76,24 @@ public class OI {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bButton1.whenPressed(new GoToPosition(States.Positions.Estop));
 =======
+=======
+>>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
 		/*jButton5.whenPressed(new WristSetPosition(0.0));
 		jButton6.whenPressed(new WristManualControl());
 		bButton1.whileHeld(new ElevatorSetPostitionWithJoystick());
 		bButton2.whileHeld(new ElevatorSetPosition(30.0));*/
+<<<<<<< HEAD
+>>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
+=======
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
 
 		bButton1.whenPressed(new ElevatorSetPercentOutput(0.0));
 		bButton1.whenPressed(new WristSetPercentOutput(0.0));
 		
+<<<<<<< HEAD
 <<<<<<< HEAD
 		bButton4.whenPressed(new GoToPosition(States.Positions.HatchLevelOne));
 		bButton5.whenPressed(new GoToPosition(States.Positions.HatchLevelTwo));
@@ -115,6 +122,8 @@ public class OI {
 		bButton1.whenPressed(new WristSetPercentOutput(0.0));
 =======
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
+=======
+>>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
 		bButton6.whenPressed(new GoToPosition(States.Positions.HatchFloor));
 		bButton7.whenPressed(new GoToPosition(States.Positions.HatchLevelOne));
 		bButton8.whenPressed(new GoToPosition(States.Positions.HatchLevelTwo));
@@ -125,12 +134,16 @@ public class OI {
 		bButton3.whenPressed(new GoToPosition(States.Positions.CargoRocketTwo));
 		bButton5.whenPressed(new GoToPosition(States.Positions.CargoRocketThree));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bButton11.whenPressed(new GoToPosition(States.Positions.CargoPlayerStation));
 		bButton10.whenPressed(new GoToPosition(States.Positions.CargoCargoShip));
 <<<<<<< HEAD
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 =======
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
+=======
+		bButton10.whenPressed(new GoToPosition(States.Positions.CargoPlayerStationAndCargoShip));
+>>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
 =======
 		bButton10.whenPressed(new GoToPosition(States.Positions.CargoPlayerStationAndCargoShip));
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
