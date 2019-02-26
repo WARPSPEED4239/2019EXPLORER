@@ -7,8 +7,11 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorManualControl;
+import frc.robot.commands.ElevatorSetPostitionWithJoystick;
+import frc.robot.tools.Logger;
 import frc.robot.tools.UnitConversion;
 
 public class Elevator extends Subsystem {

@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import frc.robot.States.StartingConfig;
 import frc.robot.commands.autonomous.AutonomousCommand;
 =======
@@ -20,6 +21,9 @@ import frc.robot.commands.autonomous.AutonomousCommand;
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 =======
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
+=======
+import frc.robot.States.StartingConfig;
+>>>>>>> parent of 4d21e22... Updated Imports
 import frc.robot.commands.DrivetrainArcadeDrive;
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 import frc.robot.subsystems.CargoIntake;
