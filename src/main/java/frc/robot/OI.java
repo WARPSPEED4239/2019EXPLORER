@@ -10,9 +10,7 @@ import frc.robot.commands.DrivetrainShiftingLowGear;
 import frc.robot.commands.ElevatorSetPercentOutput;
 import frc.robot.commands.HatchGrabberExtend;
 import frc.robot.commands.HatchGrabberRetract;
-import frc.robot.commands.LiftWheelsMotorForward;
-import frc.robot.commands.LiftWheelsMotorReverse;
-import frc.robot.commands.LiftWheelsPistonDown;
+import frc.robot.commands.LiftWheelDown;
 import frc.robot.commands.WristSetPercentOutput;
 import frc.robot.commands.automated.GoToPosition;
 
@@ -21,7 +19,7 @@ public class OI {
 	public Joystick joystick = new Joystick(1);
 	public Joystick board = new Joystick(2);
 
-	public JoystickButton xButtonA, xButtonB, xButtonX, xButtonY, xButtonLeftBumper, xButtonRightBumper;
+	public JoystickButton xButtonA, xButtonB, xButtonX, xButtonY, xButtonLeftStick, xButtonRightStick;
 
 	public JoystickButton jButton1, jButton2, jButton3, jButton4, jButton5, jButton6, jButton7, jButton8, jButton9,
 			jButton10, jButton11, jButton12;
@@ -34,8 +32,8 @@ public class OI {
 		xButtonB = new JoystickButton(xbox, 2);
 		xButtonX = new JoystickButton(xbox, 3);
 		xButtonY = new JoystickButton(xbox, 4);
-		xButtonLeftBumper = new JoystickButton(xbox, 5);
-		xButtonRightBumper = new JoystickButton(xbox, 6);
+		xButtonLeftStick = new JoystickButton(xbox, 9);
+		xButtonRightStick = new JoystickButton(xbox, 10);
 
 		jButton1 = new JoystickButton(joystick, 1);
 		jButton2 = new JoystickButton(joystick, 2);
@@ -62,12 +60,6 @@ public class OI {
 		bButton10 = new JoystickButton(board, 10);
 		bButton11 = new JoystickButton(board, 11);
 
-		xButtonA.whenPressed(new DrivetrainShiftingLowGear());
-		xButtonB.whenPressed(new DrivetrainShiftingHighGear());
-		xButtonX.toggleWhenPressed(new LiftWheelsPistonDown());
-		xButtonLeftBumper.whileHeld(new LiftWheelsMotorForward());
-		xButtonRightBumper.whileHeld(new LiftWheelsMotorReverse());
-
 		jButton1.whileHeld(new CargoIntakeOut());
 		jButton2.whileHeld(new CargoIntakeIn());
 		jButton3.whenPressed(new HatchGrabberRetract());
@@ -77,10 +69,17 @@ public class OI {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bButton1.whenPressed(new GoToPosition(States.Positions.Estop));
 =======
 =======
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
+=======
+		xButtonY.whenPressed(new DrivetrainShiftingHighGear());
+		xButtonB.whenPressed(new DrivetrainShiftingLowGear());
+		xButtonX.whileHeld(new LiftWheelDown());
+
+>>>>>>> parent of 7240df4... Added new end game code
 		/*jButton5.whenPressed(new WristSetPosition(0.0));
 		jButton6.whenPressed(new WristManualControl());
 		bButton1.whileHeld(new ElevatorSetPostitionWithJoystick());

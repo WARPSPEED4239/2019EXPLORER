@@ -4,22 +4,22 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.LiftWheelsPistonUp;
+import frc.robot.commands.LiftWheelUp;
 
-public class LiftWheelsPiston extends Subsystem {
+public class LiftWheel extends Subsystem {
 
-  private DoubleSolenoid mPiston = new DoubleSolenoid(RobotMap.liftWheelsSolenoidForward, RobotMap.liftWheelsSolenoidReverse);
+  private DoubleSolenoid mPiston = new DoubleSolenoid(RobotMap.liftWheelSolenoidForward, RobotMap.liftWheelSolenoidReverse);
   
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new LiftWheelsPistonUp());
+    setDefaultCommand(new LiftWheelUp());
   }
 
-  public void retract() {
+  public void down() {
     mPiston.set(Value.kReverse);
   }
 
-  public void extend() {
+  public void up() {
     mPiston.set(Value.kForward);
   }
 }
