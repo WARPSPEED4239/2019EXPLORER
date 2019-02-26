@@ -76,6 +76,7 @@ public class Robot extends TimedRobot {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_startingConfigChooser.setDefaultOption("Hatch Pannel", StartingConfig.HatchPannel);
     m_startingConfigChooser.addOption("Cargo", StartingConfig.Cargo);
     SmartDashboard.putData("Starting Config", m_startingConfigChooser);
@@ -88,6 +89,10 @@ public class Robot extends TimedRobot {
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
     m_chooser.setDefaultOption("Default Auto", new DrivetrainArcadeDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
+=======
+    m_startingConfig.setDefaultOption("Hatch Pannel", StartingConfig.HatchPannel());
+    m_startingConfig.addObject("Cargo", StartingConfig.Cargo);
+>>>>>>> parent of 58dad00... Updated Vendors, and added starting config
     //SmartDashboard.putData("Auto mode", m_chooser);
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 =======

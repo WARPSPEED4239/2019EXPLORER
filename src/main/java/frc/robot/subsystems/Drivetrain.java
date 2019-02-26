@@ -47,8 +47,13 @@ public class Drivetrain extends Subsystem {
     leftMaster.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
     rightMaster.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
 
+<<<<<<< HEAD
     leftMaster.setOpenLoopRampRate(kRampRate);
     rightMaster.setOpenLoopRampRate(kRampRate);
+=======
+    leftMaster.setRampRate(RAMP_RATE);
+    rightMaster.setRampRate(RAMP_RATE);
+>>>>>>> parent of 58dad00... Updated Vendors, and added starting config
 
     resetSensors();
   }
