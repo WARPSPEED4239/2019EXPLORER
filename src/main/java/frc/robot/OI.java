@@ -70,15 +70,21 @@ public class OI {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bButton1.whenPressed(new GoToPosition(States.Positions.Estop));
 =======
 =======
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
 =======
+=======
+>>>>>>> parent of 7240df4... Added new end game code
 		xButtonY.whenPressed(new DrivetrainShiftingHighGear());
 		xButtonB.whenPressed(new DrivetrainShiftingLowGear());
 		xButtonX.whileHeld(new LiftWheelDown());
 
+<<<<<<< HEAD
+>>>>>>> parent of 7240df4... Added new end game code
+=======
 >>>>>>> parent of 7240df4... Added new end game code
 		/*jButton5.whenPressed(new WristSetPosition(0.0));
 		jButton6.whenPressed(new WristManualControl());

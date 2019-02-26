@@ -73,6 +73,7 @@ public class Robot extends TimedRobot {
     m_startingConfigChooser.addOption("Cargo", StartingConfig.Cargo);
     SmartDashboard.putData("Starting Config", m_startingConfigChooser);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
@@ -82,6 +83,8 @@ public class Robot extends TimedRobot {
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 =======
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
+=======
+>>>>>>> parent of 7240df4... Added new end game code
 
     m_wrist.resetEncoder();
     m_elevator.resetEncoder();
