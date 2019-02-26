@@ -3,6 +3,7 @@ package frc.robot;
 public class States {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public enum StartingConfig {
         HatchPannel, Cargo
     }
@@ -17,6 +18,12 @@ public class States {
         ZEROING, RUNNING, MANUEL, 
     }
 
+=======
+    public enum liftOperationState {
+        ZEROING, RUNNING, MANUEL, 
+    }
+
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
     public enum intakeOperationState {
         RUNNING, MANUEL
     }
@@ -32,6 +39,9 @@ public class States {
         HatchLevelOne, HatchLevelTwo, HatchLevelThree, HatchFloor,
         CargoRocketOne, CargoRocketTwo, CargoRocketThree, CargoCargoShip, CargoPlayerStation, CargoFloor,
         StartingPosition
+<<<<<<< HEAD
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
+=======
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
     }
 }

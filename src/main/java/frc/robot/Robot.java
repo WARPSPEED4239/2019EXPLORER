@@ -11,9 +11,12 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import frc.robot.States.StartingConfig;
 import frc.robot.commands.autonomous.AutonomousCommand;
 =======
+=======
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 import frc.robot.commands.DrivetrainArcadeDrive;
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 import frc.robot.subsystems.CargoIntake;
@@ -40,7 +43,11 @@ public class Robot extends TimedRobot {
 
   private Command m_autonomousCommand;
 <<<<<<< HEAD
+<<<<<<< HEAD
   private SendableChooser<StartingConfig> m_startingConfigChooser = new SendableChooser<>();
+=======
+  private SendableChooser<Command> m_chooser = new SendableChooser<>();
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 =======
   private SendableChooser<Command> m_chooser = new SendableChooser<>();
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
@@ -63,10 +70,13 @@ public class Robot extends TimedRobot {
     cam0.setFPS(10);
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_startingConfigChooser.setDefaultOption("Hatch Pannel", StartingConfig.HatchPannel);
     m_startingConfigChooser.addOption("Cargo", StartingConfig.Cargo);
     SmartDashboard.putData("Starting Config", m_startingConfigChooser);
 =======
+=======
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
     m_chooser.setDefaultOption("Default Auto", new DrivetrainArcadeDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
@@ -122,8 +132,12 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
 <<<<<<< HEAD
+<<<<<<< HEAD
     StartingConfig startingConfig = m_startingConfigChooser.getSelected();
     m_autonomousCommand = new AutonomousCommand(startingConfig);
+=======
+    m_autonomousCommand = m_chooser.getSelected();
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 =======
     m_autonomousCommand = m_chooser.getSelected();
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster

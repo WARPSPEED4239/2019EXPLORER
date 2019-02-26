@@ -72,6 +72,7 @@ public class OI {
 		jButton4.whenPressed(new HatchGrabberExtend());
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bButton1.whenPressed(new GoToPosition(States.Positions.Estop));
 
 		bButton2.whenPressed(new GoToPosition(States.Positions.Floor));
@@ -87,6 +88,8 @@ public class OI {
 		bButton10.whenPressed(new GoToPosition(States.Positions.CargoIntakeElevated));
 		bButton11.whenPressed(new GoToPosition(States.Positions.CargoPlayerStationAndCargoShip));
 =======
+=======
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 		//xButtonX.whileHeld(new RampsUp());
 		//xButtonA.whileHeld(new RampsDown());
 		xButtonY.whenPressed(new DrivetrainShiftingHighGear());
@@ -111,6 +114,9 @@ public class OI {
 		bButton5.whenPressed(new GoToPosition(States.Positions.CargoRocketThree));
 		bButton11.whenPressed(new GoToPosition(States.Positions.CargoPlayerStation));
 		bButton10.whenPressed(new GoToPosition(States.Positions.CargoCargoShip));
+<<<<<<< HEAD
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
+=======
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 		}
 
