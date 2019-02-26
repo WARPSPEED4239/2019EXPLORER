@@ -1,6 +1,6 @@
 package frc.robot;
 
-public class States {
+public class States { //TODO Implement states functionality
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -8,7 +8,12 @@ public class States {
         HatchPannel, Cargo
     }
 
+    public enum OperationStates {
+        Zeroing, Running, Manuel, 
+    }
+
     public enum Positions {
+<<<<<<< HEAD
         HatchLevelOne, HatchLevelTwo, HatchLevelThree,
         CargoRocketOne, CargoRocketTwo, CargoRocketThree, CargoIntakeElevated, CargoPlayerStationAndCargoShip,
         Floor, Stored,
@@ -43,5 +48,10 @@ public class States {
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 =======
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
+=======
+        HatchLevelOne, HatchLevelTwo, HatchLevelThree, HatchFloor,
+        CargoRocketOne, CargoRocketTwo, CargoRocketThree, CargoPlayerStationAndCargoShip, CargoFloor,
+        StoredPosition
+>>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
     }
 }

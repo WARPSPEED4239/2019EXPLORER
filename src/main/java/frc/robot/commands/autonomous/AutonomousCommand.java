@@ -1,10 +1,9 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.States;
 import frc.robot.States.StartingConfig;
 import frc.robot.commands.HatchGrabberExtend;
-import frc.robot.commands.automated.GoToPosition;
+import frc.robot.commands.WristSetPosition;
 
 public class AutonomousCommand extends CommandGroup {
 
@@ -12,8 +11,8 @@ public class AutonomousCommand extends CommandGroup {
     switch (startingConfig) {
     case HatchPannel:
       addParallel(new HatchGrabberExtend());
-      addSequential(new GoToPosition(States.Positions.Floor));
-      addSequential(new GoToPosition(States.Positions.HatchLevelOne));
+      addSequential(new WristSetPosition(0));
+      addSequential(new WristSetPosition(90));
       break;
     case Cargo:
       break;
