@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import frc.robot.States.StartingConfig;
 import frc.robot.commands.autonomous.AutonomousCommand;
 =======
@@ -26,6 +27,9 @@ import frc.robot.States.StartingConfig;
 >>>>>>> parent of 4d21e22... Updated Imports
 import frc.robot.commands.DrivetrainArcadeDrive;
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
+=======
+import frc.robot.commands.DrivetrainArcadeDrive;
+>>>>>>> parent of b8fc18d... Made autonomous command, starting config chooser, and fixed YPR error
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.DrivetrainShifting;
@@ -50,6 +54,7 @@ public class Robot extends TimedRobot {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   private SendableChooser<StartingConfig> m_startingConfigChooser = new SendableChooser<>();
 =======
   private SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -60,6 +65,9 @@ public class Robot extends TimedRobot {
 =======
   private SendableChooser<Command> m_chooser = new SendableChooser<>();
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
+=======
+  private SendableChooser<Command> m_startingConfig = new SendableChooser<>();
+>>>>>>> parent of b8fc18d... Made autonomous command, starting config chooser, and fixed YPR error
 
   @Override
   public void robotInit() {
@@ -77,6 +85,7 @@ public class Robot extends TimedRobot {
     cam0.setResolution(320, 240);
     cam0.setFPS(10);
     
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -103,6 +112,11 @@ public class Robot extends TimedRobot {
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
 =======
 >>>>>>> parent of 7240df4... Added new end game code
+=======
+    m_startingConfig.setDefaultOption("Hatch Pannel", new DrivetrainArcadeDrive());//StartingConfig.HatchPannel());
+    //m_startingConfig.addObject("Cargo", StartingConfig.Cargo);
+    //SmartDashboard.putData("Auto mode", m_chooser);
+>>>>>>> parent of b8fc18d... Made autonomous command, starting config chooser, and fixed YPR error
 
     m_wrist.resetEncoder();
     m_elevator.resetEncoder();
@@ -144,6 +158,7 @@ public class Robot extends TimedRobot {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     StartingConfig startingConfig = m_startingConfigChooser.getSelected();
     m_autonomousCommand = new AutonomousCommand(startingConfig);
 =======
@@ -155,6 +170,9 @@ public class Robot extends TimedRobot {
 =======
     m_autonomousCommand = m_chooser.getSelected();
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
+=======
+    m_autonomousCommand = m_startingConfig.getSelected();
+>>>>>>> parent of b8fc18d... Made autonomous command, starting config chooser, and fixed YPR error
      
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();

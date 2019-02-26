@@ -5,7 +5,11 @@ public class States { //TODO Implement states functionality
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public enum StartingConfig {
+=======
+    public static enum StartingConfig {
+>>>>>>> parent of b8fc18d... Made autonomous command, starting config chooser, and fixed YPR error
         HatchPannel, Cargo
 =======
     public enum liftOperationState {

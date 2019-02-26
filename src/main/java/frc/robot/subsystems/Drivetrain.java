@@ -129,10 +129,14 @@ public class Drivetrain extends Subsystem {
   public double getIMUYaw() {
     IMU.getYawPitchRoll(ypr);
 <<<<<<< HEAD
+<<<<<<< HEAD
     return ypr[2];
 =======
     return ypr[0];
 >>>>>>> parent of 47c8ac3... Changed IMU to get Roll and changed syntax on constants
+=======
+    return ypr[3];
+>>>>>>> parent of b8fc18d... Made autonomous command, starting config chooser, and fixed YPR error
   }
 
   public void resetSensors() {
