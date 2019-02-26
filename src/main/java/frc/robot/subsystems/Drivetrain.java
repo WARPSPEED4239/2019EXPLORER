@@ -13,11 +13,11 @@ import frc.robot.commands.DrivetrainArcadeDrive;
 public class Drivetrain extends Subsystem {
   private double [] ypr = new double[3];
 
-  private final int kCurrentLimit = 40;
-  private final int kPeakCurrentLimit = 45;
-  private final int kPeakCurrentDurationMills = 100;
+  private final int CURRENT_LIMIT = 40;
+  private final int PEAK_CURRENT_LIMIT = 45;
+  private final int PEAK_CURRENT_DURATION_MILLIS = 100;
   
-	private final double kRampRate = 0.2;
+	private final double RAMP_RATE = 0.2;
   
   private double leftEncoderBase;
   private double rightEncoderBase;
@@ -42,11 +42,12 @@ public class Drivetrain extends Subsystem {
     rightSlave1.follow(rightMaster);
     rightSlave2.follow(rightMaster);
     
-    leftMaster.setSmartCurrentLimit(kCurrentLimit);
-    rightMaster.setSmartCurrentLimit(kCurrentLimit);
-    leftMaster.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
-    rightMaster.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
+    leftMaster.setSmartCurrentLimit(CURRENT_LIMIT);
+    rightMaster.setSmartCurrentLimit(CURRENT_LIMIT);
+    leftMaster.setSecondaryCurrentLimit(PEAK_CURRENT_LIMIT, PEAK_CURRENT_DURATION_MILLIS);
+    rightMaster.setSecondaryCurrentLimit(PEAK_CURRENT_LIMIT, PEAK_CURRENT_DURATION_MILLIS);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     leftMaster.setOpenLoopRampRate(kRampRate);
     rightMaster.setOpenLoopRampRate(kRampRate);
@@ -54,6 +55,10 @@ public class Drivetrain extends Subsystem {
     leftMaster.setRampRate(RAMP_RATE);
     rightMaster.setRampRate(RAMP_RATE);
 >>>>>>> parent of 58dad00... Updated Vendors, and added starting config
+=======
+    leftMaster.setOpenLoopRampRate(RAMP_RATE);
+    rightMaster.setOpenLoopRampRate(RAMP_RATE);
+>>>>>>> parent of 47c8ac3... Changed IMU to get Roll and changed syntax on constants
 
     resetSensors();
   }
@@ -121,9 +126,13 @@ public class Drivetrain extends Subsystem {
     return convertVelocity(input);
   }
 
-  public double getIMURoll() {
+  public double getIMUYaw() {
     IMU.getYawPitchRoll(ypr);
+<<<<<<< HEAD
     return ypr[2];
+=======
+    return ypr[0];
+>>>>>>> parent of 47c8ac3... Changed IMU to get Roll and changed syntax on constants
   }
 
   public void resetSensors() {
