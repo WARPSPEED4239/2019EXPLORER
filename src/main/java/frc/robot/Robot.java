@@ -4,7 +4,6 @@ import com.ctre.phoenix.CANifier;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
@@ -13,9 +12,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import frc.robot.States.StartingConfig;
 import frc.robot.commands.autonomous.AutonomousCommand;
 =======
+=======
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 =======
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 import frc.robot.commands.DrivetrainArcadeDrive;
@@ -43,7 +45,11 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   private SendableChooser<StartingConfig> m_startingConfigChooser = new SendableChooser<>();
+=======
+  private SendableChooser<Command> m_chooser = new SendableChooser<>();
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 =======
   private SendableChooser<Command> m_chooser = new SendableChooser<>();
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
@@ -69,12 +75,15 @@ public class Robot extends TimedRobot {
     
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_startingConfigChooser.setDefaultOption("Hatch Pannel", StartingConfig.HatchPannel);
     m_startingConfigChooser.addOption("Cargo", StartingConfig.Cargo);
     SmartDashboard.putData("Starting Config", m_startingConfigChooser);
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 =======
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
     m_chooser.setDefaultOption("Default Auto", new DrivetrainArcadeDrive());
@@ -125,8 +134,12 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     StartingConfig startingConfig = m_startingConfigChooser.getSelected();
     m_autonomousCommand = new AutonomousCommand(startingConfig);
+=======
+    m_autonomousCommand = m_chooser.getSelected();
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 =======
     m_autonomousCommand = m_chooser.getSelected();
 >>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster

@@ -77,6 +77,7 @@ public class GoToPosition extends CommandGroup {
       case HatchLevelTwo:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         targetElevatorPosition = 30.0; // SET
 =======
         targetElevatorPosition = 30.0;
@@ -84,6 +85,9 @@ public class GoToPosition extends CommandGroup {
 =======
         targetElevatorPosition = 30.0;
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
+=======
+        targetElevatorPosition = 30.0; // SET
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
         targetWristPosition = 90;
         break;
       case HatchLevelThree:
@@ -108,10 +112,14 @@ public class GoToPosition extends CommandGroup {
         break;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
       case CargoCargoShip:
         targetElevatorPosition = 30;
         targetWristPosition = 60;
         break;
+<<<<<<< HEAD
       case CargoFloor:
         targetElevatorPosition = 10;
         targetWristPosition = 0;
@@ -128,22 +136,28 @@ public class GoToPosition extends CommandGroup {
 =======
 =======
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
+=======
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
       case CargoFloor:
-        targetElevatorPosition = 15;
+        targetElevatorPosition = 10;
         targetWristPosition = 0;
         break;
-      case CargoPlayerStationAndCargoShip:
-        targetElevatorPosition = 40;
-        targetWristPosition = 0;
+      case CargoPlayerStation:
+        targetElevatorPosition = 37;
+        targetWristPosition = 20;
         break;
-      case StoredPosition:
+      case StartingPosition:
         targetElevatorPosition = 0;
         targetWristPosition = 0;//146;
         break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
 =======
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
+=======
+  
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
       default:
         unkownState = true;
         break;

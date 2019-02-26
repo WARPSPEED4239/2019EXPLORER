@@ -71,6 +71,7 @@ public class OI {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bButton1.whenPressed(new GoToPosition(States.Positions.Estop));
 =======
 =======
@@ -78,9 +79,13 @@ public class OI {
 =======
 =======
 >>>>>>> parent of 7240df4... Added new end game code
+=======
+		//xButtonX.whileHeld(new RampsUp());
+		//xButtonA.whileHeld(new RampsDown());
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 		xButtonY.whenPressed(new DrivetrainShiftingHighGear());
 		xButtonB.whenPressed(new DrivetrainShiftingLowGear());
-		xButtonX.whileHeld(new LiftWheelDown());
+		xButtonRightStick.whileHeld(new LiftWheelDown());
 
 <<<<<<< HEAD
 >>>>>>> parent of 7240df4... Added new end game code
@@ -97,6 +102,7 @@ public class OI {
 
 		bButton1.whenPressed(new ElevatorSetPercentOutput(0.0));
 		bButton1.whenPressed(new WristSetPercentOutput(0.0));
+<<<<<<< HEAD
 		
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -129,6 +135,8 @@ public class OI {
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
 =======
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
+=======
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 		bButton6.whenPressed(new GoToPosition(States.Positions.HatchFloor));
 		bButton7.whenPressed(new GoToPosition(States.Positions.HatchLevelOne));
 		bButton8.whenPressed(new GoToPosition(States.Positions.HatchLevelTwo));
@@ -138,6 +146,7 @@ public class OI {
 		bButton4.whenPressed(new GoToPosition(States.Positions.CargoRocketOne));
 		bButton3.whenPressed(new GoToPosition(States.Positions.CargoRocketTwo));
 		bButton5.whenPressed(new GoToPosition(States.Positions.CargoRocketThree));
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		bButton11.whenPressed(new GoToPosition(States.Positions.CargoPlayerStation));
@@ -152,6 +161,10 @@ public class OI {
 =======
 		bButton10.whenPressed(new GoToPosition(States.Positions.CargoPlayerStationAndCargoShip));
 >>>>>>> parent of 7e43e75... Added code state boolean, cleaned up OI, changed resets for sensors, reworked States, added many TODO's, fixed AutonomusCommand.
+=======
+		bButton11.whenPressed(new GoToPosition(States.Positions.CargoPlayerStation));
+		bButton10.whenPressed(new GoToPosition(States.Positions.CargoCargoShip));
+>>>>>>> parent of 0f7d36d... Created a sendable chooser, edited OI, took out similar positions, made intake in faster
 		}
 
 	public XboxController getController() {
