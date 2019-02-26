@@ -47,18 +47,8 @@ public class Drivetrain extends Subsystem {
     leftMaster.setSecondaryCurrentLimit(PEAK_CURRENT_LIMIT, PEAK_CURRENT_DURATION_MILLIS);
     rightMaster.setSecondaryCurrentLimit(PEAK_CURRENT_LIMIT, PEAK_CURRENT_DURATION_MILLIS);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    leftMaster.setOpenLoopRampRate(kRampRate);
-    rightMaster.setOpenLoopRampRate(kRampRate);
-=======
     leftMaster.setRampRate(RAMP_RATE);
     rightMaster.setRampRate(RAMP_RATE);
->>>>>>> parent of 58dad00... Updated Vendors, and added starting config
-=======
-    leftMaster.setOpenLoopRampRate(RAMP_RATE);
-    rightMaster.setOpenLoopRampRate(RAMP_RATE);
->>>>>>> parent of 47c8ac3... Changed IMU to get Roll and changed syntax on constants
 
     resetSensors();
   }
@@ -128,15 +118,7 @@ public class Drivetrain extends Subsystem {
 
   public double getIMUYaw() {
     IMU.getYawPitchRoll(ypr);
-<<<<<<< HEAD
-<<<<<<< HEAD
-    return ypr[2];
-=======
     return ypr[0];
->>>>>>> parent of 47c8ac3... Changed IMU to get Roll and changed syntax on constants
-=======
-    return ypr[3];
->>>>>>> parent of b8fc18d... Made autonomous command, starting config chooser, and fixed YPR error
   }
 
   public void resetSensors() {
