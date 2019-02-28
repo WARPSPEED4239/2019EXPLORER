@@ -77,9 +77,9 @@ public class Drivetrain extends Subsystem {
     setDefaultCommand(new DrivetrainArcadeDrive());
   }
   
-  public void arcadeDrive(double move, double rotate) { //TODO scale the rotate axis
-    final double MIN_MOVE_THRESHOLD = 0.05;
-    final double MIN_ROTATE_THRESHOLD = 0.05;
+  public void arcadeDrive(double move, double rotate) {
+    final double MIN_MOVE_THRESHOLD = 0.07;
+    final double MIN_ROTATE_THRESHOLD = 0.07;
 
     if (Math.abs(move) < MIN_MOVE_THRESHOLD)
       move = 0.0;
