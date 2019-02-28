@@ -16,7 +16,7 @@ public class Elevator extends Subsystem {
   private final WPI_TalonSRX mMaster;
   private final WPI_TalonSRX mSlave;
 
-  private final DigitalInput mBottom; //TODO implement Limit Switches (zeroing and stopping) 
+  private final DigitalInput mBottom;
   private final DigitalInput mTop2To1;
   private final DigitalInput mTop3To2;
 
@@ -145,7 +145,7 @@ public class Elevator extends Subsystem {
     mMaster.setSelectedSensorPosition(0);
   }
   
-  public void setEncoderValueInDegrees(double positionInInches) {
+  public void setEncoderValueInInches(double positionInInches) {
     double positionInRotations = UnitConversion.convertPositionInInchesToRotations(positionInInches, kDrumDiameter);
     int positionInSRXUnits = (int) UnitConversion.convertRotationsToSRXUnits(positionInRotations);
 

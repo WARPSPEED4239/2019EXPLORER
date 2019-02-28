@@ -57,8 +57,8 @@ public class Robot extends TimedRobot {
     m_startingConfigChooser.addOption("Cargo", StartingConfig.Cargo);
     SmartDashboard.putData("Starting Config", m_startingConfigChooser);
 
-    m_wrist.setEncoderValueInDegrees(146.0); //TODO Take these out
-    m_elevator.zeroEncoder();
+    //m_wrist.setEncoderValueInDegrees(146.0);
+    //m_elevator.zeroEncoder();
   }
 
   @Override

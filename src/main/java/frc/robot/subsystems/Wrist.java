@@ -17,7 +17,7 @@ import frc.robot.tools.UnitConversion;
 public class Wrist extends Subsystem {
 
   private WPI_TalonSRX mMotor;
-  private CANifier mCanifier; //TODO implement Limit Switches (zeroing and stopping) 
+  private CANifier mCanifier;
 
   private final int kPeakCurrentLimit = 35;
   private final int kContinuousCurrentLimit = 30;
