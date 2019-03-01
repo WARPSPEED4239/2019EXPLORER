@@ -11,7 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.WristManualControl;
+import frc.robot.commands.WristSetPercentOutput;
 import frc.robot.tools.UnitConversion;
 
 public class Wrist extends Subsystem {
@@ -71,7 +71,7 @@ public class Wrist extends Subsystem {
   }
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new WristManualControl());
+    setDefaultCommand(new WristSetPercentOutput(0.0));
   }
 
   public boolean getTopLimitSwitch() {

@@ -7,11 +7,14 @@ import frc.robot.commands.CargoIntakeIn;
 import frc.robot.commands.CargoIntakeOut;
 import frc.robot.commands.DrivetrainShiftingHighGear;
 import frc.robot.commands.DrivetrainShiftingLowGear;
+import frc.robot.commands.ElevatorSetPercentOutput;
 import frc.robot.commands.HatchGrabberExtend;
 import frc.robot.commands.HatchGrabberRetract;
 import frc.robot.commands.LiftWheelsMotorForward;
 import frc.robot.commands.LiftWheelsMotorReverse;
 import frc.robot.commands.LiftWheelsPistonDown;
+import frc.robot.commands.WristSetPercentOutput;
+import frc.robot.commands.WristSetPercentOutputNoLimits;
 import frc.robot.commands.automated.GoToPosition;
 
 public class OI {
@@ -70,6 +73,11 @@ public class OI {
 		jButton2.whileHeld(new CargoIntakeIn());
 		jButton3.whenPressed(new HatchGrabberRetract());
 		jButton4.whenPressed(new HatchGrabberExtend());
+		jButton7.whileHeld(new WristSetPercentOutput(-0.4));
+		jButton8.whileHeld(new WristSetPercentOutput(0.4));
+		jButton9.whileHeld(new ElevatorSetPercentOutput(-0.8));
+		jButton10.whileHeld(new ElevatorSetPercentOutput(0.8));
+		jButton11.whileHeld(new WristSetPercentOutputNoLimits(-1.0));
 
 		bButton1.whenPressed(new GoToPosition(States.Positions.Estop));
 

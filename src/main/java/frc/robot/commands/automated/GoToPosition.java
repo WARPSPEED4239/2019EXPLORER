@@ -68,11 +68,13 @@ public class GoToPosition extends CommandGroup {
     if (unkownState) {
       addParallel(new ElevatorSetPercentOutput(0.0));
       addSequential(new WristSetPercentOutput(0.0));
-    } else if (runSequentially) { // TODO Implememt So ElevatorSetPosoiton ends
+    } 
+    else if (runSequentially) { //TODO Implememt So ElevatorSetPosoiton ends
       addSequential(new ElevatorSetPosition(targetElevatorPosition));
       addSequential(new WristSetPosition(targetWristPosition));
       runSequentially = false;
-    } else {
+    } 
+    else {
       addParallel(new ElevatorSetPosition(targetElevatorPosition));
       addSequential(new WristSetPosition(targetWristPosition));
     }
