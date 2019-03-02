@@ -7,6 +7,7 @@ import com.revrobotics.CANSparkMaxLowLevel;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.DrivetrainArcadeDrive;
 
@@ -132,5 +133,22 @@ public class Drivetrain extends Subsystem {
 
   public double convertVelocity(double input) {
     return 2.0 * Math.PI * 0.25 * input / 7.08 / 60; 
+  }
+
+  public void printAccelerations() {
+    short[] ba_xyz = new short[3];
+    IMU.getBiasedAccelerometer(ba_xyz);
+
+    double xInMetersPerSecondSquared = ((double) ba_xyz[0]) * 9.81 / 16384.0;
+    double yInMetersPerSecondSquared = ((double) ba_xyz[1]) * 9.81 / 16384.0;
+    double zInMetersPerSecondSquared = ((double) ba_xyz[2]) * 9.81 / 16384.0;
+
+    SmartDashboard.putNumber("xInMetersPerSecondSquared", xInMetersPerSecondSquared);
+    SmartDashboard.putNumber("yInMetersPerSecondSquared", yInMetersPerSecondSquared);
+    SmartDashboard.putNumber("zInMetersPerSecondSquared", zInMetersPerSecondSquared);
+  }
+
+  public void driveWithVisionAssist(double move, double rotate) {
+    drive.curvatureDrive(move, rotate, false); // Or may arcadeDrive
   }
 }

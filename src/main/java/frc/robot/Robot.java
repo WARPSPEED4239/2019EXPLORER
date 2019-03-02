@@ -79,6 +79,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Wrist Velocity", m_wrist.getVelocityInDegreesPerSecond());
     SmartDashboard.putBoolean("Wrist Bottom Limit Switch", m_wrist.getBottomLimitSwitch());
     SmartDashboard.putBoolean("Wrist Top Limit Switch", m_wrist.getTopLimitSwitch());
+
+    m_drivetrain.printAccelerations();
     
     if (Constants.kCodeTestingState) {
       if (m_oi.xbox.getPOV() == 0) {
