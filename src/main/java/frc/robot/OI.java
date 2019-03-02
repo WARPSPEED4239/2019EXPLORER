@@ -79,20 +79,20 @@ public class OI {
 		jButton10.whileHeld(new ElevatorSetPercentOutput(0.8));
 		jButton11.whileHeld(new WristSetPercentOutputNoLimits(-1.0));
 
-		bButton1.whenPressed(new GoToPosition(States.Positions.Estop));
+		bButton1.whenPressed(new GoToPosition(States.Positions.Estop)); //YELLOW
 
-		bButton2.whenPressed(new GoToPosition(States.Positions.Floor));
-		bButton3.whenPressed(new GoToPosition(States.Positions.Stored));
+		bButton2.whenPressed(new GoToPosition(States.Positions.Floor)); //BLUE 1
+		bButton3.whenPressed(new GoToPosition(States.Positions.Stored)); //BLUE 4
 		
-		bButton4.whenPressed(new GoToPosition(States.Positions.HatchLevelOne));
-		bButton5.whenPressed(new GoToPosition(States.Positions.HatchLevelTwo));
-		bButton6.whenPressed(new GoToPosition(States.Positions.HatchLevelThree));
+		bButton4.whenPressed(new GoToPosition(States.Positions.HatchLevelOne)); //WHITE 1
+		bButton5.whenPressed(new GoToPosition(States.Positions.HatchLevelTwo)); //WHITE 2
+		bButton6.whenPressed(new GoToPosition(States.Positions.HatchLevelThree)); //WHITE 3
 
-		bButton7.whenPressed(new GoToPosition(States.Positions.CargoRocketOne));
-		bButton8.whenPressed(new GoToPosition(States.Positions.CargoRocketTwo));
-		bButton9.whenPressed(new GoToPosition(States.Positions.CargoRocketThree));
-		bButton10.whenPressed(new GoToPosition(States.Positions.CargoIntakeElevated));
-		bButton11.whenPressed(new GoToPosition(States.Positions.CargoPlayerStationAndCargoShip));
+		bButton7.whenPressed(new GoToPosition(States.Positions.CargoRocketOne)); //RED 1
+		bButton8.whenPressed(new GoToPosition(States.Positions.CargoRocketTwo)); //RED 2
+		bButton9.whenPressed(new GoToPosition(States.Positions.CargoRocketThree)); //RED 3
+		bButton10.whenPressed(new GoToPosition(States.Positions.CargoIntakeElevated)); //BLUE 2
+		bButton11.whenPressed(new GoToPosition(States.Positions.CargoPlayerStationAndCargoShip)); //BLUE 3
 		}
 
 	public XboxController getController() {
