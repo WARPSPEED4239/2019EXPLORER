@@ -69,7 +69,7 @@ public class GoToPosition extends CommandGroup {
       addParallel(new ElevatorSetPercentOutput(0.0));
       addSequential(new WristSetPercentOutput(0.0));
     } 
-    else if (runSequentially) { //TODO Implememt So ElevatorSetPosoiton ends
+    else if (runSequentially) { //TODO MAKE THIS END
       addSequential(new ElevatorSetPosition(targetElevatorPosition));
       addSequential(new WristSetPosition(targetWristPosition));
       runSequentially = false;
