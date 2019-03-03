@@ -15,6 +15,7 @@ import frc.robot.commands.LiftWheelsMotorReverse;
 import frc.robot.commands.LiftWheelsPistonDown;
 import frc.robot.commands.WristSetPercentOutput;
 import frc.robot.commands.WristSetPercentOutputNoLimits;
+import frc.robot.commands.automated.DrivetrainVisionAssist;
 import frc.robot.commands.automated.GoToPosition;
 
 public class OI {
@@ -66,6 +67,7 @@ public class OI {
 		xButtonA.whenPressed(new DrivetrainShiftingLowGear());
 		xButtonB.whenPressed(new DrivetrainShiftingHighGear());
 		xButtonX.toggleWhenPressed(new LiftWheelsPistonDown());
+		xButtonY.whileHeld(new DrivetrainVisionAssist());
 		xButtonLeftBumper.whileHeld(new LiftWheelsMotorForward());
 		xButtonRightBumper.whileHeld(new LiftWheelsMotorReverse());
 
