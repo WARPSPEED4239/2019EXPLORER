@@ -9,9 +9,11 @@ import frc.robot.Robot;
 
 public class DrivetrainVisionAssist extends Command {
 
-  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-  NetworkTableEntry tx = table.getEntry("tx");
-  private final double Kp = 0.0; //TODO SET THIS NUMBER
+  NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+  NetworkTableEntry tx = limelightTable.getEntry("tx");
+  NetworkTableEntry tv = limelightTable.getEntry("tv");
+
+  private final double Kp = 0.0335; // TODO Tune this number
 
   public DrivetrainVisionAssist() {
     requires(Robot.m_drivetrain);
@@ -19,16 +21,29 @@ public class DrivetrainVisionAssist extends Command {
 
   @Override
   protected void initialize() {
+    limelightTable.getEntry("pipeline").setNumber(0);
+    limelightTable.getEntry("camMode").setNumber(0);
+    limelightTable.getEntry("ledMode").setNumber(3);
   }
 
   @Override
   protected void execute() {
-    double x = tx.getDouble(0.0);
+    double v = tv.getDouble(0.0);
 
-    double move = -Robot.m_oi.xbox.getTriggerAxis(Hand.kRight) + Robot.m_oi.xbox.getTriggerAxis(Hand.kLeft);;
-    double rotate = Kp * x;
+    if (v == 1.0) {
+      double x = tx.getDouble(0.0);
 
-    Robot.m_drivetrain.driveWithVisionAssist(move, rotate);
+      double move = -Robot.m_oi.xbox.getTriggerAxis(Hand.kRight) + Robot.m_oi.xbox.getTriggerAxis(Hand.kLeft);
+      ;
+      double rotate = Kp * x;
+
+      Robot.m_drivetrain.driveWithVisionAssist(move, rotate);
+    } else {
+      double move = -Robot.m_oi.xbox.getTriggerAxis(Hand.kRight) + Robot.m_oi.xbox.getTriggerAxis(Hand.kLeft);
+      double rotate = Math.pow((-Robot.m_oi.xbox.getX(Hand.kLeft)), 1.4); // CHANGE 1.4 IF NECCESSARY (CHECK DESMOS)
+
+      Robot.m_drivetrain.arcadeDrive(move, rotate);
+    }
   }
 
   @Override
@@ -38,9 +53,12 @@ public class DrivetrainVisionAssist extends Command {
 
   @Override
   protected void end() {
+    limelightTable.getEntry("camMode").setNumber(1);
+    limelightTable.getEntry("ledMode").setNumber(1);
   }
 
   @Override
   protected void interrupted() {
+    end();
   }
 }
