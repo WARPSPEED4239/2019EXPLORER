@@ -23,7 +23,7 @@ public class DrivetrainArcadeDrive extends Command {
   @Override
   protected void execute() {
     double move = -Robot.m_oi.xbox.getTriggerAxis(Hand.kRight) + Robot.m_oi.xbox.getTriggerAxis(Hand.kLeft);
-    double rotate = Math.pow((-Robot.m_oi.xbox.getX(Hand.kLeft)), 1.4); //CHANGE 1.4 IF NECCESSARY (CHECK DESMOS)
+    double rotate = -(.533333 * Math.pow(Robot.m_oi.xbox.getX(Hand.kLeft), 3) + .466666 *  Robot.m_oi.xbox.getX(Hand.kLeft));
 
     Robot.m_drivetrain.arcadeDrive(move, rotate);
   }
