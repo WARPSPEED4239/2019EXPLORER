@@ -16,6 +16,7 @@ public class CargoIntake extends Subsystem {
 
     mMotor.setInverted(false);
     mMotor.setNeutralMode(NeutralMode.Brake);
+    mMotor.configNeutralDeadband(0.001);
   }
   @Override
   public void initDefaultCommand() {
@@ -23,7 +24,7 @@ public class CargoIntake extends Subsystem {
   }
 
   public void stop() {
-    mMotor.set(0.0);
+    mMotor.set(-0.05);
   }
 
   public void in() {
