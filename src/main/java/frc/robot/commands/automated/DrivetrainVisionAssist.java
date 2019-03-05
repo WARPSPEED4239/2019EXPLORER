@@ -35,10 +35,10 @@ public class DrivetrainVisionAssist extends Command {
       double rotate;
       double move = -Robot.m_oi.xbox.getTriggerAxis(Hand.kRight) + Robot.m_oi.xbox.getTriggerAxis(Hand.kLeft);
 
-      if (Math.abs(x) < 5.0) {
+      if (Math.abs(x) < 1.0) {
         rotate = 0;
       } else {
-        rotate = Kp * x;
+        rotate = Kp * -x;
       }
       
       Robot.m_drivetrain.driveWithVisionAssist(move, rotate);
