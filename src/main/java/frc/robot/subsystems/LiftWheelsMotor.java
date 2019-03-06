@@ -14,8 +14,8 @@ public class LiftWheelsMotor extends Subsystem {
   public LiftWheelsMotor() {
     mMotor.configFactoryDefault();
 
-    mMotor.setInverted(false);
-    mMotor.setNeutralMode(NeutralMode.Coast);
+    mMotor.setInverted(true);
+    mMotor.setNeutralMode(NeutralMode.Brake);
   }
 
   @Override
@@ -28,10 +28,10 @@ public class LiftWheelsMotor extends Subsystem {
   }
 
   public void forward() {
-    mMotor.set(0.2);
+    mMotor.set(0.4);
   }
 
   public void reverse() {
-    mMotor.set(-0.2);
+    mMotor.set(-0.4);
   }
 }
