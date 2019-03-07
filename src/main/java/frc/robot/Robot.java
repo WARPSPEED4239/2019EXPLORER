@@ -72,9 +72,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Elevator Position", m_elevator.getPositionInInches());
     SmartDashboard.putNumber("Elevator Velocity", m_elevator.getVelocityInInchesPerSecond());
     SmartDashboard.putBoolean("Elevator Bottom Limit Switch", m_elevator.getBottomLimitSwitch());
-    SmartDashboard.putBoolean("Elevator Top 2 to 1 Limit Switch", m_elevator.getTop2To1LimitSwitch());
-    SmartDashboard.putBoolean("Elevator Top 3 to 2 Limit Switch", m_elevator.getTop3To2LimitSwitch());
-
+    SmartDashboard.putBoolean("Elevator Top Limit Switch", m_elevator.getTop2To1LimitSwitch() && m_elevator.getTop3To2LimitSwitch());
+    
     SmartDashboard.putNumber("Wrist Position", m_wrist.getPositionInDegrees());
     SmartDashboard.putNumber("Wrist Velocity", m_wrist.getVelocityInDegreesPerSecond());
     SmartDashboard.putBoolean("Wrist Bottom Limit Switch", m_wrist.getBottomLimitSwitch());
@@ -83,6 +82,10 @@ public class Robot extends TimedRobot {
     m_drivetrain.printAccelerations();
     
     if (Constants.kCodeTestingState) {
+
+      SmartDashboard.putBoolean("Elevator Top 2 to 1 Limit Switch", m_elevator.getTop2To1LimitSwitch());
+      SmartDashboard.putBoolean("Elevator Top 3 to 2 Limit Switch", m_elevator.getTop3To2LimitSwitch());
+
       if (m_oi.xbox.getPOV() == 0) {
         m_drivetrain.resetSensors();
        }
