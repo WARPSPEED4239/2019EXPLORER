@@ -5,6 +5,8 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -33,6 +35,8 @@ public class Drivetrain extends Subsystem {
   private CANEncoder rightEncoder = new CANEncoder(rightMaster);
 
   private DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
+  
+  private NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
 
   public Drivetrain() {
     leftSlave1.follow(leftMaster);
@@ -51,6 +55,9 @@ public class Drivetrain extends Subsystem {
     leftEncoder.setPosition(0.0);
     rightEncoder.setPosition(0.0);
     resetSensors();
+
+    limelightTable.getEntry("camMode").setNumber(1);
+    limelightTable.getEntry("ledMode").setNumber(1);
   }
 
   public CANSparkMax getLeftController() {
@@ -67,6 +74,10 @@ public class Drivetrain extends Subsystem {
 
   public CANEncoder getRightEncoder() {
     return rightEncoder;
+  }
+
+  public NetworkTable getLimelightTable() {
+    return limelightTable;
   }
 
   @Override

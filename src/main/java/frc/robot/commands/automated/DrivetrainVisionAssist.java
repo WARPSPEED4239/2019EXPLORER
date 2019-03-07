@@ -1,19 +1,16 @@
 package frc.robot.commands.automated;
 
-import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class DrivetrainVisionAssist extends Command {
 
-  NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
-  NetworkTableEntry tx = limelightTable.getEntry("tx");
-  NetworkTableEntry tv = limelightTable.getEntry("tv");
+  NetworkTableEntry tx = Robot.m_drivetrain.getLimelightTable().getEntry("tx");
+  NetworkTableEntry tv = Robot.m_drivetrain.getLimelightTable().getEntry("tv");
 
-  private final double Kp = 0.0335; // TODO Tune this number
+  private final double Kp = 0.0335;
 
   public DrivetrainVisionAssist() {
     requires(Robot.m_drivetrain);
@@ -21,9 +18,9 @@ public class DrivetrainVisionAssist extends Command {
 
   @Override
   protected void initialize() {
-    limelightTable.getEntry("pipeline").setNumber(0);
-    limelightTable.getEntry("camMode").setNumber(0);
-    limelightTable.getEntry("ledMode").setNumber(3);
+    Robot.m_drivetrain.getLimelightTable().getEntry("pipeline").setNumber(0);
+    Robot.m_drivetrain.getLimelightTable().getEntry("camMode").setNumber(0);
+    Robot.m_drivetrain.getLimelightTable().getEntry("ledMode").setNumber(3);
   }
 
   @Override
@@ -57,8 +54,8 @@ public class DrivetrainVisionAssist extends Command {
 
   @Override
   protected void end() {
-    limelightTable.getEntry("camMode").setNumber(1);
-    limelightTable.getEntry("ledMode").setNumber(1);
+    Robot.m_drivetrain.getLimelightTable().getEntry("camMode").setNumber(1);
+    Robot.m_drivetrain.getLimelightTable().getEntry("ledMode").setNumber(1);
   }
 
   @Override
