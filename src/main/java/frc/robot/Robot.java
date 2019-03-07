@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
     UsbCamera cam0 = CameraServer.getInstance().startAutomaticCapture(0);
     cam0.setResolution(320, 240);
     cam0.setFPS(10);
-    
+
     m_startingConfigChooser.setDefaultOption("Hatch Pannel", StartingConfig.HatchPannel);
     m_startingConfigChooser.addOption("Cargo", StartingConfig.Cargo);
     SmartDashboard.putData("Starting Config", m_startingConfigChooser);
