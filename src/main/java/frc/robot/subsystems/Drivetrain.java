@@ -55,9 +55,6 @@ public class Drivetrain extends Subsystem {
     leftEncoder.setPosition(0.0);
     rightEncoder.setPosition(0.0);
     resetSensors();
-
-    limelightTable.getEntry("camMode").setNumber(1);
-    limelightTable.getEntry("ledMode").setNumber(1);
   }
 
   public CANSparkMax getLeftController() {
@@ -127,9 +124,9 @@ public class Drivetrain extends Subsystem {
     return convertVelocity(input);
   }
 
-  public double getIMURoll() {
+  public double getIMUYaw() {
     IMU.getYawPitchRoll(ypr);
-    return ypr[2];
+    return ypr[0];
   }
 
   public void resetSensors() {
@@ -160,6 +157,6 @@ public class Drivetrain extends Subsystem {
   }
 
   public void driveWithVisionAssist(double move, double rotate) {
-    drive.curvatureDrive(move, rotate, false); // Or may arcadeDrive
+    drive.curvatureDrive(move, rotate, false);
   }
 }
