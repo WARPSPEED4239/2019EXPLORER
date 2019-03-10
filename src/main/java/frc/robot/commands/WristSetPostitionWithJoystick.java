@@ -25,7 +25,7 @@ public class WristSetPostitionWithJoystick extends Command {
         Robot.m_wrist.setEncoderValueInDegrees(146.3378906);
       } else {
         double targetPosition = 146 * -Robot.m_oi.getJoystick().getY();
-        Robot.m_wrist.setPositionInDegrees(targetPosition);
+        Robot.m_wrist.setPositionInDegrees(targetPosition, 0);
         
         SmartDashboard.putNumberArray("Wrist Target Position", new double[] {Robot.m_wrist.getActiveTrajectoryPositionInDegrees(), Robot.m_wrist.getPositionInDegrees()});
       }

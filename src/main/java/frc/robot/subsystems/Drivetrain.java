@@ -143,6 +143,14 @@ public class Drivetrain extends Subsystem {
     return 2.0 * Math.PI * 0.25 * input / 7.08 / 60; 
   }
 
+  public double getIMUAccelerationYInMetersPerSecondSquared() {
+    short[] ba_xyz = new short[3];
+    IMU.getBiasedAccelerometer(ba_xyz);
+
+    double xInMetersPerSecondSquared = ((double) ba_xyz[1]) * 9.81 / 16384.0;
+    return xInMetersPerSecondSquared;
+  }
+
   public void printAccelerations() {
     short[] ba_xyz = new short[3];
     IMU.getBiasedAccelerometer(ba_xyz);
