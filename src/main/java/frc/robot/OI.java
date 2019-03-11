@@ -84,7 +84,7 @@ public class OI {
 		bButton1.whenPressed(new GoToPosition(States.Positions.Estop)); //YELLOW
 
 		bButton2.whenPressed(new GoToPosition(States.Positions.Floor)); //BLUE 1
-		bButton3.whenPressed(new GoToPosition(States.Positions.Stored)); //BLUE 4
+		bButton3.whenPressed(new GoToPosition(States.Positions.Stored)); //BLUE 2
 		
 		bButton4.whenPressed(new GoToPosition(States.Positions.HatchLevelOne)); //WHITE 1
 		bButton5.whenPressed(new GoToPosition(States.Positions.HatchLevelTwo)); //WHITE 2
@@ -93,8 +93,8 @@ public class OI {
 		bButton7.whenPressed(new GoToPosition(States.Positions.CargoRocketOne)); //RED 1
 		bButton8.whenPressed(new GoToPosition(States.Positions.CargoRocketTwo)); //RED 2
 		bButton9.whenPressed(new GoToPosition(States.Positions.CargoRocketThree)); //RED 3
-		bButton10.whenPressed(new GoToPosition(States.Positions.CargoIntakeElevated)); //BLUE 2
-		bButton11.whenPressed(new GoToPosition(States.Positions.CargoPlayerStationAndCargoShip)); //BLUE 3
+		bButton10.whenPressed(new GoToPosition(States.Positions.CargoIntakeElevated)); //BLUE 3
+		bButton11.whenPressed(new GoToPosition(States.Positions.CargoPlayerStationAndCargoShip)); //BLUE 4
 		}
 
 	public XboxController getController() {
