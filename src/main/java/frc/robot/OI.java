@@ -77,8 +77,8 @@ public class OI {
 		jButton4.whenPressed(new HatchGrabberExtend());
 		jButton7.whileHeld(new WristSetPercentOutput(-0.4));
 		jButton8.whileHeld(new WristSetPercentOutput(0.4));
-		jButton9.whileHeld(new ElevatorSetPercentOutput(-0.8));
-		jButton10.whileHeld(new ElevatorSetPercentOutput(0.8));
+		jButton9.whileHeld(new ElevatorSetPercentOutput(-0.6));
+		jButton10.whileHeld(new ElevatorSetPercentOutput(0.6));
 		jButton11.whileHeld(new WristSetPercentOutputNoLimits(-1.0));
 
 		bButton1.whenPressed(new GoToPosition(States.Positions.Estop)); //YELLOW
