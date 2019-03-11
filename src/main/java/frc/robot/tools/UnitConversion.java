@@ -48,10 +48,10 @@ public class UnitConversion {
     }
 
     public static double convertSRXUnitsToDegrees(double units) {
-        return units / SRX_UNITS_PER_ROTATION * 360;
+        return (units / SRX_UNITS_PER_ROTATION) * 360;
     }
 
     public static double convertPositionInDegreesToSRXUnits(double positionInDegrees) {
-        return positionInDegrees / 360 * SRX_UNITS_PER_ROTATION;
+        return (positionInDegrees / 360) * SRX_UNITS_PER_ROTATION;
     }
 }
