@@ -10,11 +10,10 @@ import frc.robot.commands.WristSetPosition;
 
 public class GoToPosition extends CommandGroup {
 
-  }
   public GoToPosition(States.Positions positions) {
     double targetElevatorPosition = 0.0;
     double targetWristPosition = 0.0;
-    boolean unkownState;
+    boolean unkownState = false;
 
    switch (positions) {
     case HatchLevelOne:
