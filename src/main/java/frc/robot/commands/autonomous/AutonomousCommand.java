@@ -1,10 +1,7 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.States;
 import frc.robot.States.StartingConfig;
-import frc.robot.commands.HatchGrabberExtend;
-import frc.robot.commands.automated.GoToPosition;
 
 public class AutonomousCommand extends CommandGroup {
 
