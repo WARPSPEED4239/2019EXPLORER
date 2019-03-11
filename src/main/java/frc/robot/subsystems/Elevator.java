@@ -23,8 +23,8 @@ public class Elevator extends Subsystem {
   private final int kPeakCurrentLimit = 45;
   private final int kContinuousCurrentLimit = 40;
 
-  private final int kMaxVelocity = 3312;
-  private final int kMaxAcceleration = 6624;
+  private final int kMaxVelocity = 3312; //2000
+  private final int kMaxAcceleration = 6624; //2000
 
   private final int kSlotIdx = 0;
   private final int kPIDIdx = 0;

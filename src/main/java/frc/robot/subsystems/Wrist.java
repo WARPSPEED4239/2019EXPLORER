@@ -23,8 +23,8 @@ public class Wrist extends Subsystem {
   private final int kPeakCurrentLimit = 35;
   private final int kContinuousCurrentLimit = 30;
 
-  private final int kMaxVelocity = 394;
-  private final int kMaxAcceleration = 788; //TUNE?
+  private final int kMaxVelocity = 394; //275
+  private final int kMaxAcceleration = 788; //TUNE? //275
 
   private final int kSlotIdx = 0;
   private final int kPIDIdx = 0;
