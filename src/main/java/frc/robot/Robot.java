@@ -53,12 +53,11 @@ public class Robot extends TimedRobot {
     cam0.setResolution(320, 240);
     cam0.setFPS(10);
 
+    //TODO make unknownState = true on startup, then it will be set to false in robotDisabled when both limits are pressed at the same time
+
     m_startingConfigChooser.setDefaultOption("Hatch Pannel", StartingConfig.HatchPannel);
     m_startingConfigChooser.addOption("Cargo", StartingConfig.Cargo);
     SmartDashboard.putData("Starting Config", m_startingConfigChooser);
-
-    //m_wrist.setEncoderValueInDegrees(146.0);
-    //m_elevator.zeroEncoder();
   }
 
   @Override
@@ -78,14 +77,13 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Wrist Velocity", m_wrist.getVelocityInDegreesPerSecond());
     SmartDashboard.putBoolean("Wrist Bottom Limit Switch", m_wrist.getBottomLimitSwitch());
     SmartDashboard.putBoolean("Wrist Top Limit Switch", m_wrist.getTopLimitSwitch());
-
-    m_drivetrain.printAccelerations();
     
     if (Constants.kCodeTestingState) {
 
       SmartDashboard.putBoolean("Elevator Top 2 to 1 Limit Switch", m_elevator.getTop2To1LimitSwitch());
       SmartDashboard.putBoolean("Elevator Top 3 to 2 Limit Switch", m_elevator.getTop3To2LimitSwitch());
-
+      m_drivetrain.printAccelerations();
+      
       if (m_oi.xbox.getPOV() == 0) {
         m_drivetrain.resetSensors();
        }
@@ -107,6 +105,24 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+
+    if (Robot.m_wrist.getBottomLimitSwitch()) {
+      Robot.m_wrist.setEncoderValueInDegrees(0.0);
+    }
+    else if (Robot.m_wrist.getTopLimitSwitch()) {
+      Robot.m_wrist.setEncoderValueInDegrees(146.3378906);
+    }
+
+    if (Robot.m_elevator.getBottomLimitSwitch()) {
+      Robot.m_elevator.setEncoderValueInInches(0.0);
+    }
+    else if (Robot.m_elevator.getTop2To1LimitSwitch() && Robot.m_elevator.getTop3To2LimitSwitch()) {
+      Robot.m_elevator.setEncoderValueInInches(67.33019938);
+    }
+
+    if (Robot.m_elevator.getBottomLimitSwitch() && (m_wrist.getBottomLimitSwitch() || m_wrist.getTopLimitSwitch())) {
+    //UnkownState = false;
+    }
   }
 
   @Override

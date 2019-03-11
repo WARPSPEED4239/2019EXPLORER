@@ -11,9 +11,9 @@ public class AutonomousCommand extends CommandGroup {
   public AutonomousCommand(StartingConfig startingConfig) {
     switch (startingConfig) {
     case HatchPannel:
-      addParallel(new HatchGrabberExtend());
+      /*addParallel(new HatchGrabberExtend());
       addSequential(new GoToPosition(States.Positions.Floor)); //TODO MAKE THIS END (Might not be a thing, talk to build)
-      addSequential(new GoToPosition(States.Positions.HatchLevelOne));
+      addSequential(new GoToPosition(States.Positions.HatchLevelOne));*/
       break;
     case Cargo:
       break;
