@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.CargoIntakeHold;
 import frc.robot.commands.CargoIntakeIn;
 import frc.robot.commands.CargoIntakeOut;
 import frc.robot.commands.DrivetrainShiftingHighGear;
@@ -71,6 +72,7 @@ public class OI {
 		xButtonLeftBumper.whileHeld(new LiftWheelsMotorForward());
 		xButtonRightBumper.whileHeld(new LiftWheelsMotorReverse());
 
+		
 		jButton1.whileHeld(new CargoIntakeOut());
 		jButton2.whileHeld(new CargoIntakeIn());
 		jButton3.whenPressed(new HatchGrabberRetract());
@@ -79,7 +81,9 @@ public class OI {
 		jButton8.whileHeld(new WristSetPercentOutput(0.4));
 		jButton9.whileHeld(new ElevatorSetPercentOutput(-0.6));
 		jButton10.whileHeld(new ElevatorSetPercentOutput(0.6));
-		jButton11.whileHeld(new WristSetPercentOutputNoLimits(-1.0));
+		jButton11.whenPressed(new CargoIntakeHold());
+		jButton12.whileHeld(new WristSetPercentOutputNoLimits(-1.0));
+
 
 		bButton1.whenPressed(new GoToPosition(States.Positions.Estop)); //YELLOW
 

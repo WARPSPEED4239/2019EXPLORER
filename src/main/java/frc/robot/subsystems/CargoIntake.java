@@ -24,7 +24,11 @@ public class CargoIntake extends Subsystem {
   }
 
   public void stop() {
-    mMotor.set(-0.05);
+    mMotor.set(0.0);
+  }
+
+  public void hold() {
+    mMotor.set(-0.2);
   }
 
   public void in() {
