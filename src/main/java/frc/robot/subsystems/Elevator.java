@@ -109,10 +109,6 @@ public class Elevator extends Subsystem {
     return positionInInches;
   }
 
-  public double getActiveTrajectoryAccelerationInInchesPerSecondSquared() { //TODO Fiugre out how to get this
-    return 0;
-  }
-
   public void setPercentOutput(double output) {
     if (output < -1) {
       output = -1;

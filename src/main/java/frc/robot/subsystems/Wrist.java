@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.CANifier;
 import com.ctre.phoenix.CANifier.GeneralPin;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -92,10 +91,10 @@ public class Wrist extends Subsystem {
     mMotor.set(ControlMode.PercentOutput, output);
   }
 
-  public void setPositionInDegrees(double positionInDegrees, double arbFeedForward) {
+  public void setPositionInDegrees(double positionInDegrees) {
     double positionInSRXUnits = UnitConversion.convertPositionInDegreesToSRXUnits(positionInDegrees);
 
-    mMotor.set(ControlMode.MotionMagic, positionInSRXUnits, DemandType.ArbitraryFeedForward, arbFeedForward);
+    mMotor.set(ControlMode.MotionMagic, positionInSRXUnits);
   }
 
   public double getPositionInDegrees() {
@@ -110,10 +109,6 @@ public class Wrist extends Subsystem {
     double positionInDegrees = UnitConversion.convertSRXUnitsToDegrees(positionInSRXUnits);
 
     return positionInDegrees;
-  }
-
-  public double getActiveTrajectoryAccelerationInDegreesPerSecondSquared() { //TODO Fiugre out how to get this
-    return 0;
   }
 
   public double getVelocityInDegreesPerSecond() {

@@ -33,14 +33,7 @@ public class WristSetPosition extends Command {
       Robot.m_wrist.setPercentOutput(0.0);
       Robot.m_wrist.setEncoderValueInDegrees(146.3378906);
     } else {
-      double wristGravityComponnent = Constants.kWristGravityComponentMultiplier * Math.cos(Math.toRadians(Robot.m_wrist.getPositionInDegrees()));
-      double wristAcceleration = Constants.kWristAccelerationMultiplier * Robot.m_wrist.getActiveTrajectoryAccelerationInDegreesPerSecondSquared();
-      double wristElevatorAcceleration = Constants.kWristElevatorAccelerationMultiplier * Robot.m_elevator.getActiveTrajectoryAccelerationInInchesPerSecondSquared() * Math.cos(Math.toRadians(Robot.m_wrist.getPositionInDegrees()));
-      double wristDrivetrainAcceleration = Constants.kWristDrivetrainAccelerationMultiplier * Robot.m_drivetrain.getIMUAccelerationYInMetersPerSecondSquared() /*TODO Right Units?*/ * Math.sin(Math.toRadians(Robot.m_wrist.getPositionInDegrees()));
-
-      double arbFeedForward = wristGravityComponnent + wristAcceleration + wristElevatorAcceleration + wristDrivetrainAcceleration;
-      
-      Robot.m_wrist.setPositionInDegrees(targetPosition, arbFeedForward);
+      Robot.m_wrist.setPositionInDegrees(targetPosition);
     }
     SmartDashboard.putNumberArray("Wrist Target Position", new double [] {Robot.m_wrist.getActiveTrajectoryPositionInDegrees(), Robot.m_wrist.getPositionInDegrees()});
   }
