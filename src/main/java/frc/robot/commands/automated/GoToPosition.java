@@ -1,7 +1,6 @@
 package frc.robot.commands.automated;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.Robot;
 import frc.robot.States;
 import frc.robot.commands.ElevatorSetPercentOutput;
 import frc.robot.commands.ElevatorSetPosition;
@@ -57,7 +56,7 @@ public class GoToPosition extends CommandGroup {
       targetWristPosition = 146.3375;
       break;
     case Estop:
-      unkownState = true; //TODO RESET THIS BACK TO FALSE SOMEWHERE? (See Below)
+      unkownState = true;
       break;
     default:
       unkownState = true;
@@ -68,11 +67,6 @@ public class GoToPosition extends CommandGroup {
       addParallel(new ElevatorSetPercentOutput(0.0));
       addSequential(new WristSetPercentOutput(0.0));
     } 
-    else if (unkownState && Robot.m_elevator.getBottomLimitSwitch() && (Robot.m_wrist.getBottomLimitSwitch() || Robot.m_wrist.getTopLimitSwitch())) { //REVIEW, Does this fix the issue above? Will this need a double click of a button?
-      unkownState = false;
-      addParallel(new ElevatorSetPosition(targetElevatorPosition));
-      addSequential(new WristSetPosition(targetWristPosition));
-    }
     else {
       addParallel(new ElevatorSetPosition(targetElevatorPosition));
       addSequential(new WristSetPosition(targetWristPosition));

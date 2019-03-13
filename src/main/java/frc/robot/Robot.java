@@ -53,8 +53,6 @@ public class Robot extends TimedRobot {
     cam0.setResolution(320, 240);
     cam0.setFPS(10);
 
-    //TODO make unknownState = true on startup, then it will be set to false in robotDisabled when both limits are pressed at the same time
-
     m_startingConfigChooser.setDefaultOption("Hatch Pannel", StartingConfig.HatchPannel);
     m_startingConfigChooser.addOption("Cargo", StartingConfig.Cargo);
     SmartDashboard.putData("Starting Config", m_startingConfigChooser);
@@ -118,10 +116,6 @@ public class Robot extends TimedRobot {
     }
     else if (Robot.m_elevator.getTop2To1LimitSwitch() && Robot.m_elevator.getTop3To2LimitSwitch()) {
       Robot.m_elevator.setEncoderValueInInches(67.33019938);
-    }
-
-    if (Robot.m_elevator.getBottomLimitSwitch() && (m_wrist.getBottomLimitSwitch() || m_wrist.getTopLimitSwitch())) {
-    //UnkownState = false;
     }
   }
 

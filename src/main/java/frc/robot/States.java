@@ -2,6 +2,8 @@ package frc.robot;
 
 public class States {
 
+    public boolean PositionControlState;
+    
     public enum StartingConfig {
         HatchPannel, Cargo
     }
@@ -11,5 +13,13 @@ public class States {
         CargoRocketOne, CargoRocketTwo, CargoRocketThree, CargoIntakeElevated, CargoPlayerStationAndCargoShip,
         Floor, Stored,
         Estop
+    }
+
+    public boolean getPostionControlState() {
+        return PositionControlState;
+    }
+
+    public void setPositionControlState(boolean state) {
+        PositionControlState = state;
     }
 }
