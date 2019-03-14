@@ -25,7 +25,7 @@ private double mOutput;
     } 
     else if (Robot.m_elevator.getTop2To1LimitSwitch() && Robot.m_elevator.getTop3To2LimitSwitch() && mOutput > 0.0) {
       mOutput = 0.0;
-      Robot.m_elevator.setEncoderValueInInches(67.33019938);
+      //Robot.m_elevator.setEncoderValueInInches(67.33019938);
     }
 
     Robot.m_elevator.setPercentOutput(mOutput);

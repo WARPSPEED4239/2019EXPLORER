@@ -56,8 +56,8 @@ public class Wrist extends Subsystem {
     mMotor.config_IntegralZone(kSlotIdx, 50);
     mMotor.config_kF(kSlotIdx, 1023.0 / 550.0);
     mMotor.config_kP(kSlotIdx, 4.0);
-    mMotor.config_kI(kSlotIdx, 0.005);
-    mMotor.config_kD(kSlotIdx, 40.0);
+    mMotor.config_kI(kSlotIdx, 0.0);
+    mMotor.config_kD(kSlotIdx, 0.0);
 
     mMotor.configMotionCruiseVelocity(kMaxVelocity);
     mMotor.configMotionAcceleration(kMaxAcceleration);
@@ -75,11 +75,11 @@ public class Wrist extends Subsystem {
   }
 
   public boolean getTopLimitSwitch() {
-    return !mCanifier.getGeneralInput(GeneralPin.LIMR);
+    return !mCanifier.getGeneralInput(GeneralPin.LIMF);
   }
 
   public boolean getBottomLimitSwitch() {
-    return !mCanifier.getGeneralInput(GeneralPin.LIMF);
+    return !mCanifier.getGeneralInput(GeneralPin.LIMR);
   }
 
   public void setPercentOutput(double output) {

@@ -18,13 +18,19 @@ public class WristSetPercentOutput extends Command {
 
   @Override
   protected void execute() {
+
+    if (Robot.m_wrist.getBottomLimitSwitch()) {
+      Robot.m_wrist.setEncoderValueInDegrees(0.0);
+    }
+    else if (Robot.m_wrist.getTopLimitSwitch()){
+      Robot.m_wrist.setEncoderValueInDegrees(146.3378906);
+    }
+
     if (Robot.m_wrist.getBottomLimitSwitch() && mOutput > 0.0) {
       mOutput = 0.0;
-      Robot.m_wrist.setEncoderValueInDegrees(0.0);
     }
     else if (Robot.m_wrist.getTopLimitSwitch() && mOutput < 0.0) {
       mOutput = 0.0;
-      Robot.m_wrist.setEncoderValueInDegrees(146.3378906);
     }
     Robot.m_wrist.setPercentOutput(mOutput);
   }
