@@ -55,9 +55,9 @@ public class Wrist extends Subsystem {
     mMotor.selectProfileSlot(kSlotIdx, kPIDIdx);
     mMotor.config_IntegralZone(kSlotIdx, 50);
     mMotor.config_kF(kSlotIdx, 1023.0 / 550.0);
-    mMotor.config_kP(kSlotIdx, 4.0);
+    mMotor.config_kP(kSlotIdx, 5.0);
     mMotor.config_kI(kSlotIdx, 0.0);
-    mMotor.config_kD(kSlotIdx, 0.0);
+    mMotor.config_kD(kSlotIdx, 50.0);
 
     mMotor.configMotionCruiseVelocity(kMaxVelocity);
     mMotor.configMotionAcceleration(kMaxAcceleration);
