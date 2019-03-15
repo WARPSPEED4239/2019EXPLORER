@@ -4,6 +4,7 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -51,6 +52,13 @@ public class Drivetrain extends Subsystem {
     rightSlave1.follow(rightMaster);
     rightSlave2.follow(rightMaster);
     
+    leftMaster.setIdleMode(IdleMode.kBrake);
+    leftSlave1.setIdleMode(IdleMode.kBrake);
+    leftSlave2.setIdleMode(IdleMode.kBrake);
+    rightMaster.setIdleMode(IdleMode.kBrake);
+    rightSlave1.setIdleMode(IdleMode.kBrake);
+    rightSlave2.setIdleMode(IdleMode.kBrake);
+
     leftMaster.setSmartCurrentLimit(kCurrentLimit);
     leftSlave1.setSmartCurrentLimit(kCurrentLimit);
     leftSlave2.setSmartCurrentLimit(kCurrentLimit);
