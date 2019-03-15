@@ -18,10 +18,8 @@ public class Drivetrain extends Subsystem {
   private double[] ypr = new double[3];
 
   private final int kCurrentLimit = 40;
-  private final int kPeakCurrentLimit = 45;
-  private final int kPeakCurrentDurationMills = 100;
 
-  private final double kRampRate = 0.3;
+  private final double kRampRate = 0.2;
 
   private CANSparkMax leftMaster = new CANSparkMax(RobotMap.drivetrainLeftOne, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax leftSlave1 = new CANSparkMax(RobotMap.drivetrainLeftTwo, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -59,19 +57,12 @@ public class Drivetrain extends Subsystem {
     rightSlave1.setIdleMode(IdleMode.kBrake);
     rightSlave2.setIdleMode(IdleMode.kBrake);
 
-    /*leftMaster.setSmartCurrentLimit(kCurrentLimit);
+    leftMaster.setSmartCurrentLimit(kCurrentLimit);
     leftSlave1.setSmartCurrentLimit(kCurrentLimit);
     leftSlave2.setSmartCurrentLimit(kCurrentLimit);
     rightMaster.setSmartCurrentLimit(kCurrentLimit);
     rightSlave1.setSmartCurrentLimit(kCurrentLimit);
     rightSlave2.setSmartCurrentLimit(kCurrentLimit);
-
-    leftMaster.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
-    leftSlave1.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
-    leftSlave2.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
-    rightMaster.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
-    rightSlave1.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
-    rightSlave2.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);*/
 
     leftMaster.setOpenLoopRampRate(kRampRate);
     leftSlave1.setOpenLoopRampRate(kRampRate);
@@ -80,7 +71,7 @@ public class Drivetrain extends Subsystem {
     rightSlave1.setOpenLoopRampRate(kRampRate);
     rightSlave2.setOpenLoopRampRate(kRampRate);
 
-    //resetSensors();
+    resetSensors();
   }
 
   public CANSparkMax getLeftController() {
