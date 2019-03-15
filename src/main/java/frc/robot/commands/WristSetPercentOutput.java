@@ -6,6 +6,7 @@ import frc.robot.Robot;
 public class WristSetPercentOutput extends Command {
 
   private double mOutput;
+
   public WristSetPercentOutput(double output) {
     requires(Robot.m_wrist);
 
@@ -14,25 +15,25 @@ public class WristSetPercentOutput extends Command {
 
   @Override
   protected void initialize() {
+    Robot.m_wrist.lockRetract();
   }
 
   @Override
   protected void execute() {
+    if (timeSinceInitialized() >= 0.5) {
+      if (Robot.m_wrist.getBottomLimitSwitch()) {
+        Robot.m_wrist.setEncoderValueInDegrees(0.0);
+      } else if (Robot.m_wrist.getTopLimitSwitch()) {
+        Robot.m_wrist.setEncoderValueInDegrees(146.3378906);
+      }
 
-    if (Robot.m_wrist.getBottomLimitSwitch()) {
-      Robot.m_wrist.setEncoderValueInDegrees(0.0);
+      if (Robot.m_wrist.getBottomLimitSwitch() && mOutput > 0.0) {
+        mOutput = 0.0;
+      } else if (Robot.m_wrist.getTopLimitSwitch() && mOutput < 0.0) {
+        mOutput = 0.0;
+      }
+      Robot.m_wrist.setPercentOutput(mOutput);
     }
-    else if (Robot.m_wrist.getTopLimitSwitch()){
-      Robot.m_wrist.setEncoderValueInDegrees(146.3378906);
-    }
-
-    if (Robot.m_wrist.getBottomLimitSwitch() && mOutput > 0.0) {
-      mOutput = 0.0;
-    }
-    else if (Robot.m_wrist.getTopLimitSwitch() && mOutput < 0.0) {
-      mOutput = 0.0;
-    }
-    Robot.m_wrist.setPercentOutput(mOutput);
   }
 
   @Override

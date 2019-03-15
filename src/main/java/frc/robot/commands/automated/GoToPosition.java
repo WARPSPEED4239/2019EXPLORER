@@ -58,14 +58,14 @@ public class GoToPosition extends CommandGroup {
       targetWristPosition = 146.3375;
       break;
     case EndgamePrep:
-      endgame = true;
       targetElevatorPosition = 24.0;
       targetWristPosition = 0.0;
       break;
     case EndgameDown:
       endgame = true;
-      targetElevatorPosition = 0.0;
+      targetElevatorPosition = -0.7;
       targetWristPosition = 0.0;
+      break;
     case Estop:
       unkownState = true;
       break;
@@ -79,7 +79,7 @@ public class GoToPosition extends CommandGroup {
       addSequential(new WristSetPercentOutput(0.0));
     } 
     else if (endgame) {
-      addParallel(new ElevatorSetPosition(targetElevatorPosition));
+      addParallel(new ElevatorSetPercentOutput(targetElevatorPosition));
       addSequential(new WristEndgame(targetWristPosition));
     }
     else {
