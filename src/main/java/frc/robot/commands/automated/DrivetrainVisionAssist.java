@@ -20,7 +20,7 @@ public class DrivetrainVisionAssist extends Command {
   protected void initialize() {
     Robot.m_drivetrain.getLimelightTable().getEntry("pipeline").setNumber(1);
     Robot.m_drivetrain.getLimelightTable().getEntry("camMode").setNumber(0);
-    Robot.m_drivetrain.getLimelightTable().getEntry("ledMode").setNumber(3);
+    Robot.m_drivetrain.getLimelightTable().getEntry("ledMode").setNumber(0);
   }
 
   @Override
@@ -54,7 +54,7 @@ public class DrivetrainVisionAssist extends Command {
 
   @Override
   protected void end() {
-    Robot.m_drivetrain.getLimelightTable().getEntry("camMode").setNumber(1);
+    Robot.m_drivetrain.getLimelightTable().getEntry("pipeline").setNumber(0);
     Robot.m_drivetrain.getLimelightTable().getEntry("ledMode").setNumber(1);
   }
 

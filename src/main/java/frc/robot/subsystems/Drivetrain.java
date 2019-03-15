@@ -20,7 +20,7 @@ public class Drivetrain extends Subsystem {
   private final int kPeakCurrentLimit = 45;
   private final int kPeakCurrentDurationMills = 100;
   
-	private final double kRampRate = 0.0;
+	private final double kRampRate = 0.2;
 
   private CANSparkMax leftMaster = new CANSparkMax(RobotMap.drivetrainLeftOne, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax leftSlave1 = new CANSparkMax(RobotMap.drivetrainLeftTwo, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -39,6 +39,13 @@ public class Drivetrain extends Subsystem {
   private NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
 
   public Drivetrain() {
+    leftMaster.restoreFactoryDefaults();
+    leftSlave1.restoreFactoryDefaults();
+    leftSlave2.restoreFactoryDefaults();
+    rightMaster.restoreFactoryDefaults();
+    rightSlave1.restoreFactoryDefaults();
+    rightSlave2.restoreFactoryDefaults();
+
     leftSlave1.follow(leftMaster);
     leftSlave2.follow(leftMaster);
     rightSlave1.follow(rightMaster);
@@ -58,16 +65,14 @@ public class Drivetrain extends Subsystem {
     rightSlave1.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
     rightSlave2.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
 
-    leftMaster.setOpenLoopRampRate(kRampRate);
+    /*leftMaster.setOpenLoopRampRate(kRampRate);
     leftSlave1.setOpenLoopRampRate(kRampRate);
     leftSlave2.setOpenLoopRampRate(kRampRate);
     rightMaster.setOpenLoopRampRate(kRampRate);
     rightSlave1.setOpenLoopRampRate(kRampRate);
     rightSlave2.setOpenLoopRampRate(kRampRate);
 
-    leftEncoder.setPosition(0.0);
-    rightEncoder.setPosition(0.0);
-    resetSensors();
+    resetSensors();*/
   }
 
   public CANSparkMax getLeftController() {
