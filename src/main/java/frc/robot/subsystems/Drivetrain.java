@@ -3,8 +3,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -13,15 +13,16 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.DrivetrainArcadeDrive;
+import frc.robot.tools.Logger;
 
 public class Drivetrain extends Subsystem {
-  private double [] ypr = new double[3];
+  private double[] ypr = new double[3];
 
   private final int kCurrentLimit = 40;
   private final int kPeakCurrentLimit = 45;
   private final int kPeakCurrentDurationMills = 100;
-  
-	private final double kRampRate = 0.2;
+
+  private final double kRampRate = 0.2;
 
   private CANSparkMax leftMaster = new CANSparkMax(RobotMap.drivetrainLeftOne, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax leftSlave1 = new CANSparkMax(RobotMap.drivetrainLeftTwo, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -72,6 +73,31 @@ public class Drivetrain extends Subsystem {
     rightMaster.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
     rightSlave1.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
     rightSlave2.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
+
+    Logger.log("leftMaster (1)");
+    Logger.log(leftMaster.getDeviceId());
+    Logger.log(leftMaster.getFirmwareString());
+    Logger.log("------------");
+    Logger.log("leftSlave1 (2)");
+    Logger.log(leftSlave1.getDeviceId());
+    Logger.log(leftSlave1.getFirmwareString());
+    Logger.log("------------");
+    Logger.log("leftSlave2 (3)");
+    Logger.log(leftSlave2.getDeviceId());
+    Logger.log(leftSlave2.getFirmwareString());
+    Logger.log("------------");
+    Logger.log("rightMaster (4)");
+    Logger.log(rightMaster.getDeviceId());
+    Logger.log(rightMaster.getFirmwareString());
+    Logger.log("------------");
+    Logger.log("rightSlave1 (5)");
+    Logger.log(rightSlave1.getDeviceId());
+    Logger.log(rightSlave1.getFirmwareString());
+    Logger.log("------------");
+    Logger.log("rightSlave2 (6)");
+    Logger.log(rightSlave2.getDeviceId());
+    Logger.log(rightSlave2.getFirmwareString());
+    Logger.log("------------");
 
     /*leftMaster.setOpenLoopRampRate(kRampRate);
     leftSlave1.setOpenLoopRampRate(kRampRate);
