@@ -9,6 +9,8 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.WristSetPercentOutput;
@@ -17,6 +19,7 @@ import frc.robot.tools.UnitConversion;
 public class Wrist extends Subsystem {
 
   private WPI_TalonSRX mMotor;
+  private DoubleSolenoid mSolenoid;
   private CANifier mCanifier;
 
   private final int kPeakCurrentLimit = 35;
@@ -28,8 +31,9 @@ public class Wrist extends Subsystem {
   private final int kSlotIdx = 0;
   private final int kPIDIdx = 0;
 
-  public Wrist (WPI_TalonSRX wristMotor, CANifier canifier) {
-    mMotor = wristMotor;
+  public Wrist (WPI_TalonSRX motor, DoubleSolenoid solenoid, CANifier canifier) {
+    mMotor = motor;
+    mSolenoid = solenoid;
     mCanifier = canifier;
 
     mMotor.configFactoryDefault();
@@ -65,9 +69,10 @@ public class Wrist extends Subsystem {
 
   public static Wrist create() {
     WPI_TalonSRX mMotor = new WPI_TalonSRX(RobotMap.wristMotor);
+    DoubleSolenoid mSolenoid = new DoubleSolenoid(RobotMap.wristLockSolenoidForward, RobotMap.wristLockSolenoidReverse);
     CANifier mCanifier = new CANifier(RobotMap.canifier);
 
-    return new Wrist(mMotor, mCanifier);
+    return new Wrist(mMotor, mSolenoid, mCanifier);
   }
   @Override
   public void initDefaultCommand() {
@@ -126,5 +131,13 @@ public class Wrist extends Subsystem {
     int positionInSRXUnits = (int) UnitConversion.convertPositionInDegreesToSRXUnits(positionInDegrees);
     
     mMotor.setSelectedSensorPosition(positionInSRXUnits);
+  }
+
+  public void lockExtend() {
+    mSolenoid.set(Value.kForward);
+  }
+
+  public void lockRetract() {
+    mSolenoid.set(Value.kReverse);
   }
 }

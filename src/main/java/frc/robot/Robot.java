@@ -121,6 +121,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    Robot.m_wrist.lockRetract();
     StartingConfig startingConfig = m_startingConfigChooser.getSelected();
     m_autonomousCommand = new AutonomousCommand(startingConfig);
      
@@ -136,6 +137,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    Robot.m_wrist.lockRetract();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }

@@ -28,5 +28,7 @@ public class RobotMap {
                     hatchGrabberSolenoidForward = 2,
                     hatchGrabberSolenoidReverse = 3,
                     liftWheelsSolenoidForward = 4,
-                    liftWheelsSolenoidReverse = 5;
+                    liftWheelsSolenoidReverse = 5,
+                    wristLockSolenoidForward = 6,
+                    wristLockSolenoidReverse = 7;
 }
