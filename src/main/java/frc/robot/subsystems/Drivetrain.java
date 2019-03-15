@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.DrivetrainArcadeDrive;
-import frc.robot.tools.Logger;
 
 public class Drivetrain extends Subsystem {
   private double[] ypr = new double[3];
@@ -22,7 +21,7 @@ public class Drivetrain extends Subsystem {
   private final int kPeakCurrentLimit = 45;
   private final int kPeakCurrentDurationMills = 100;
 
-  private final double kRampRate = 0.2;
+  private final double kRampRate = 0.3;
 
   private CANSparkMax leftMaster = new CANSparkMax(RobotMap.drivetrainLeftOne, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax leftSlave1 = new CANSparkMax(RobotMap.drivetrainLeftTwo, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -60,7 +59,7 @@ public class Drivetrain extends Subsystem {
     rightSlave1.setIdleMode(IdleMode.kBrake);
     rightSlave2.setIdleMode(IdleMode.kBrake);
 
-    leftMaster.setSmartCurrentLimit(kCurrentLimit);
+    /*leftMaster.setSmartCurrentLimit(kCurrentLimit);
     leftSlave1.setSmartCurrentLimit(kCurrentLimit);
     leftSlave2.setSmartCurrentLimit(kCurrentLimit);
     rightMaster.setSmartCurrentLimit(kCurrentLimit);
@@ -72,41 +71,16 @@ public class Drivetrain extends Subsystem {
     leftSlave2.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
     rightMaster.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
     rightSlave1.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
-    rightSlave2.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);
+    rightSlave2.setSecondaryCurrentLimit(kPeakCurrentLimit, kPeakCurrentDurationMills);*/
 
-    Logger.log("leftMaster (1)");
-    Logger.log(leftMaster.getDeviceId());
-    Logger.log(leftMaster.getFirmwareString());
-    Logger.log("------------");
-    Logger.log("leftSlave1 (2)");
-    Logger.log(leftSlave1.getDeviceId());
-    Logger.log(leftSlave1.getFirmwareString());
-    Logger.log("------------");
-    Logger.log("leftSlave2 (3)");
-    Logger.log(leftSlave2.getDeviceId());
-    Logger.log(leftSlave2.getFirmwareString());
-    Logger.log("------------");
-    Logger.log("rightMaster (4)");
-    Logger.log(rightMaster.getDeviceId());
-    Logger.log(rightMaster.getFirmwareString());
-    Logger.log("------------");
-    Logger.log("rightSlave1 (5)");
-    Logger.log(rightSlave1.getDeviceId());
-    Logger.log(rightSlave1.getFirmwareString());
-    Logger.log("------------");
-    Logger.log("rightSlave2 (6)");
-    Logger.log(rightSlave2.getDeviceId());
-    Logger.log(rightSlave2.getFirmwareString());
-    Logger.log("------------");
-
-    /*leftMaster.setOpenLoopRampRate(kRampRate);
+    leftMaster.setOpenLoopRampRate(kRampRate);
     leftSlave1.setOpenLoopRampRate(kRampRate);
     leftSlave2.setOpenLoopRampRate(kRampRate);
     rightMaster.setOpenLoopRampRate(kRampRate);
     rightSlave1.setOpenLoopRampRate(kRampRate);
     rightSlave2.setOpenLoopRampRate(kRampRate);
 
-    resetSensors();*/
+    //resetSensors();
   }
 
   public CANSparkMax getLeftController() {
