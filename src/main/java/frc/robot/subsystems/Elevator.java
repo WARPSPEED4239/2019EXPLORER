@@ -51,8 +51,8 @@ public class Elevator extends Subsystem {
     mMaster.configPeakCurrentLimit(kPeakCurrentLimit);
     mMaster.configContinuousCurrentLimit(kContinuousCurrentLimit);
 
-    mMaster.setInverted(false);
-    mMaster.setSensorPhase(true);
+    mMaster.setInverted(true);
+    mMaster.setSensorPhase(false);
 
     mMaster.configNominalOutputForward(0.0);
     mMaster.configNominalOutputReverse(0.0);

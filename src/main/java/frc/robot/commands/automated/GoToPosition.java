@@ -30,7 +30,7 @@ public class GoToPosition extends CommandGroup {
       targetWristPosition = 90.0;
       break;
     case CargoRocketOne:
-      targetElevatorPosition = 27.0;
+      targetElevatorPosition = 29.0;
       targetWristPosition = 0.0;
       break;
     case CargoRocketTwo:
@@ -42,7 +42,7 @@ public class GoToPosition extends CommandGroup {
       targetWristPosition = 50.0;
       break;
     case CargoIntakeElevated:
-      targetElevatorPosition = 15.0;
+      targetElevatorPosition = 7.0;
       targetWristPosition = 0.0;
       break;
     case CargoPlayerStationAndCargoShip:
