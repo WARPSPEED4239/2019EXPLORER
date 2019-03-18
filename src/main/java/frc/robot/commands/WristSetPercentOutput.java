@@ -20,7 +20,6 @@ public class WristSetPercentOutput extends Command {
 
   @Override
   protected void execute() {
-    if (timeSinceInitialized() >= 0.5) {
       if (Robot.m_wrist.getBottomLimitSwitch()) {
         Robot.m_wrist.setEncoderValueInDegrees(0.0);
       } else if (Robot.m_wrist.getTopLimitSwitch()) {
@@ -33,7 +32,6 @@ public class WristSetPercentOutput extends Command {
         mOutput = 0.0;
       }
       Robot.m_wrist.setPercentOutput(mOutput);
-    }
   }
 
   @Override

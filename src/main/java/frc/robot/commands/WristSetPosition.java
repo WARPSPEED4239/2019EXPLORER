@@ -23,10 +23,6 @@ public class WristSetPosition extends Command {
   @Override
   protected void execute() {
       double targetPosition = mPositionInDegrees;
-      if (targetPosition > 85 && !Robot.m_elevator.getBottomLimitSwitch()) {
-        targetPosition = 85;
-      }
-
       if (Robot.m_wrist.getBottomLimitSwitch()
           && Robot.m_wrist.getVelocityInDegreesPerSecond() < -Constants.kEpsilson) {
         Robot.m_wrist.setPercentOutput(0.0);
