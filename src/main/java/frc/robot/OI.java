@@ -15,7 +15,6 @@ import frc.robot.commands.LiftWheelsMotorForward;
 import frc.robot.commands.LiftWheelsMotorReverse;
 import frc.robot.commands.LiftWheelsPistonDown;
 import frc.robot.commands.WristSetPercentOutput;
-import frc.robot.commands.WristSetPercentOutputNoLimits;
 import frc.robot.commands.automated.DrivetrainVisionAssist;
 import frc.robot.commands.automated.GoToPosition;
 
@@ -79,12 +78,11 @@ public class OI {
 		jButton4.whenPressed(new HatchGrabberExtend());
 		//jButton5.whenPressed(new GoToPosition(States.Positions.EndgamePrep));
 		//jButton6.whenPressed(new GoToPosition(States.Positions.EndgameDown));
-		jButton7.whileHeld(new WristSetPercentOutput(-0.4));
-		jButton8.whileHeld(new WristSetPercentOutput(0.4));
+		jButton7.whileHeld(new WristSetPercentOutput(-0.7));
+		jButton8.whileHeld(new WristSetPercentOutput(0.7));
 		jButton9.whileHeld(new ElevatorSetPercentOutput(-0.6));
 		jButton10.whileHeld(new ElevatorSetPercentOutput(0.6));
 		jButton11.whenPressed(new CargoIntakeHold());
-		jButton12.whileHeld(new WristSetPercentOutputNoLimits(-1.0));
 
 
 		bButton1.whenPressed(new GoToPosition(States.Positions.Estop)); //YELLOW

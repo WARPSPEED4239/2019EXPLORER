@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ElevatorSetPercentOutput extends Command {
-    
-private double mOutput;
-  
+
+  private double mOutput;
+
   public ElevatorSetPercentOutput(double output) {
     requires(Robot.m_elevator);
 
@@ -21,11 +21,8 @@ private double mOutput;
   protected void execute() {
     if (Robot.m_elevator.getBottomLimitSwitch() && mOutput < 0.0) {
       mOutput = 0.0;
-      Robot.m_elevator.setEncoderValueInInches(0.0);
-    } 
-    else if (Robot.m_elevator.getTop2To1LimitSwitch() && Robot.m_elevator.getTop3To2LimitSwitch() && mOutput > 0.0) {
+    } else if (Robot.m_elevator.getTop2To1LimitSwitch() && Robot.m_elevator.getTop3To2LimitSwitch() && mOutput > 0.0) {
       mOutput = 0.0;
-      //Robot.m_elevator.setEncoderValueInInches(67.33019938);
     }
 
     Robot.m_elevator.setPercentOutput(mOutput);

@@ -23,11 +23,9 @@ public class WristSetPercentOutputWithJoystick extends Command {
 
       if (Robot.m_wrist.getBottomLimitSwitch() && mOutput > 0.0) {
         mOutput = 0.0;
-        Robot.m_wrist.setEncoderValueInDegrees(0.0);
       }
       else if (Robot.m_wrist.getTopLimitSwitch() && mOutput < 0.0) {
         mOutput = 0.0;
-        Robot.m_wrist.setEncoderValueInDegrees(146.3378906);
       }
     }
     else {

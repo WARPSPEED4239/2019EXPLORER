@@ -23,10 +23,8 @@ public class ElevatorSetPosition extends Command {
   protected void execute() {
     if (Robot.m_elevator.getTop2To1LimitSwitch() && Robot.m_elevator.getTop3To2LimitSwitch() && Robot.m_elevator.getMotorOutputVoltage() > Constants.kEpsilson) {
       Robot.m_elevator.setPercentOutput(0.0);
-      //Robot.m_elevator.setEncoderValueInInches(67.33019938);
     } else if (Robot.m_elevator.getBottomLimitSwitch() && Robot.m_elevator.getMotorOutputVoltage() < -Constants.kEpsilson) {
       Robot.m_elevator.setPercentOutput(0.0);
-      Robot.m_elevator.setEncoderValueInInches(0.0);
     } else {
       Robot.m_elevator.setPosition(mPositionInInches);
     }

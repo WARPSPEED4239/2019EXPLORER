@@ -7,10 +7,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.States.StartingConfig;
-import frc.robot.commands.autonomous.AutonomousCommand;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.DrivetrainShifting;
@@ -34,7 +31,6 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
 
   private Command m_autonomousCommand;
-  private SendableChooser<StartingConfig> m_startingConfigChooser = new SendableChooser<>();
 
   @Override
   public void robotInit() {
@@ -52,14 +48,24 @@ public class Robot extends TimedRobot {
     UsbCamera cam0 = CameraServer.getInstance().startAutomaticCapture(0);
     cam0.setResolution(320, 240);
     cam0.setFPS(10);
-
-    m_startingConfigChooser.setDefaultOption("Hatch Pannel", StartingConfig.HatchPannel);
-    m_startingConfigChooser.addOption("Cargo", StartingConfig.Cargo);
-    SmartDashboard.putData("Starting Config", m_startingConfigChooser);
   }
 
   @Override
   public void robotPeriodic() {
+    if (Robot.m_wrist.getBottomLimitSwitch()) {
+      Robot.m_wrist.setEncoderValueInDegrees(0.0);
+    }
+    else if (Robot.m_wrist.getTopLimitSwitch()) {
+      Robot.m_wrist.setEncoderValueInDegrees(146.3378906);
+    }
+
+    if (Robot.m_elevator.getBottomLimitSwitch()) {
+      Robot.m_elevator.setEncoderValueInInches(0.0);
+    }
+    else if (Robot.m_elevator.getTop2To1LimitSwitch() && Robot.m_elevator.getTop3To2LimitSwitch()) {
+      Robot.m_elevator.setEncoderValueInInches(67.33019938);
+    }
+
     SmartDashboard.putNumber("Left Position (ft)", Robot.m_drivetrain.getLeftEncoderPosition());
     SmartDashboard.putNumber("Right Position (ft)", Robot.m_drivetrain.getRightEncoderPosition());
     SmartDashboard.putNumber("Left Velocity (ft/s)", Robot.m_drivetrain.getLeftEncoderVelocity());
@@ -103,27 +109,11 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
-
-    if (Robot.m_wrist.getBottomLimitSwitch()) {
-      Robot.m_wrist.setEncoderValueInDegrees(0.0);
-    }
-    else if (Robot.m_wrist.getTopLimitSwitch()) {
-      Robot.m_wrist.setEncoderValueInDegrees(146.3378906);
-    }
-
-    if (Robot.m_elevator.getBottomLimitSwitch()) {
-      Robot.m_elevator.setEncoderValueInInches(0.0);
-    }
-    else if (Robot.m_elevator.getTop2To1LimitSwitch() && Robot.m_elevator.getTop3To2LimitSwitch()) {
-      Robot.m_elevator.setEncoderValueInInches(67.33019938);
-    }
   }
 
   @Override
   public void autonomousInit() {
     Robot.m_wrist.lockRetract();
-    StartingConfig startingConfig = m_startingConfigChooser.getSelected();
-    m_autonomousCommand = new AutonomousCommand(startingConfig);
      
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();

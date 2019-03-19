@@ -19,10 +19,8 @@ public class WristSetPostitionWithJoystick extends Command {
     if (Constants.kCodeTestingState) {
       if (Robot.m_wrist.getBottomLimitSwitch() && Robot.m_wrist.getVelocityInDegreesPerSecond() < -Constants.kEpsilson) {
         Robot.m_wrist.setPercentOutput(0.0);
-        Robot.m_wrist.setEncoderValueInDegrees(0.0);
       } else if (Robot.m_wrist.getTopLimitSwitch() && Robot.m_wrist.getVelocityInDegreesPerSecond() > Constants.kEpsilson) {
         Robot.m_wrist.setPercentOutput(0.0);
-        Robot.m_wrist.setEncoderValueInDegrees(146.3378906);
       } else {
         double targetPosition = 146 * -Robot.m_oi.getJoystick().getY();
         Robot.m_wrist.setPositionInDegrees(targetPosition);
