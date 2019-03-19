@@ -3,8 +3,11 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -12,18 +15,12 @@ import frc.robot.RobotMap;
 import frc.robot.commands.DrivetrainArcadeDrive;
 
 public class Drivetrain extends Subsystem {
-  private double [] ypr = new double[3];
+  private double[] ypr = new double[3];
 
-  private final int CURRENT_LIMIT = 40;
-  private final int PEAK_CURRENT_LIMIT = 45;
-  private final int PEAK_CURRENT_DURATION_MILLIS = 100;
-  
-	private final double RAMP_RATE = 0.2;
-	//private final int TIMEOUT_MILLIS = 10;
-  
-  private double leftEncoderBase;
-  private double rightEncoderBase;
-  
+  private final int kCurrentLimit = 40;
+
+  private final double kRampRate = 0.2;
+
   private CANSparkMax leftMaster = new CANSparkMax(RobotMap.drivetrainLeftOne, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax leftSlave1 = new CANSparkMax(RobotMap.drivetrainLeftTwo, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax leftSlave2 = new CANSparkMax(RobotMap.drivetrainLeftThree, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -37,20 +34,42 @@ public class Drivetrain extends Subsystem {
   private CANEncoder rightEncoder = new CANEncoder(rightMaster);
 
   private DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
+  
+  private NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
 
   public Drivetrain() {
+    leftMaster.restoreFactoryDefaults();
+    leftSlave1.restoreFactoryDefaults();
+    leftSlave2.restoreFactoryDefaults();
+    rightMaster.restoreFactoryDefaults();
+    rightSlave1.restoreFactoryDefaults();
+    rightSlave2.restoreFactoryDefaults();
+
     leftSlave1.follow(leftMaster);
     leftSlave2.follow(leftMaster);
     rightSlave1.follow(rightMaster);
     rightSlave2.follow(rightMaster);
     
-    leftMaster.setSmartCurrentLimit(CURRENT_LIMIT);
-    rightMaster.setSmartCurrentLimit(CURRENT_LIMIT);
-    leftMaster.setSecondaryCurrentLimit(PEAK_CURRENT_LIMIT, PEAK_CURRENT_DURATION_MILLIS);
-    rightMaster.setSecondaryCurrentLimit(PEAK_CURRENT_LIMIT, PEAK_CURRENT_DURATION_MILLIS);
+    leftMaster.setIdleMode(IdleMode.kBrake);
+    leftSlave1.setIdleMode(IdleMode.kBrake);
+    leftSlave2.setIdleMode(IdleMode.kBrake);
+    rightMaster.setIdleMode(IdleMode.kBrake);
+    rightSlave1.setIdleMode(IdleMode.kBrake);
+    rightSlave2.setIdleMode(IdleMode.kBrake);
 
-    leftMaster.setRampRate(RAMP_RATE);
-    rightMaster.setRampRate(RAMP_RATE);
+    leftMaster.setSmartCurrentLimit(kCurrentLimit);
+    leftSlave1.setSmartCurrentLimit(kCurrentLimit);
+    leftSlave2.setSmartCurrentLimit(kCurrentLimit);
+    rightMaster.setSmartCurrentLimit(kCurrentLimit);
+    rightSlave1.setSmartCurrentLimit(kCurrentLimit);
+    rightSlave2.setSmartCurrentLimit(kCurrentLimit);
+
+    leftMaster.setOpenLoopRampRate(kRampRate);
+    leftSlave1.setOpenLoopRampRate(kRampRate);
+    leftSlave2.setOpenLoopRampRate(kRampRate);
+    rightMaster.setOpenLoopRampRate(kRampRate);
+    rightSlave1.setOpenLoopRampRate(kRampRate);
+    rightSlave2.setOpenLoopRampRate(kRampRate);
 
     resetSensors();
   }
@@ -71,6 +90,10 @@ public class Drivetrain extends Subsystem {
     return rightEncoder;
   }
 
+  public NetworkTable getLimelightTable() {
+    return limelightTable;
+  }
+
   @Override
   public void periodic() {
   }
@@ -81,8 +104,8 @@ public class Drivetrain extends Subsystem {
   }
   
   public void arcadeDrive(double move, double rotate) {
-    final double MIN_MOVE_THRESHOLD = 0.05;
-    final double MIN_ROTATE_THRESHOLD = 0.05;
+    final double MIN_MOVE_THRESHOLD = 0.07;
+    final double MIN_ROTATE_THRESHOLD = 0.07;
 
     if (Math.abs(move) < MIN_MOVE_THRESHOLD)
       move = 0.0;
@@ -99,12 +122,12 @@ public class Drivetrain extends Subsystem {
   }
 
   public double getLeftEncoderPosition() {
-    double revs = -(leftEncoder.getPosition() - leftEncoderBase);
+    double revs = -(leftEncoder.getPosition());
     return convertPosition(revs);
   }
 
   public double getRightEncoderPosition() {
-     double revs = rightEncoder.getPosition() - rightEncoderBase;
+     double revs = rightEncoder.getPosition();
      return convertPosition(revs);
   }
 
@@ -118,14 +141,14 @@ public class Drivetrain extends Subsystem {
     return convertVelocity(input);
   }
 
-  public void getIMUdata() {
+  public double getIMUYaw() {
     IMU.getYawPitchRoll(ypr);
-    SmartDashboard.putNumber("Pigeon IMU Yaw", ypr[0]);
+    return ypr[0];
   }
 
   public void resetSensors() {
-    leftEncoderBase = leftEncoder.getPosition();
-    rightEncoderBase = rightEncoder.getPosition();
+    leftEncoder.setPosition(0.0);
+    rightEncoder.setPosition(0.0);
     IMU.setYaw(0.0);
   }
 
@@ -135,5 +158,30 @@ public class Drivetrain extends Subsystem {
 
   public double convertVelocity(double input) {
     return 2.0 * Math.PI * 0.25 * input / 7.08 / 60; 
+  }
+
+  public double getIMUAccelerationYInMetersPerSecondSquared() {
+    short[] ba_xyz = new short[3];
+    IMU.getBiasedAccelerometer(ba_xyz);
+
+    double xInMetersPerSecondSquared = ((double) ba_xyz[1]) * 9.81 / 16384.0;
+    return xInMetersPerSecondSquared;
+  }
+
+  public void printAccelerations() {
+    short[] ba_xyz = new short[3];
+    IMU.getBiasedAccelerometer(ba_xyz);
+
+    double xInMetersPerSecondSquared = ((double) ba_xyz[0]) * 9.81 / 16384.0;
+    double yInMetersPerSecondSquared = ((double) ba_xyz[1]) * 9.81 / 16384.0;
+    double zInMetersPerSecondSquared = ((double) ba_xyz[2]) * 9.81 / 16384.0;
+
+    SmartDashboard.putNumber("xInMetersPerSecondSquared", xInMetersPerSecondSquared);
+    SmartDashboard.putNumber("yInMetersPerSecondSquared", yInMetersPerSecondSquared);
+    SmartDashboard.putNumber("zInMetersPerSecondSquared", zInMetersPerSecondSquared);
+  }
+
+  public void driveWithVisionAssist(double move, double rotate) {
+    drive.curvatureDrive(move, rotate, false);
   }
 }

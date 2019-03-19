@@ -10,7 +10,7 @@ public class HatchGrabberExtend extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_hatchGrabber.hatchGrabberExtend();
+    Robot.m_hatchGrabber.extend();
   }
 
   @Override

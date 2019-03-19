@@ -3,9 +3,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class RampsStop extends Command {
-  public RampsStop() {
-    requires(Robot.m_ramps);
+public class LiftWheelsMotorForward extends Command {
+  public LiftWheelsMotorForward() {
+    requires(Robot.m_liftWheelsMotor);
   }
 
   @Override
@@ -14,7 +14,7 @@ public class RampsStop extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_ramps.rampsStop();
+    Robot.m_liftWheelsMotor.forward();
   }
 
   @Override
@@ -28,6 +28,5 @@ public class RampsStop extends Command {
 
   @Override
   protected void interrupted() {
-    end();
   }
 }

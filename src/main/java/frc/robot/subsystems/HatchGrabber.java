@@ -4,22 +4,22 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.HatchGrabberExtend;
+import frc.robot.commands.HatchGrabberRetract;
 
 public class HatchGrabber extends Subsystem {
 
-  private DoubleSolenoid hatchGrabberPiston = new DoubleSolenoid(RobotMap.hatchGrabberSolenoidForward, RobotMap.hatchGrabberSolenoidReverse);
+  private DoubleSolenoid mPiston = new DoubleSolenoid(RobotMap.hatchGrabberSolenoidForward, RobotMap.hatchGrabberSolenoidReverse);
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new HatchGrabberExtend());
+    setDefaultCommand(new HatchGrabberRetract());
   }
 
-  public void hatchGrabberExtend() {
-    hatchGrabberPiston.set(Value.kForward);
+  public void extend() {
+    mPiston.set(Value.kForward);
   }
 
-  public void hatchGrabberRetract() {
-    hatchGrabberPiston.set(Value.kReverse);
+  public void retract() {
+    mPiston.set(Value.kReverse);
   }
 }

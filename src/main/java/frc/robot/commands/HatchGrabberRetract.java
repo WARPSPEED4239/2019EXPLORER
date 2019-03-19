@@ -10,7 +10,7 @@ public class HatchGrabberRetract extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_hatchGrabber.hatchGrabberRetract();
+    Robot.m_hatchGrabber.retract();
   }
 
   @Override

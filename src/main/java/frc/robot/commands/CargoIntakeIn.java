@@ -14,7 +14,7 @@ public class CargoIntakeIn extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_cargoIntake.cargoIntakeIn();
+    Robot.m_cargoIntake.in();
   }
 
   @Override

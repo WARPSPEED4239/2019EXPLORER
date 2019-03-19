@@ -3,9 +3,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftDown extends Command {
-  public LiftDown() {
-    requires(Robot.m_lift);
+public class LiftWheelsMotorReverse extends Command {
+  public LiftWheelsMotorReverse() {
+    requires(Robot.m_liftWheelsMotor);
   }
 
   @Override
@@ -14,12 +14,12 @@ public class LiftDown extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_lift.liftDown();
+    Robot.m_liftWheelsMotor.reverse();
   }
 
   @Override
   protected boolean isFinished() {
-    return Robot.m_lift.getLiftLimitSwitch();
+    return false;
   }
 
   @Override
@@ -28,6 +28,5 @@ public class LiftDown extends Command {
 
   @Override
   protected void interrupted() {
-    end();
   }
 }
