@@ -22,15 +22,24 @@ public class WristSetPosition extends Command {
 
   @Override
   protected void execute() {
-      double targetPosition = mPositionInDegrees;
-      if (Robot.m_wrist.getBottomLimitSwitch() && Robot.m_wrist.getVelocityInDegreesPerSecond() < -Constants.kEpsilson) {
-        Robot.m_wrist.setPercentOutput(0.0);
-      } else if (Robot.m_wrist.getTopLimitSwitch() && Robot.m_wrist.getVelocityInDegreesPerSecond() > Constants.kEpsilson) {
-        Robot.m_wrist.setPercentOutput(0.0);
-      } else {
-        Robot.m_wrist.setPositionInDegrees(targetPosition);
-      }
-      SmartDashboard.putNumberArray("Wrist Target Position", new double[] { Robot.m_wrist.getActiveTrajectoryPositionInDegrees(), Robot.m_wrist.getPositionInDegrees() });
+    double targetPosition = mPositionInDegrees;
+    
+    if (Robot.m_wrist.getBottomLimitSwitch() && Robot.m_wrist.getVelocityInDegreesPerSecond() < -Constants.kEpsilson) {
+      Robot.m_wrist.setPercentOutput(0.0);
+    } else if (Robot.m_wrist.getTopLimitSwitch()
+        && Robot.m_wrist.getVelocityInDegreesPerSecond() > Constants.kEpsilson) {
+      Robot.m_wrist.setPercentOutput(0.0);
+    } else {
+      double wristGravityComponnent = Constants.kWristGravityComponentMultiplier * Math.cos(Math.toRadians(Robot.m_wrist.getPositionInDegrees()));
+      double wristAcceleration = Constants.kWristAccelerationMultiplier * Robot.m_wrist.getActiveTrajectoryAccelerationInDegreesPerSecondSquared();
+      double wristElevatorAcceleration = Constants.kWristElevatorAccelerationMultiplier * Robot.m_elevator.getActiveTrajectoryAccelerationInInchesPerSecondSquared() * Math.cos(Math.toRadians(Robot.m_wrist.getPositionInDegrees()));
+      double wristDrivetrainAcceleration = Constants.kWristDrivetrainAccelerationMultiplier * Robot.m_drivetrain.getIMUAccelerationYInMetersPerSecondSquared() /* TODO Right Units? */ * Math.sin(Math.toRadians(Robot.m_wrist.getPositionInDegrees()));
+
+      double arbFeedForward = wristGravityComponnent + wristAcceleration + wristElevatorAcceleration + wristDrivetrainAcceleration;
+
+      Robot.m_wrist.setPositionInDegrees(targetPosition, arbFeedForward);
+    }
+    SmartDashboard.putNumberArray("Wrist Target Position", new double[] { Robot.m_wrist.getActiveTrajectoryPositionInDegrees(), Robot.m_wrist.getPositionInDegrees() });
   }
 
   @Override

@@ -34,7 +34,7 @@ public class WristEndgame extends Command {
       Robot.m_wrist.setPercentOutput(0.0);
       Robot.m_wrist.setEncoderValueInDegrees(146.3378906);
     } else {
-      Robot.m_wrist.setPositionInDegrees(targetPosition);
+      Robot.m_wrist.setPositionInDegrees(targetPosition, 0);
     }
     SmartDashboard.putNumberArray("Wrist Target Position", new double [] {Robot.m_wrist.getActiveTrajectoryPositionInDegrees(), Robot.m_wrist.getPositionInDegrees()});
   }
