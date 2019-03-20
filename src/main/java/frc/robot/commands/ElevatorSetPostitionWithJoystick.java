@@ -18,9 +18,9 @@ public class ElevatorSetPostitionWithJoystick extends Command {
   protected void execute() {
 
     if (Constants.kCodeTestingState) {
-      if (Robot.m_elevator.getBottomLimitSwitch() && Robot.m_elevator.getVelocityInInchesPerSecond() < -Constants.kEpsilson) {
+      if (Robot.m_elevator.getBottomLimitSwitch() && Robot.m_elevator.getVelocityInInchesPerSecond() < -Constants.kEpsilon) {
         Robot.m_elevator.setPercentOutput(0.0);
-      } else if (Robot.m_elevator.getTop2To1LimitSwitch() && Robot.m_elevator.getTop3To2LimitSwitch() && Robot.m_elevator.getVelocityInInchesPerSecond() > Constants.kEpsilson) {
+      } else if (Robot.m_elevator.getTop2To1LimitSwitch() && Robot.m_elevator.getTop3To2LimitSwitch() && Robot.m_elevator.getVelocityInInchesPerSecond() > Constants.kEpsilon) {
         Robot.m_elevator.setPercentOutput(0.0);
       } else {
         double targetPosition = 60 * -Robot.m_oi.getBoard().getY();

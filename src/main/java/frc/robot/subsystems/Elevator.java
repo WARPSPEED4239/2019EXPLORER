@@ -109,11 +109,21 @@ public class Elevator extends Subsystem {
     return positionInInches;
   }
 
-  public double getActiveTrajectoryAccelerationInInchesPerSecondSquared() { //TODO Fiugre out this math
+  public double getActiveTrajectoryAccelerationInInchesPerSecondSquared() {
     double EncoderTicksPerRotation = UnitConversion.convertPositionInInchesToRotations(1.0, kDrumDiameter);
     double EncoderTicksPerInch = UnitConversion.convertRotationsToSRXUnits(EncoderTicksPerRotation);
+    double activeTrajectoryAccelerationInInchesPerSecondSquared;
 
-    return kMaxAcceleration * 10 / (EncoderTicksPerInch * 386.09);
+    if (getVelocityInInchesPerSecond() > 5.0) {
+      activeTrajectoryAccelerationInInchesPerSecondSquared = kMaxAcceleration * 10.0 / (EncoderTicksPerInch * 386.09); // 10 ~ Gravity, 386.09 = Gravity Constant
+    }
+    else if (getVelocityInInchesPerSecond() < -5.0) {
+      activeTrajectoryAccelerationInInchesPerSecondSquared = -kMaxAcceleration * 10.0 / (EncoderTicksPerInch * 386.09); // 10 ~ Gravity, 386.09 = Gravity Constant
+    }
+    else {
+      activeTrajectoryAccelerationInInchesPerSecondSquared = 0.0;
+    }
+    return activeTrajectoryAccelerationInInchesPerSecondSquared;
   }
 
   public void setPercentOutput(double output) {
