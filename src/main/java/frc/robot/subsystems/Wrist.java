@@ -117,8 +117,10 @@ public class Wrist extends Subsystem {
     return positionInDegrees;
   }
 
-  public double getActiveTrajectoryAccelerationInDegreesPerSecondSquared() { //TODO Fiugre out how to get this
-    return 0;
+  public double getActiveTrajectoryAccelerationInDegreesPerSecondSquared() { //TODO Figure out this math
+    double EncoderTicksPerDegree = UnitConversion.convertPositionInDegreesToSRXUnits(1.0);
+
+    return kMaxAcceleration * 10 / (EncoderTicksPerDegree * 386.09);
   }
 
   public double getVelocityInDegreesPerSecond() {

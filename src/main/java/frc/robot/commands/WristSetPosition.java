@@ -33,7 +33,7 @@ public class WristSetPosition extends Command {
       double wristGravityComponnent = Constants.kWristGravityComponentMultiplier * Math.cos(Math.toRadians(Robot.m_wrist.getPositionInDegrees()));
       double wristAcceleration = Constants.kWristAccelerationMultiplier * Robot.m_wrist.getActiveTrajectoryAccelerationInDegreesPerSecondSquared();
       double wristElevatorAcceleration = Constants.kWristElevatorAccelerationMultiplier * Robot.m_elevator.getActiveTrajectoryAccelerationInInchesPerSecondSquared() * Math.cos(Math.toRadians(Robot.m_wrist.getPositionInDegrees()));
-      double wristDrivetrainAcceleration = Constants.kWristDrivetrainAccelerationMultiplier * Robot.m_drivetrain.getIMUAccelerationYInMetersPerSecondSquared() /* TODO Right Units? */ * Math.sin(Math.toRadians(Robot.m_wrist.getPositionInDegrees()));
+      double wristDrivetrainAcceleration = Constants.kWristDrivetrainAccelerationMultiplier * Robot.m_drivetrain.getIMUAccelerationYInMetersPerSecondSquared() * Math.sin(Math.toRadians(Robot.m_wrist.getPositionInDegrees()));
 
       double arbFeedForward = wristGravityComponnent + wristAcceleration + wristElevatorAcceleration + wristDrivetrainAcceleration;
 

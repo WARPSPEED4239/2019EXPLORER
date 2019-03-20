@@ -109,8 +109,11 @@ public class Elevator extends Subsystem {
     return positionInInches;
   }
 
-  public double getActiveTrajectoryAccelerationInInchesPerSecondSquared() { //TODO Fiugre out how to get this
-    return 0;
+  public double getActiveTrajectoryAccelerationInInchesPerSecondSquared() { //TODO Fiugre out this math
+    double EncoderTicksPerRotation = UnitConversion.convertPositionInInchesToRotations(1.0, kDrumDiameter);
+    double EncoderTicksPerInch = UnitConversion.convertRotationsToSRXUnits(EncoderTicksPerRotation);
+
+    return kMaxAcceleration * 10 / (EncoderTicksPerInch * 386.09);
   }
 
   public void setPercentOutput(double output) {
