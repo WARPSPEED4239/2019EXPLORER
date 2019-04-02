@@ -1,6 +1,7 @@
 package frc.robot.commands.automated;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.Robot;
 import frc.robot.States;
 import frc.robot.commands.ElevatorSetPercentOutput;
 import frc.robot.commands.ElevatorSetPosition;
@@ -63,7 +64,7 @@ public class GoToPosition extends CommandGroup {
       break;
     case EndgameDown:
       endgame = true;
-      targetElevatorPosition = -0.7;
+      targetElevatorPosition = -Math.abs(Robot.m_oi.getJoystick().getY());
       targetWristPosition = 0.0;
       break;
     case Estop:
@@ -79,7 +80,7 @@ public class GoToPosition extends CommandGroup {
       addSequential(new WristSetPercentOutput(0.0));
     } 
     else if (endgame) {
-      addParallel(new ElevatorSetPercentOutput(targetElevatorPosition));
+      addParallel(new ElevatorSetPercentOutput(-Math.abs(Robot.m_oi.getJoystick().getY())));
       addSequential(new WristEndgame(targetWristPosition));
     }
     else {
