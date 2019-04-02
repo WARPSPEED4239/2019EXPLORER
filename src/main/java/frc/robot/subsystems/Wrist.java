@@ -27,7 +27,7 @@ public class Wrist extends Subsystem {
   private final int kContinuousCurrentLimit = 30;
 
   private final int kMaxVelocity = 394; //275
-  private final int kMaxAcceleration = 788; //TUNE? //275
+  private final int kMaxAcceleration = 520; //TUNE //275 //MAX = 788
 
   private final int kSlotIdx = 0;
   private final int kPIDIdx = 0;
@@ -62,7 +62,7 @@ public class Wrist extends Subsystem {
     mMotor.config_kF(kSlotIdx, 1023.0 / 550.0);
     mMotor.config_kP(kSlotIdx, 5.0);
     mMotor.config_kI(kSlotIdx, 0.0);
-    mMotor.config_kD(kSlotIdx, 50.0);
+    mMotor.config_kD(kSlotIdx, 0.0);
 
     mMotor.configMotionCruiseVelocity(kMaxVelocity);
     mMotor.configMotionAcceleration(kMaxAcceleration);
