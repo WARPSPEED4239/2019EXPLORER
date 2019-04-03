@@ -32,6 +32,8 @@ public class Wrist extends Subsystem {
   private final int kSlotIdx = 0;
   private final int kPIDIdx = 0;
 
+  private boolean locked = false;
+
   public Wrist (WPI_TalonSRX motor, DoubleSolenoid solenoid, CANifier canifier) {
     mMotor = motor;
     mSolenoid = solenoid;
@@ -78,6 +80,14 @@ public class Wrist extends Subsystem {
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new WristSetPercentOutput(0.0));
+  }
+
+  public boolean getLocked() {
+    return locked;
+  }
+
+  public void setLocked(boolean state) {
+    locked = state;
   }
 
   public boolean getTopLimitSwitch() {
@@ -140,11 +150,11 @@ public class Wrist extends Subsystem {
     mMotor.setSelectedSensorPosition(positionInSRXUnits);
   }
 
-  public void lockExtend() {
+  public void lockRetract() {
     mSolenoid.set(Value.kForward);
   }
 
-  public void lockRetract() {
+  public void lockDeploy() {
     mSolenoid.set(Value.kReverse);
   }
 }

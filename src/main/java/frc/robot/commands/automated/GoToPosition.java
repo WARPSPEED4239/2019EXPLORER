@@ -15,7 +15,8 @@ public class GoToPosition extends CommandGroup {
     double targetElevatorPosition = 0.0;
     double targetWristPosition = 0.0;
     boolean unkownState = false;
-    boolean endgame = false;
+    boolean endgamePrep = false;
+    boolean endgameDown = false;
 
    switch (positions) {
     case HatchLevelOne:
@@ -58,13 +59,19 @@ public class GoToPosition extends CommandGroup {
       targetElevatorPosition = 0.0;
       targetWristPosition = 146.3375;
       break;
-    case EndgamePrep:
-      targetElevatorPosition = 12.0; //12.0 for Level 2, 24.0 for Level 3
+    case EndgamePrepLevel2:
+      endgamePrep = true;
+      targetElevatorPosition = 12.0;
+      targetWristPosition = 0.0;
+      break;
+    case EndgamePrepLevel3:
+      endgamePrep = true;
+      targetElevatorPosition = 24.0;
       targetWristPosition = 0.0;
       break;
     case EndgameDown:
-      endgame = true;
-      targetElevatorPosition = -Math.abs(Robot.m_oi.getJoystick().getY());
+      endgameDown = true;
+      targetElevatorPosition = -Robot.m_oi.getJoystick().getY();
       targetWristPosition = 0.0;
       break;
     case Estop:
@@ -79,8 +86,12 @@ public class GoToPosition extends CommandGroup {
       addParallel(new ElevatorSetPercentOutput(0.0));
       addSequential(new WristSetPercentOutput(0.0));
     } 
-    else if (endgame) {
-      addParallel(new ElevatorSetPercentOutput(-Math.abs(Robot.m_oi.getJoystick().getY())));
+    else if (endgamePrep) {
+      addParallel(new ElevatorSetPosition(targetElevatorPosition));
+      addSequential(new WristEndgame(targetWristPosition));
+    }
+    else if (endgameDown) {
+      addParallel(new ElevatorSetPercentOutput(-Robot.m_oi.getJoystick().getY()));
       addSequential(new WristEndgame(targetWristPosition));
     }
     else {
