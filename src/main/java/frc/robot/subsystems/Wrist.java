@@ -1,15 +1,13 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.CANifier;
-import com.ctre.phoenix.CANifier.GeneralPin;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -21,7 +19,8 @@ public class Wrist extends Subsystem {
 
   private WPI_TalonSRX mMotor;
   private DoubleSolenoid mSolenoid;
-  private CANifier mCanifier;
+  private DigitalInput mBottomLimitSwitch;
+  private DigitalInput mTopLimitSwitch;
 
   private final int kPeakCurrentLimit = 35;
   private final int kContinuousCurrentLimit = 30;
@@ -34,10 +33,11 @@ public class Wrist extends Subsystem {
 
   private boolean locked = false;
 
-  public Wrist (WPI_TalonSRX motor, DoubleSolenoid solenoid, CANifier canifier) {
+  public Wrist (WPI_TalonSRX motor, DoubleSolenoid solenoid, CANifier canifier, DigitalInput bottomLimitSwitch, DigitalInput topLimitSwitch) {
     mMotor = motor;
     mSolenoid = solenoid;
-    mCanifier = canifier;
+    mBottomLimitSwitch = bottomLimitSwitch;
+    mTopLimitSwitch = topLimitSwitch;
 
     mMotor.configFactoryDefault();
 
@@ -50,9 +50,6 @@ public class Wrist extends Subsystem {
 
     mMotor.setInverted(true);
     mMotor.setSensorPhase(false);
-
-    mMotor.configForwardLimitSwitchSource(RemoteLimitSwitchSource.RemoteCANifier, LimitSwitchNormal.NormallyOpen, RobotMap.canifier);
-    mMotor.configReverseLimitSwitchSource(RemoteLimitSwitchSource.RemoteCANifier, LimitSwitchNormal.NormallyOpen, RobotMap.canifier);
 
     mMotor.configNominalOutputForward(0.0);
     mMotor.configNominalOutputReverse(0.0);
@@ -74,8 +71,10 @@ public class Wrist extends Subsystem {
     WPI_TalonSRX mMotor = new WPI_TalonSRX(RobotMap.wristMotor);
     DoubleSolenoid mSolenoid = new DoubleSolenoid(RobotMap.wristLockSolenoidForward, RobotMap.wristLockSolenoidReverse);
     CANifier mCanifier = new CANifier(RobotMap.canifier);
+    DigitalInput mBottomLimitSwitch = new DigitalInput(RobotMap.wristBottomLimitSwitch);
+    DigitalInput mTopLimitSwitch = new DigitalInput(RobotMap.wristTopLimitSwitch);
 
-    return new Wrist(mMotor, mSolenoid, mCanifier);
+    return new Wrist(mMotor, mSolenoid, mCanifier, mBottomLimitSwitch, mTopLimitSwitch);
   }
   @Override
   public void initDefaultCommand() {
@@ -91,11 +90,11 @@ public class Wrist extends Subsystem {
   }
 
   public boolean getTopLimitSwitch() {
-    return !mCanifier.getGeneralInput(GeneralPin.LIMF);
+    return !mTopLimitSwitch.get();
   }
 
   public boolean getBottomLimitSwitch() {
-    return !mCanifier.getGeneralInput(GeneralPin.LIMR);
+    return !mBottomLimitSwitch.get();
   }
 
   public void setPercentOutput(double output) {
