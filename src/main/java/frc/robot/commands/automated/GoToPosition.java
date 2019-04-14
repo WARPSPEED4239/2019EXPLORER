@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.States;
 import frc.robot.commands.ElevatorSetPercentOutput;
 import frc.robot.commands.ElevatorSetPosition;
-import frc.robot.commands.WristEndgame;
 import frc.robot.commands.WristSetPercentOutput;
 import frc.robot.commands.WristSetPosition;
 
@@ -14,21 +13,19 @@ public class GoToPosition extends CommandGroup {
     double targetElevatorPosition = 0.0;
     double targetWristPosition = 0.0;
     boolean unkownState = false;
-    boolean endgamePrep = false;
-    boolean endgameDown = false;
 
    switch (positions) {
     case HatchLevelOne:
       targetElevatorPosition = 0.0;
-      targetWristPosition = 88.0;
+      targetWristPosition = 0.0;
       break;
     case HatchLevelTwo:
       targetElevatorPosition = 30.0;
-      targetWristPosition = 88.0;
+      targetWristPosition = 0.0;
       break;
     case HatchLevelThree:
       targetElevatorPosition = 60.0;
-      targetWristPosition = 88.0;
+      targetWristPosition = 0.0;
       break;
     case CargoRocketOne:
       targetElevatorPosition = 22.0;
@@ -58,21 +55,6 @@ public class GoToPosition extends CommandGroup {
       targetElevatorPosition = 0.0;
       targetWristPosition = 146.3375;
       break;
-    case EndgamePrepLevel2:
-      endgamePrep = true;
-      targetElevatorPosition = 12.0;
-      targetWristPosition = 0.0;
-      break;
-    case EndgamePrepLevel3:
-      endgamePrep = true;
-      targetElevatorPosition = 24.0;
-      targetWristPosition = 0.0;
-      break;
-    case EndgameDown:
-      endgameDown = true;
-      targetElevatorPosition = -1.0;
-      targetWristPosition = 0.0;
-      break;
     case Estop:
       unkownState = true;
       break;
@@ -85,14 +67,6 @@ public class GoToPosition extends CommandGroup {
       addParallel(new ElevatorSetPercentOutput(0.0));
       addSequential(new WristSetPercentOutput(0.0));
     } 
-    else if (endgamePrep) {
-      addParallel(new ElevatorSetPosition(targetElevatorPosition));
-      addSequential(new WristEndgame(targetWristPosition));
-    }
-    else if (endgameDown) {
-      addParallel(new ElevatorSetPercentOutput(targetElevatorPosition));
-      addSequential(new WristEndgame(targetWristPosition));
-    }
     else {
       addParallel(new ElevatorSetPosition(targetElevatorPosition));
       addSequential(new WristSetPosition(targetWristPosition));

@@ -1,14 +1,11 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.WristSetPercentOutput;
@@ -17,7 +14,6 @@ import frc.robot.tools.UnitConversion;
 public class Wrist extends Subsystem {
 
   private WPI_TalonSRX mMotor;
-  private DoubleSolenoid mSolenoid;
   private DigitalInput mBottomLimitSwitch;
   private DigitalInput mTopLimitSwitch;
 
@@ -30,11 +26,8 @@ public class Wrist extends Subsystem {
   private final int kSlotIdx = 0;
   private final int kPIDIdx = 0;
 
-  private boolean locked = false;
-
-  public Wrist (WPI_TalonSRX motor, DoubleSolenoid solenoid, DigitalInput bottomLimitSwitch, DigitalInput topLimitSwitch) {
+  public Wrist (WPI_TalonSRX motor, DigitalInput bottomLimitSwitch, DigitalInput topLimitSwitch) {
     mMotor = motor;
-    mSolenoid = solenoid;
     mBottomLimitSwitch = bottomLimitSwitch;
     mTopLimitSwitch = topLimitSwitch;
 
@@ -68,23 +61,14 @@ public class Wrist extends Subsystem {
 
   public static Wrist create() {
     WPI_TalonSRX mMotor = new WPI_TalonSRX(RobotMap.wristMotor);
-    DoubleSolenoid mSolenoid = new DoubleSolenoid(RobotMap.wristLockSolenoidForward, RobotMap.wristLockSolenoidReverse);
     DigitalInput mBottomLimitSwitch = new DigitalInput(RobotMap.wristBottomLimitSwitch);
     DigitalInput mTopLimitSwitch = new DigitalInput(RobotMap.wristTopLimitSwitch);
 
-    return new Wrist(mMotor, mSolenoid, mBottomLimitSwitch, mTopLimitSwitch);
+    return new Wrist(mMotor, mBottomLimitSwitch, mTopLimitSwitch);
   }
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new WristSetPercentOutput(0.0));
-  }
-
-  public boolean getLocked() {
-    return locked;
-  }
-
-  public void setLocked(boolean state) {
-    locked = state;
   }
 
   public boolean getTopLimitSwitch() {
@@ -104,10 +88,10 @@ public class Wrist extends Subsystem {
     mMotor.set(ControlMode.PercentOutput, output);
   }
 
-  public void setPositionInDegrees(double positionInDegrees, double arbFeedForward) {
+  public void setPositionInDegrees(double positionInDegrees) {
     double positionInSRXUnits = UnitConversion.convertPositionInDegreesToSRXUnits(positionInDegrees);
 
-    mMotor.set(ControlMode.MotionMagic, positionInSRXUnits, DemandType.ArbitraryFeedForward, arbFeedForward);
+    mMotor.set(ControlMode.MotionMagic, positionInSRXUnits);
   }
 
   public double getPositionInDegrees() {
@@ -122,12 +106,6 @@ public class Wrist extends Subsystem {
     double positionInDegrees = UnitConversion.convertSRXUnitsToDegrees(positionInSRXUnits);
 
     return positionInDegrees;
-  }
-
-  public double getActiveTrajectoryAccelerationInDegreesPerSecondSquared() { //TODO Figure out this math
-    double EncoderTicksPerDegree = UnitConversion.convertPositionInDegreesToSRXUnits(1.0);
-
-    return kMaxAcceleration * 10 / (EncoderTicksPerDegree * 386.09);
   }
 
   public double getVelocityInDegreesPerSecond() {
@@ -145,13 +123,5 @@ public class Wrist extends Subsystem {
     int positionInSRXUnits = (int) UnitConversion.convertPositionInDegreesToSRXUnits(positionInDegrees);
     
     mMotor.setSelectedSensorPosition(positionInSRXUnits);
-  }
-
-  public void lockRetract() {
-    mSolenoid.set(Value.kForward);
-  }
-
-  public void lockDeploy() {
-    mSolenoid.set(Value.kReverse);
   }
 }

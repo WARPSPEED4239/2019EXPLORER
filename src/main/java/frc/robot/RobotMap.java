@@ -9,15 +9,12 @@ public class RobotMap {
                     drivetrainRightSix = 6;
 
   public static int elevatorMotorOne = 1, //SRX's
-                    liftWheelsMotor = 2,
                     elevatorMotorTwo = 3,
                     wristMotor = 4,
                     
                     cargoIntakeMotor = 1, //SPX
 
-                    canifier = 1, //CANifiers
-
-                    pigeonIMU = 1; //Pigeon IMU
+                    canifier = 1; //CANifiers
 
   public static int liftBottomLimitSwitch = 2, //DIO
                     liftTop2To1LimitSwitch = 1,
@@ -29,8 +26,8 @@ public class RobotMap {
                     drivetrainShiftingSolenoidReverse = 1,
                     hatchGrabberSolenoidForward = 2,
                     hatchGrabberSolenoidReverse = 3,
-                    liftWheelsSolenoidForward = 4,
-                    liftWheelsSolenoidReverse = 5,
-                    wristLockSolenoidForward = 6,
-                    wristLockSolenoidReverse = 7;
+                    liftRodsFrontSolenoidForward = 4,
+                    liftRodsFrontSolenoidReverse = 5,
+                    liftRodBackSolenoidForward = 6,
+                    liftRodBackSolenoidReverse = 7;
 }

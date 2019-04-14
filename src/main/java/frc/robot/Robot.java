@@ -13,8 +13,8 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.DrivetrainShifting;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.HatchGrabber;
-import frc.robot.subsystems.LiftWheelsMotor;
-import frc.robot.subsystems.LiftWheelsPiston;
+import frc.robot.subsystems.LiftRodBack;
+import frc.robot.subsystems.LiftRodsFront;
 import frc.robot.subsystems.Wrist;
 import frc.robot.tools.RGBController;
 
@@ -24,8 +24,8 @@ public class Robot extends TimedRobot {
   public static Elevator m_elevator;
   public static HatchGrabber m_hatchGrabber;
   public static Drivetrain m_drivetrain;
-  public static LiftWheelsMotor m_liftWheelsMotor;
-  public static LiftWheelsPiston m_liftWheelsPiston;
+  public static LiftRodBack m_liftRodBack;
+  public static LiftRodsFront m_liftRodsFront;
   public static RGBController m_rgbController;
   public static Wrist m_wrist;
   public static OI m_oi;
@@ -39,8 +39,8 @@ public class Robot extends TimedRobot {
     m_drivetrainShifting = new DrivetrainShifting();
     m_elevator = Elevator.create();
     m_hatchGrabber = new HatchGrabber();
-    m_liftWheelsMotor = new LiftWheelsMotor();
-    m_liftWheelsPiston = new LiftWheelsPiston();
+    m_liftRodBack = new LiftRodBack();
+    m_liftRodsFront = new LiftRodsFront();
     m_rgbController = new RGBController(new CANifier(RobotMap.canifier));
     m_wrist = Wrist.create();
     m_oi = new OI();
@@ -70,7 +70,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Right Position (ft)", Robot.m_drivetrain.getRightEncoderPosition());
     SmartDashboard.putNumber("Left Velocity (ft/s)", Robot.m_drivetrain.getLeftEncoderVelocity());
     SmartDashboard.putNumber("Right Velocity (ft/s)", Robot.m_drivetrain.getRightEncoderVelocity());
-    SmartDashboard.putNumber("Gyro Yaw (deg)", Robot.m_drivetrain.getIMUYaw());
     
     SmartDashboard.putNumber("Elevator Position", m_elevator.getPositionInInches());
     SmartDashboard.putNumber("Elevator Velocity", m_elevator.getVelocityInInchesPerSecond());
@@ -86,7 +85,6 @@ public class Robot extends TimedRobot {
 
       SmartDashboard.putBoolean("Elevator Top 2 to 1 Limit Switch", m_elevator.getTop2To1LimitSwitch());
       SmartDashboard.putBoolean("Elevator Top 3 to 2 Limit Switch", m_elevator.getTop3To2LimitSwitch());
-      m_drivetrain.printAccelerations();
       
       if (m_oi.xbox.getPOV() == 0) {
         m_drivetrain.resetSensors();
@@ -113,8 +111,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    Robot.m_wrist.lockRetract();
-     
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
     }
@@ -127,7 +123,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    Robot.m_wrist.lockRetract();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
