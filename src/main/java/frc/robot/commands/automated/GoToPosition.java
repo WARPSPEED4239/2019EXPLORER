@@ -20,27 +20,27 @@ public class GoToPosition extends CommandGroup {
    switch (positions) {
     case HatchLevelOne:
       targetElevatorPosition = 0.0;
-      targetWristPosition = 90.0;
+      targetWristPosition = 88.0;
       break;
     case HatchLevelTwo:
       targetElevatorPosition = 30.0;
-      targetWristPosition = 90.0;
+      targetWristPosition = 88.0;
       break;
     case HatchLevelThree:
       targetElevatorPosition = 60.0;
-      targetWristPosition = 90.0;
+      targetWristPosition = 88.0;
       break;
     case CargoRocketOne:
-      targetElevatorPosition = 24.0;
+      targetElevatorPosition = 22.0;
       targetWristPosition = 0.0;
       break;
     case CargoRocketTwo:
-      targetElevatorPosition = 52.0;
+      targetElevatorPosition = 50.0;
       targetWristPosition = 0.0;
       break;
     case CargoRocketThree:
       targetElevatorPosition = 69.0;
-      targetWristPosition = 50.0;
+      targetWristPosition = 20.0;
       break;
     case CargoIntakeElevated:
       targetElevatorPosition = 7.0;
@@ -70,7 +70,7 @@ public class GoToPosition extends CommandGroup {
       break;
     case EndgameDown:
       endgameDown = true;
-      targetElevatorPosition = -0.5;
+      targetElevatorPosition = -1.0;
       targetWristPosition = 0.0;
       break;
     case Estop:

@@ -182,6 +182,6 @@ public class Drivetrain extends Subsystem {
   }
 
   public void driveWithVisionAssist(double move, double rotate) {
-    drive.curvatureDrive(move, rotate, false);
+    drive.arcadeDrive(move, rotate, false);
   }
 }

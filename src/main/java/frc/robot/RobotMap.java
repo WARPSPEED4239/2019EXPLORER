@@ -19,9 +19,9 @@ public class RobotMap {
 
                     pigeonIMU = 1; //Pigeon IMU
 
-  public static int liftBottomLimitSwitch = 0, //DIO
+  public static int liftBottomLimitSwitch = 2, //DIO
                     liftTop2To1LimitSwitch = 1,
-                    liftTop3To2LimitSwitch = 2,
+                    liftTop3To2LimitSwitch = 0, 
                     wristBottomLimitSwitch = 3,
                     wristTopLimitSwitch = 4;
 

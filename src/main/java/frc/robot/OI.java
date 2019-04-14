@@ -76,8 +76,8 @@ public class OI {
 		jButton2.whileHeld(new CargoIntakeIn());
 		jButton3.whenPressed(new HatchGrabberRetract());
 		jButton4.whenPressed(new HatchGrabberExtend());
-		jButton5.whenPressed(new GoToPosition(States.Positions.EndgamePrepLevel3)); //CHANGE TO LEVEL 2 IF NECCESSARY
-		jButton6.whenPressed(new GoToPosition(States.Positions.EndgameDown));
+		//jButton5.whenPressed(new GoToPosition(States.Positions.EndgamePrepLevel3)); //CHANGE TO LEVEL 2 IF NECCESSARY
+		//jButton6.whenPressed(new GoToPosition(States.Positions.EndgameDown));
 		jButton7.whileHeld(new WristSetPercentOutput(-0.8));
 		jButton8.whileHeld(new WristSetPercentOutput(0.8));
 		jButton9.whileHeld(new ElevatorSetPercentOutput(-0.6));

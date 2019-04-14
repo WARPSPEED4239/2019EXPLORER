@@ -23,11 +23,11 @@ public class WristEndgame extends Command {
   protected void execute() {
     double targetPosition = mPositionInDegrees;
     
-    if (targetPosition > 85 && !Robot.m_elevator.getBottomLimitSwitch()) {
-      targetPosition = 85;
-    }
+   // if (targetPosition > 85 && !Robot.m_elevator.getBottomLimitSwitch()) {
+  //    targetPosition = 85;
+//    }
 
-    if (Robot.m_wrist.getBottomLimitSwitch() && Robot.m_wrist.getVelocityInDegreesPerSecond() < -Constants.kEpsilon) {
+    if (Robot.m_wrist.getBottomLimitSwitch() /*&& Robot.m_wrist.getVelocityInDegreesPerSecond() < -Constants.kEpsilon*/) {
       Robot.m_wrist.setEncoderValueInDegrees(0.0);
       Robot.m_wrist.setPercentOutput(0.0);
       Robot.m_wrist.lockDeploy();

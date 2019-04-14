@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.CANifier;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -26,14 +25,14 @@ public class Wrist extends Subsystem {
   private final int kContinuousCurrentLimit = 30;
 
   private final int kMaxVelocity = 394; //275
-  private final int kMaxAcceleration = 520; //TUNE //275 //MAX = 788
+  private final int kMaxAcceleration = 520; //TUNE //275 //MAX = 788 //520
 
   private final int kSlotIdx = 0;
   private final int kPIDIdx = 0;
 
   private boolean locked = false;
 
-  public Wrist (WPI_TalonSRX motor, DoubleSolenoid solenoid, CANifier canifier, DigitalInput bottomLimitSwitch, DigitalInput topLimitSwitch) {
+  public Wrist (WPI_TalonSRX motor, DoubleSolenoid solenoid, DigitalInput bottomLimitSwitch, DigitalInput topLimitSwitch) {
     mMotor = motor;
     mSolenoid = solenoid;
     mBottomLimitSwitch = bottomLimitSwitch;
@@ -47,6 +46,7 @@ public class Wrist extends Subsystem {
 
     mMotor.configPeakCurrentLimit(kPeakCurrentLimit);
     mMotor.configContinuousCurrentLimit(kContinuousCurrentLimit);
+    mMotor.enableCurrentLimit(true);
 
     mMotor.setInverted(true);
     mMotor.setSensorPhase(false);
@@ -57,11 +57,10 @@ public class Wrist extends Subsystem {
     mMotor.configPeakOutputReverse(-1.0);
 
     mMotor.selectProfileSlot(kSlotIdx, kPIDIdx);
-    mMotor.config_IntegralZone(kSlotIdx, 50);
-    mMotor.config_kF(kSlotIdx, 1023.0 / 550.0);
+    mMotor.config_kF(kSlotIdx, 1023.0 / 550.0); //1023.0 / 550.0
     mMotor.config_kP(kSlotIdx, 5.0);
     mMotor.config_kI(kSlotIdx, 0.0);
-    mMotor.config_kD(kSlotIdx, 0.0);
+    mMotor.config_kD(kSlotIdx, 50.0);
 
     mMotor.configMotionCruiseVelocity(kMaxVelocity);
     mMotor.configMotionAcceleration(kMaxAcceleration);
@@ -70,11 +69,10 @@ public class Wrist extends Subsystem {
   public static Wrist create() {
     WPI_TalonSRX mMotor = new WPI_TalonSRX(RobotMap.wristMotor);
     DoubleSolenoid mSolenoid = new DoubleSolenoid(RobotMap.wristLockSolenoidForward, RobotMap.wristLockSolenoidReverse);
-    CANifier mCanifier = new CANifier(RobotMap.canifier);
     DigitalInput mBottomLimitSwitch = new DigitalInput(RobotMap.wristBottomLimitSwitch);
     DigitalInput mTopLimitSwitch = new DigitalInput(RobotMap.wristTopLimitSwitch);
 
-    return new Wrist(mMotor, mSolenoid, mCanifier, mBottomLimitSwitch, mTopLimitSwitch);
+    return new Wrist(mMotor, mSolenoid, mBottomLimitSwitch, mTopLimitSwitch);
   }
   @Override
   public void initDefaultCommand() {

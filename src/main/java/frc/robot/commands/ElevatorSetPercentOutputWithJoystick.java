@@ -14,6 +14,7 @@ public class ElevatorSetPercentOutputWithJoystick extends Command {
 
   @Override
   protected void initialize() {
+    
   }
 
   @Override
