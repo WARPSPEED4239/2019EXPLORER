@@ -20,7 +20,7 @@ public class Elevator extends Subsystem {
   private final DigitalInput mTop2To1;
   private final DigitalInput mTop3To2;
 
-  private final int kPeakCurrentLimit = 45;
+  private final int kPeakCurrentLimit = 60;
   private final int kContinuousCurrentLimit = 40;
 
   private final int kMaxVelocity = 3312; //2000
@@ -47,9 +47,14 @@ public class Elevator extends Subsystem {
     mMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
   
     mMaster.setNeutralMode(NeutralMode.Brake);
+    mSlave.setNeutralMode(NeutralMode.Brake);
 
     mMaster.configPeakCurrentLimit(kPeakCurrentLimit);
+    mSlave.configPeakCurrentLimit(kPeakCurrentLimit);
     mMaster.configContinuousCurrentLimit(kContinuousCurrentLimit);
+    mSlave.configContinuousCurrentLimit(kContinuousCurrentLimit);
+    mMaster.enableCurrentLimit(true);
+    mSlave.enableCurrentLimit(true);
 
     mMaster.setInverted(true);
     mMaster.setSensorPhase(false);
@@ -58,6 +63,11 @@ public class Elevator extends Subsystem {
     mMaster.configNominalOutputReverse(0.0);
     mMaster.configPeakOutputForward(1.0);
     mMaster.configPeakOutputReverse(-1.0);
+
+    mSlave.configNominalOutputForward(0.0);
+    mSlave.configNominalOutputReverse(0.0);
+    mSlave.configPeakOutputForward(1.0);
+    mSlave.configPeakOutputReverse(-1.0);
 
     mMaster.selectProfileSlot(kSlotIdx, kPIDIdx);
     mMaster.config_kF(kSlotIdx, 1023.0 / 4000.0);
@@ -107,6 +117,23 @@ public class Elevator extends Subsystem {
     double positionInInches = UnitConversion.convertRotationsToInches(positionInRotations, kDrumDiameter);
     
     return positionInInches;
+  }
+
+  public double getActiveTrajectoryAccelerationInInchesPerSecondSquared() {
+    double EncoderTicksPerRotation = UnitConversion.convertPositionInInchesToRotations(1.0, kDrumDiameter);
+    double EncoderTicksPerInch = UnitConversion.convertRotationsToSRXUnits(EncoderTicksPerRotation);
+    double activeTrajectoryAccelerationInInchesPerSecondSquared;
+
+    if (getVelocityInInchesPerSecond() > 5.0) {
+      activeTrajectoryAccelerationInInchesPerSecondSquared = kMaxAcceleration * 10.0 / (EncoderTicksPerInch * 386.09); // 10 ~ Gravity, 386.09 = Gravity Constant
+    }
+    else if (getVelocityInInchesPerSecond() < -5.0) {
+      activeTrajectoryAccelerationInInchesPerSecondSquared = -kMaxAcceleration * 10.0 / (EncoderTicksPerInch * 386.09); // 10 ~ Gravity, 386.09 = Gravity Constant
+    }
+    else {
+      activeTrajectoryAccelerationInInchesPerSecondSquared = 0.0;
+    }
+    return activeTrajectoryAccelerationInInchesPerSecondSquared;
   }
 
   public void setPercentOutput(double output) {

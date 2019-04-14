@@ -18,9 +18,14 @@ public class DrivetrainArcadeDrive extends Command {
   @Override
   protected void execute() {
     double move = -Robot.m_oi.xbox.getTriggerAxis(Hand.kRight) + Robot.m_oi.xbox.getTriggerAxis(Hand.kLeft);
-    //double move = (-(Math.pow(Robot.m_oi.xbox.getTriggerAxis(Hand.kRight), 2)) * 0.6) + (Math.pow(Robot.m_oi.xbox.getTriggerAxis(Hand.kLeft), 2) * 0.6);
-
     double rotate = -(.533333 * Math.pow(Robot.m_oi.xbox.getX(Hand.kLeft), 3) + .466666 *  Robot.m_oi.xbox.getX(Hand.kLeft));
+
+    if (rotate > 0.85){
+      rotate = 0.85;
+    }
+    else if (rotate < -0.85) {
+      rotate = -0.85;
+    }
 
     Robot.m_drivetrain.arcadeDrive(move, rotate);
   }

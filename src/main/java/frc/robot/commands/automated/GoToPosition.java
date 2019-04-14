@@ -14,32 +14,33 @@ public class GoToPosition extends CommandGroup {
     double targetElevatorPosition = 0.0;
     double targetWristPosition = 0.0;
     boolean unkownState = false;
-    boolean endgame = false;
+    boolean endgamePrep = false;
+    boolean endgameDown = false;
 
    switch (positions) {
     case HatchLevelOne:
       targetElevatorPosition = 0.0;
-      targetWristPosition = 90.0;
+      targetWristPosition = 88.0;
       break;
     case HatchLevelTwo:
       targetElevatorPosition = 30.0;
-      targetWristPosition = 90.0;
+      targetWristPosition = 88.0;
       break;
     case HatchLevelThree:
       targetElevatorPosition = 60.0;
-      targetWristPosition = 90.0;
+      targetWristPosition = 88.0;
       break;
     case CargoRocketOne:
-      targetElevatorPosition = 24.0;
+      targetElevatorPosition = 22.0;
       targetWristPosition = 0.0;
       break;
     case CargoRocketTwo:
-      targetElevatorPosition = 52.0;
+      targetElevatorPosition = 50.0;
       targetWristPosition = 0.0;
       break;
     case CargoRocketThree:
       targetElevatorPosition = 69.0;
-      targetWristPosition = 50.0;
+      targetWristPosition = 20.0;
       break;
     case CargoIntakeElevated:
       targetElevatorPosition = 7.0;
@@ -57,13 +58,19 @@ public class GoToPosition extends CommandGroup {
       targetElevatorPosition = 0.0;
       targetWristPosition = 146.3375;
       break;
-    case EndgamePrep:
-      targetElevatorPosition = 12.0; //12.0 for Level 2, 24.0 for Level 3
+    case EndgamePrepLevel2:
+      endgamePrep = true;
+      targetElevatorPosition = 12.0;
+      targetWristPosition = 0.0;
+      break;
+    case EndgamePrepLevel3:
+      endgamePrep = true;
+      targetElevatorPosition = 24.0;
       targetWristPosition = 0.0;
       break;
     case EndgameDown:
-      endgame = true;
-      targetElevatorPosition = -0.7;
+      endgameDown = true;
+      targetElevatorPosition = -1.0;
       targetWristPosition = 0.0;
       break;
     case Estop:
@@ -78,7 +85,11 @@ public class GoToPosition extends CommandGroup {
       addParallel(new ElevatorSetPercentOutput(0.0));
       addSequential(new WristSetPercentOutput(0.0));
     } 
-    else if (endgame) {
+    else if (endgamePrep) {
+      addParallel(new ElevatorSetPosition(targetElevatorPosition));
+      addSequential(new WristEndgame(targetWristPosition));
+    }
+    else if (endgameDown) {
       addParallel(new ElevatorSetPercentOutput(targetElevatorPosition));
       addSequential(new WristEndgame(targetWristPosition));
     }

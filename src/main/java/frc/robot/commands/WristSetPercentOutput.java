@@ -20,11 +20,11 @@ public class WristSetPercentOutput extends Command {
 
   @Override
   protected void execute() {
-    if (Robot.m_wrist.getBottomLimitSwitch() && mOutput > 0.0) {
+    /*if (Robot.m_wrist.getBottomLimitSwitch() && mOutput > 0.0) {
       mOutput = 0.0;
     } else if (Robot.m_wrist.getTopLimitSwitch() && mOutput < 0.0) {
       mOutput = 0.0;
-    }
+    }*/
     Robot.m_wrist.setPercentOutput(mOutput);
   }
 

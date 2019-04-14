@@ -160,7 +160,7 @@ public class Drivetrain extends Subsystem {
     return 2.0 * Math.PI * 0.25 * input / 7.08 / 60; 
   }
 
-  public double getIMUAccelerationYInMetersPerSecondSquared() {
+  public double getIMUAccelerationYInMetersPerSecondSquared() { //TODO Test this to see if it is too noisy
     short[] ba_xyz = new short[3];
     IMU.getBiasedAccelerometer(ba_xyz);
 
@@ -182,6 +182,6 @@ public class Drivetrain extends Subsystem {
   }
 
   public void driveWithVisionAssist(double move, double rotate) {
-    drive.curvatureDrive(move, rotate, false);
+    drive.arcadeDrive(move, rotate, false);
   }
 }

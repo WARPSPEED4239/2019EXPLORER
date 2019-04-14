@@ -19,11 +19,11 @@ public class ElevatorSetPercentOutput extends Command {
 
   @Override
   protected void execute() {
-    if (Robot.m_elevator.getBottomLimitSwitch() && mOutput < 0.0) {
+    /*if (Robot.m_elevator.getBottomLimitSwitch() && mOutput < 0.0) {
       mOutput = 0.0;
     } else if (Robot.m_elevator.getTop2To1LimitSwitch() && Robot.m_elevator.getTop3To2LimitSwitch() && mOutput > 0.0) {
       mOutput = 0.0;
-    }
+    }*/
 
     Robot.m_elevator.setPercentOutput(mOutput);
   }
