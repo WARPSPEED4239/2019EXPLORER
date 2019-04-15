@@ -65,6 +65,13 @@ public class Drivetrain extends Subsystem {
     rightSlave1.setOpenLoopRampRate(kRampRate);
     rightSlave2.setOpenLoopRampRate(kRampRate);
 
+    leftMaster.burnFlash();
+    leftSlave1.burnFlash();
+    leftSlave2.burnFlash();
+    rightMaster.burnFlash();
+    rightSlave1.burnFlash();
+    rightSlave2.burnFlash();
+    
     resetSensors();
   }
 
