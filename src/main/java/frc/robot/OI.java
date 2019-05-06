@@ -37,7 +37,7 @@ public class OI {
 		xButtonY = new JoystickButton(xbox, 4);
 		xButtonLeftBumper = new JoystickButton(xbox, 5);
 		xButtonRightBumper = new JoystickButton(xbox, 6);
-		xButtonLeftBumper = new JoystickButton(xbox, 9);
+		xButtonLeftStick = new JoystickButton(xbox, 9);
 		xButtonRightStick = new JoystickButton(xbox, 10);
 
 		jButton1 = new JoystickButton(joystick, 1);
@@ -70,7 +70,6 @@ public class OI {
 		xButtonX.whileHeld(new LiftRodBackExtend());
 		xButtonY.whileHeld(new LiftRodsFrontExtend());
 		xButtonLeftStick.whileHeld(new DrivetrainVisionAssist());
-
 		
 		jButton1.whileHeld(new CargoIntakeOut());
 		jButton2.whileHeld(new CargoIntakeIn());

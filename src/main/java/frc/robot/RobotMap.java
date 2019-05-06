@@ -26,8 +26,8 @@ public class RobotMap {
                     drivetrainShiftingSolenoidReverse = 1,
                     hatchGrabberSolenoidForward = 2,
                     hatchGrabberSolenoidReverse = 3,
-                    liftRodsFrontSolenoidForward = 4,
-                    liftRodsFrontSolenoidReverse = 5,
-                    liftRodBackSolenoidForward = 6,
-                    liftRodBackSolenoidReverse = 7;
+                    liftRodBackSolenoidForward = 4,
+                    liftRodBackSolenoidReverse = 5,
+                    liftRodsFrontSolenoidForward = 6,
+                    liftRodsFrontSolenoidReverse = 7;
 }
