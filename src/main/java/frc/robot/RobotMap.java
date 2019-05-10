@@ -22,6 +22,8 @@ public class RobotMap {
                     wristBottomLimitSwitch = 3,
                     wristTopLimitSwitch = 4;
 
+  public static int pressueSensor = 0; //Analog In
+
   public static int drivetrainShiftingSolenoidForward = 0, //Solenoids
                     drivetrainShiftingSolenoidReverse = 1,
                     hatchGrabberSolenoidForward = 2,
@@ -30,4 +32,6 @@ public class RobotMap {
                     liftRodBackSolenoidReverse = 5,
                     liftRodsFrontSolenoidForward = 6,
                     liftRodsFrontSolenoidReverse = 7;
+
+  public static int compressor = 0; //Compressor
 }

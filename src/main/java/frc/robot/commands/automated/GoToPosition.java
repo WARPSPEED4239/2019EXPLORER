@@ -53,7 +53,7 @@ public class GoToPosition extends CommandGroup {
       break;
     case Stored:
       targetElevatorPosition = 0.0;
-      targetWristPosition = 146.3375;
+      targetWristPosition = 146.3375; //TODO Will need to tune this number
       break;
     case Estop:
       unkownState = true;

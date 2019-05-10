@@ -4,6 +4,8 @@ import com.ctre.phoenix.CANifier;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -56,7 +58,7 @@ public class Robot extends TimedRobot {
       Robot.m_wrist.setEncoderValueInDegrees(0.0);
     }
     else if (Robot.m_wrist.getTopLimitSwitch()) {
-      Robot.m_wrist.setEncoderValueInDegrees(146.3378906);
+      Robot.m_wrist.setEncoderValueInDegrees(146.3378906); //TODO Will need to tune this number
     }
 
     if (Robot.m_elevator.getBottomLimitSwitch()) {
@@ -81,6 +83,16 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Wrist Bottom Limit Switch", m_wrist.getBottomLimitSwitch());
     SmartDashboard.putBoolean("Wrist Top Limit Switch", m_wrist.getTopLimitSwitch());
     
+    SmartDashboard.putNumber("Tank Pressure", m_hatchGrabber.getTankPressure());
+    SmartDashboard.putNumber("Pressure Sensor Volts", m_hatchGrabber.getPressureSensorVolts());
+    SmartDashboard.putBoolean("Compressor Status", m_hatchGrabber.getCompressorStatus());
+
+    SmartDashboard.putNumber("Match Time", DriverStation.getInstance().getMatchTime());
+    SmartDashboard.putBoolean("DS Attached", DriverStation.getInstance().isDSAttached());
+    SmartDashboard.putBoolean("FMS Attached", DriverStation.getInstance().isFMSAttached());
+    SmartDashboard.putBoolean("Browned Out", RobotController.isBrownedOut());
+    SmartDashboard.putBoolean("Sys Active", RobotController.isSysActive());
+
     if (Constants.kCodeTestingState) {
 
       SmartDashboard.putBoolean("Elevator Top 2 to 1 Limit Switch", m_elevator.getTop2To1LimitSwitch());
@@ -119,6 +131,16 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+
+    if (m_hatchGrabber.getTankPressure() <= 65.0 && RobotController.getBatteryVoltage() >= 12.2) {
+      m_hatchGrabber.turnOnCompressor();
+    } else if (m_hatchGrabber.getTankPressure() < 55.0 && RobotController.getBatteryVoltage() > 11.6 && RobotController.getBatteryVoltage() < 12.2) {
+      m_hatchGrabber.turnOnCompressor();
+    } else if (m_hatchGrabber.getTankPressure() >= 55.0 && RobotController.getBatteryVoltage() > 11.6 && RobotController.getBatteryVoltage() < 12.0) {
+      m_hatchGrabber.turnOffCompressor();
+    } else if (m_hatchGrabber.getTankPressure() >= 80.0 || RobotController.getBatteryVoltage() <= 11.6) {
+      m_hatchGrabber.turnOffCompressor();
+    }
   }
 
   @Override
@@ -131,9 +153,20 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+
+    if (m_hatchGrabber.getTankPressure() <= 65.0 && RobotController.getBatteryVoltage() >= 12.2) {
+      m_hatchGrabber.turnOnCompressor();
+    } else if (m_hatchGrabber.getTankPressure() < 55.0 && RobotController.getBatteryVoltage() > 11.6 && RobotController.getBatteryVoltage() < 12.2) {
+      m_hatchGrabber.turnOnCompressor();
+    } else if (m_hatchGrabber.getTankPressure() >= 55.0 && RobotController.getBatteryVoltage() > 11.6 && RobotController.getBatteryVoltage() < 12.0) {
+      m_hatchGrabber.turnOffCompressor();
+    } else if (m_hatchGrabber.getTankPressure() >= 80.0 || RobotController.getBatteryVoltage() <= 11.6) {
+      m_hatchGrabber.turnOffCompressor();
+    }
   }
 
   @Override
   public void testPeriodic() {
+    m_hatchGrabber.turnOnCompressor();
   }
 }
