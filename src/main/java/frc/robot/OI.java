@@ -9,7 +9,6 @@ import frc.robot.commands.CargoIntakeOut;
 import frc.robot.commands.DrivetrainShiftingHighGear;
 import frc.robot.commands.DrivetrainShiftingLowGear;
 import frc.robot.commands.ElevatorSetPercentOutput;
-import frc.robot.commands.HatchGrabberGrab;
 import frc.robot.commands.HatchGrabberRelease;
 import frc.robot.commands.LiftRodBackExtend;
 import frc.robot.commands.LiftRodsFrontExtend;
@@ -73,8 +72,7 @@ public class OI {
 		
 		jButton1.whileHeld(new CargoIntakeOut());
 		jButton2.whileHeld(new CargoIntakeIn());
-		jButton3.whenPressed(new HatchGrabberRelease());
-		jButton4.whenPressed(new HatchGrabberGrab());
+		jButton3.whileHeld(new HatchGrabberRelease());
 		jButton7.whileHeld(new WristSetPercentOutput(-0.8));
 		jButton8.whileHeld(new WristSetPercentOutput(0.8));
 		jButton9.whileHeld(new ElevatorSetPercentOutput(-0.6));

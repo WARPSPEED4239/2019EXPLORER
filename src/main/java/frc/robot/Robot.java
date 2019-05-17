@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
       Robot.m_wrist.setEncoderValueInDegrees(0.0);
     }
     else if (Robot.m_wrist.getTopLimitSwitch()) {
-      Robot.m_wrist.setEncoderValueInDegrees(146.3378906); //TODO Will need to tune this number
+      Robot.m_wrist.setEncoderValueInDegrees(145.7226);
     }
 
     if (Robot.m_elevator.getBottomLimitSwitch()) {
@@ -135,7 +135,7 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
 
-    if (m_PneumaticController.getTankPressure() <= 65.0 && RobotController.getBatteryVoltage() >= 12.2) {
+    /*if (m_PneumaticController.getTankPressure() <= 65.0 && RobotController.getBatteryVoltage() >= 12.2) {
       m_PneumaticController.turnOnCompressor();
     } else if (m_PneumaticController.getTankPressure() < 55.0 && RobotController.getBatteryVoltage() > 11.6 && RobotController.getBatteryVoltage() < 12.2) {
       m_PneumaticController.turnOnCompressor();
@@ -143,7 +143,7 @@ public class Robot extends TimedRobot {
       m_PneumaticController.turnOffCompressor();
     } else if (m_PneumaticController.getTankPressure() >= 80.0 || RobotController.getBatteryVoltage() <= 11.6) {
       m_PneumaticController.turnOffCompressor();
-    }
+    }*/
   }
 
   @Override
@@ -157,7 +157,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
 
-    if (m_PneumaticController.getTankPressure() <= 65.0 && RobotController.getBatteryVoltage() >= 12.2) {
+    /*if (m_PneumaticController.getTankPressure() <= 65.0 && RobotController.getBatteryVoltage() >= 12.2) {
       m_PneumaticController.turnOnCompressor();
     } else if (m_PneumaticController.getTankPressure() < 55.0 && RobotController.getBatteryVoltage() > 11.6 && RobotController.getBatteryVoltage() < 12.2) {
       m_PneumaticController.turnOnCompressor();
@@ -165,7 +165,8 @@ public class Robot extends TimedRobot {
       m_PneumaticController.turnOffCompressor();
     } else if (m_PneumaticController.getTankPressure() >= 80.0 || RobotController.getBatteryVoltage() <= 11.6) {
       m_PneumaticController.turnOffCompressor();
-    }
+    }*/
+
   }
 
   @Override
