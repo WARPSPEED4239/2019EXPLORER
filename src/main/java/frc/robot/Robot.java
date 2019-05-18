@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
   public static Drivetrain m_drivetrain;
   public static LiftRodBack m_liftRodBack;
   public static LiftRodsFront m_liftRodsFront;
-  public static PneumaticController m_PneumaticController;
+  public static PneumaticController m_pneumaticController;
   public static RGBController m_rgbController;
   public static Wrist m_wrist;
   public static OI m_oi;
@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
     m_hatchGrabber = new HatchGrabber();
     m_liftRodBack = new LiftRodBack();
     m_liftRodsFront = new LiftRodsFront();
-    m_PneumaticController = PneumaticController.create();
+    m_pneumaticController = PneumaticController.create();
     m_rgbController = new RGBController(new CANifier(RobotMap.canifier));
     m_wrist = Wrist.create();
     m_oi = new OI();
@@ -86,9 +86,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Wrist Bottom Limit Switch", m_wrist.getBottomLimitSwitch());
     SmartDashboard.putBoolean("Wrist Top Limit Switch", m_wrist.getTopLimitSwitch());
     
-    SmartDashboard.putNumber("Tank Pressure", m_PneumaticController.getTankPressure());
-    SmartDashboard.putNumber("Pressure Sensor Volts", m_PneumaticController.getPressureSensorVolts());
-    SmartDashboard.putBoolean("Compressor Status", m_PneumaticController.getCompressorStatus());
+    SmartDashboard.putNumber("Tank Pressure", m_pneumaticController.getTankPressure());
+    SmartDashboard.putNumber("Pressure Sensor Volts", m_pneumaticController.getPressureSensorVolts());
+    SmartDashboard.putBoolean("Compressor Status", m_pneumaticController.getCompressorStatus());
 
     SmartDashboard.putNumber("Match Time", DriverStation.getInstance().getMatchTime());
     SmartDashboard.putBoolean("DS Attached", DriverStation.getInstance().isDSAttached());
@@ -135,14 +135,20 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
 
-    /*if (m_PneumaticController.getTankPressure() <= 65.0 && RobotController.getBatteryVoltage() >= 12.2) {
-      m_PneumaticController.turnOnCompressor();
-    } else if (m_PneumaticController.getTankPressure() < 55.0 && RobotController.getBatteryVoltage() > 11.6 && RobotController.getBatteryVoltage() < 12.2) {
-      m_PneumaticController.turnOnCompressor();
-    } else if (m_PneumaticController.getTankPressure() >= 55.0 && RobotController.getBatteryVoltage() > 11.6 && RobotController.getBatteryVoltage() < 12.0) {
-      m_PneumaticController.turnOffCompressor();
-    } else if (m_PneumaticController.getTankPressure() >= 80.0 || RobotController.getBatteryVoltage() <= 11.6) {
-      m_PneumaticController.turnOffCompressor();
+    if (m_pneumaticController.getTankPressure() <= 65.0) {
+      m_pneumaticController.turnOnCompressor();
+    } else if (m_pneumaticController.getTankPressure() >= 80.0) {
+      m_pneumaticController.turnOffCompressor();
+    }
+
+    /*if (m_pneumaticController.getTankPressure() <= 65.0 && RobotController.getBatteryVoltage() >= 12.2) {
+      m_pneumaticController.turnOnCompressor();
+    } else if (m_pneumaticController.getTankPressure() < 55.0 && RobotController.getBatteryVoltage() > 11.6 && RobotController.getBatteryVoltage() < 12.2) {
+      m_pneumaticController.turnOnCompressor();
+    } else if (m_pneumaticController.getTankPressure() >= 55.0 && RobotController.getBatteryVoltage() > 11.6 && RobotController.getBatteryVoltage() < 12.0) {
+      m_pneumaticController.turnOffCompressor();
+    } else if (m_pneumaticController.getTankPressure() >= 80.0 || RobotController.getBatteryVoltage() <= 11.6) {
+      m_pneumaticController.turnOffCompressor();
     }*/
   }
 
@@ -157,20 +163,27 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
 
-    /*if (m_PneumaticController.getTankPressure() <= 65.0 && RobotController.getBatteryVoltage() >= 12.2) {
-      m_PneumaticController.turnOnCompressor();
-    } else if (m_PneumaticController.getTankPressure() < 55.0 && RobotController.getBatteryVoltage() > 11.6 && RobotController.getBatteryVoltage() < 12.2) {
-      m_PneumaticController.turnOnCompressor();
-    } else if (m_PneumaticController.getTankPressure() >= 55.0 && RobotController.getBatteryVoltage() > 11.6 && RobotController.getBatteryVoltage() < 12.0) {
-      m_PneumaticController.turnOffCompressor();
-    } else if (m_PneumaticController.getTankPressure() >= 80.0 || RobotController.getBatteryVoltage() <= 11.6) {
-      m_PneumaticController.turnOffCompressor();
-    }*/
+    if (m_pneumaticController.getTankPressure() <= 65.0) {
+      m_pneumaticController.turnOnCompressor();
+    } else if (m_pneumaticController.getTankPressure() >= 80.0) {
+      m_pneumaticController.turnOffCompressor();
+    }
 
+    //TODO Test compressor code above and below
+
+    /*if (m_pneumaticController.getTankPressure() <= 65.0 && RobotController.getBatteryVoltage() >= 12.2) {
+      m_pneumaticController.turnOnCompressor();
+    } else if (m_pneumaticController.getTankPressure() < 55.0 && RobotController.getBatteryVoltage() > 11.6 && RobotController.getBatteryVoltage() < 12.2) {
+      m_pneumaticController.turnOnCompressor();
+    } else if (m_pneumaticController.getTankPressure() >= 55.0 && RobotController.getBatteryVoltage() > 11.6 && RobotController.getBatteryVoltage() < 12.0) {
+      m_pneumaticController.turnOffCompressor();
+    } else if (m_pneumaticController.getTankPressure() >= 80.0 || RobotController.getBatteryVoltage() <= 11.6) {
+      m_pneumaticController.turnOffCompressor();
+    }*/
   }
 
   @Override
   public void testPeriodic() {
-    m_PneumaticController.turnOnCompressor();
+    m_pneumaticController.turnOnCompressor();
   }
 }
