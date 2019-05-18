@@ -37,7 +37,7 @@ public class PneumaticController {
     }
 
     public double getTankPressure() {
-        return SLOPE * (mPressureSensor.getVoltage() / DEFAULT_VOLTS) + Y_INTERCEPT; // TODO Tune this equation to 65 PSI
+        return SLOPE * (mPressureSensor.getVoltage() / DEFAULT_VOLTS) + Y_INTERCEPT;
     }
 
     public double getPressureSensorVolts() {

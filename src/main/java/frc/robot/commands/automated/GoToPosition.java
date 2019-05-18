@@ -16,7 +16,7 @@ public class GoToPosition extends CommandGroup {
 
    switch (positions) {
     case HatchLevelOne:
-      targetElevatorPosition = 0.0;
+      targetElevatorPosition = 2.0;
       targetWristPosition = 0.0;
       break;
     case HatchLevelTwo:
