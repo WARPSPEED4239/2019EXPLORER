@@ -3,18 +3,18 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftWheelsMotorReverse extends Command {
-  public LiftWheelsMotorReverse() {
-    requires(Robot.m_liftWheelsMotor);
+public class HatchGrabberRelease extends Command {
+  public HatchGrabberRelease() {
+    requires(Robot.m_hatchGrabber);
   }
 
   @Override
   protected void initialize() {
+    Robot.m_hatchGrabber.retract();
   }
 
   @Override
   protected void execute() {
-    Robot.m_liftWheelsMotor.reverse();
   }
 
   @Override
@@ -28,5 +28,6 @@ public class LiftWheelsMotorReverse extends Command {
 
   @Override
   protected void interrupted() {
+    end();
   }
 }

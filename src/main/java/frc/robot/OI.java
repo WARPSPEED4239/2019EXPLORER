@@ -9,11 +9,9 @@ import frc.robot.commands.CargoIntakeOut;
 import frc.robot.commands.DrivetrainShiftingHighGear;
 import frc.robot.commands.DrivetrainShiftingLowGear;
 import frc.robot.commands.ElevatorSetPercentOutput;
-import frc.robot.commands.HatchGrabberExtend;
-import frc.robot.commands.HatchGrabberRetract;
-import frc.robot.commands.LiftWheelsMotorForward;
-import frc.robot.commands.LiftWheelsMotorReverse;
-import frc.robot.commands.LiftWheelsPistonDown;
+import frc.robot.commands.HatchGrabberRelease;
+import frc.robot.commands.LiftRodBackExtend;
+import frc.robot.commands.LiftRodsFrontExtend;
 import frc.robot.commands.WristSetPercentOutput;
 import frc.robot.commands.automated.DrivetrainVisionAssist;
 import frc.robot.commands.automated.GoToPosition;
@@ -23,7 +21,7 @@ public class OI {
 	public Joystick joystick = new Joystick(1);
 	public Joystick board = new Joystick(2);
 
-	public JoystickButton xButtonA, xButtonB, xButtonX, xButtonY, xButtonLeftBumper, xButtonRightBumper;
+	public JoystickButton xButtonA, xButtonB, xButtonX, xButtonY, xButtonLeftBumper, xButtonRightBumper, xButtonLeftStick, xButtonRightStick;
 
 	public JoystickButton jButton1, jButton2, jButton3, jButton4, jButton5, jButton6, jButton7, jButton8, jButton9,
 			jButton10, jButton11, jButton12;
@@ -38,6 +36,8 @@ public class OI {
 		xButtonY = new JoystickButton(xbox, 4);
 		xButtonLeftBumper = new JoystickButton(xbox, 5);
 		xButtonRightBumper = new JoystickButton(xbox, 6);
+		xButtonLeftStick = new JoystickButton(xbox, 9);
+		xButtonRightStick = new JoystickButton(xbox, 10);
 
 		jButton1 = new JoystickButton(joystick, 1);
 		jButton2 = new JoystickButton(joystick, 2);
@@ -66,18 +66,13 @@ public class OI {
 
 		xButtonA.whenPressed(new DrivetrainShiftingLowGear());
 		xButtonB.whenPressed(new DrivetrainShiftingHighGear());
-		xButtonX.toggleWhenPressed(new LiftWheelsPistonDown());
-		xButtonY.whileHeld(new DrivetrainVisionAssist());
-		xButtonLeftBumper.whileHeld(new LiftWheelsMotorForward());
-		xButtonRightBumper.whileHeld(new LiftWheelsMotorReverse());
-
+		xButtonX.whileHeld(new LiftRodBackExtend());
+		xButtonY.whileHeld(new LiftRodsFrontExtend());
+		xButtonLeftStick.whileHeld(new DrivetrainVisionAssist());
 		
 		jButton1.whileHeld(new CargoIntakeOut());
 		jButton2.whileHeld(new CargoIntakeIn());
-		jButton3.whenPressed(new HatchGrabberRetract());
-		jButton4.whenPressed(new HatchGrabberExtend());
-		//jButton5.whenPressed(new GoToPosition(States.Positions.EndgamePrepLevel3)); //CHANGE TO LEVEL 2 IF NECCESSARY
-		//jButton6.whenPressed(new GoToPosition(States.Positions.EndgameDown));
+		jButton3.whileHeld(new HatchGrabberRelease());
 		jButton7.whileHeld(new WristSetPercentOutput(-0.8));
 		jButton8.whileHeld(new WristSetPercentOutput(0.8));
 		jButton9.whileHeld(new ElevatorSetPercentOutput(-0.6));

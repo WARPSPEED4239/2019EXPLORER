@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.sensors.PigeonIMU;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -10,13 +9,10 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.DrivetrainArcadeDrive;
 
 public class Drivetrain extends Subsystem {
-  private double[] ypr = new double[3];
-
   private final int kCurrentLimit = 40;
 
   private final double kRampRate = 0.2;
@@ -27,8 +23,6 @@ public class Drivetrain extends Subsystem {
   private CANSparkMax rightMaster = new CANSparkMax(RobotMap.drivetrainRightFour, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax rightSlave1 = new CANSparkMax(RobotMap.drivetrainRightFive, CANSparkMaxLowLevel.MotorType.kBrushless);
   private CANSparkMax rightSlave2 = new CANSparkMax(RobotMap.drivetrainRightSix, CANSparkMaxLowLevel.MotorType.kBrushless);
-
-  private PigeonIMU IMU = new PigeonIMU(RobotMap.pigeonIMU);
 
   private CANEncoder leftEncoder = new CANEncoder(leftMaster);
   private CANEncoder rightEncoder = new CANEncoder(rightMaster);
@@ -71,6 +65,13 @@ public class Drivetrain extends Subsystem {
     rightSlave1.setOpenLoopRampRate(kRampRate);
     rightSlave2.setOpenLoopRampRate(kRampRate);
 
+    leftMaster.burnFlash();
+    leftSlave1.burnFlash();
+    leftSlave2.burnFlash();
+    rightMaster.burnFlash();
+    rightSlave1.burnFlash();
+    rightSlave2.burnFlash();
+    
     resetSensors();
   }
 
@@ -141,15 +142,9 @@ public class Drivetrain extends Subsystem {
     return convertVelocity(input);
   }
 
-  public double getIMUYaw() {
-    IMU.getYawPitchRoll(ypr);
-    return ypr[0];
-  }
-
   public void resetSensors() {
     leftEncoder.setPosition(0.0);
     rightEncoder.setPosition(0.0);
-    IMU.setYaw(0.0);
   }
 
   public double convertPosition(double input) {
@@ -158,27 +153,6 @@ public class Drivetrain extends Subsystem {
 
   public double convertVelocity(double input) {
     return 2.0 * Math.PI * 0.25 * input / 7.08 / 60; 
-  }
-
-  public double getIMUAccelerationYInMetersPerSecondSquared() { //TODO Test this to see if it is too noisy
-    short[] ba_xyz = new short[3];
-    IMU.getBiasedAccelerometer(ba_xyz);
-
-    double xInMetersPerSecondSquared = ((double) ba_xyz[1]) * 9.81 / 16384.0;
-    return xInMetersPerSecondSquared;
-  }
-
-  public void printAccelerations() {
-    short[] ba_xyz = new short[3];
-    IMU.getBiasedAccelerometer(ba_xyz);
-
-    double xInMetersPerSecondSquared = ((double) ba_xyz[0]) * 9.81 / 16384.0;
-    double yInMetersPerSecondSquared = ((double) ba_xyz[1]) * 9.81 / 16384.0;
-    double zInMetersPerSecondSquared = ((double) ba_xyz[2]) * 9.81 / 16384.0;
-
-    SmartDashboard.putNumber("xInMetersPerSecondSquared", xInMetersPerSecondSquared);
-    SmartDashboard.putNumber("yInMetersPerSecondSquared", yInMetersPerSecondSquared);
-    SmartDashboard.putNumber("zInMetersPerSecondSquared", zInMetersPerSecondSquared);
   }
 
   public void driveWithVisionAssist(double move, double rotate) {

@@ -42,8 +42,6 @@ public class Elevator extends Subsystem {
     mMaster.configFactoryDefault();
     mSlave.configFactoryDefault();
 
-    mSlave.follow(mMaster);
-
     mMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
   
     mMaster.setNeutralMode(NeutralMode.Brake);
@@ -83,6 +81,8 @@ public class Elevator extends Subsystem {
     WPI_TalonSRX master = new WPI_TalonSRX(RobotMap.elevatorMotorOne);
     WPI_TalonSRX slave = new WPI_TalonSRX(RobotMap.elevatorMotorTwo);
 
+    slave.follow(master);
+
     DigitalInput bottom = new DigitalInput(RobotMap.liftBottomLimitSwitch);
     DigitalInput top2To1 = new DigitalInput(RobotMap.liftTop2To1LimitSwitch);
     DigitalInput top3To2 = new DigitalInput(RobotMap.liftTop3To2LimitSwitch);
@@ -117,23 +117,6 @@ public class Elevator extends Subsystem {
     double positionInInches = UnitConversion.convertRotationsToInches(positionInRotations, kDrumDiameter);
     
     return positionInInches;
-  }
-
-  public double getActiveTrajectoryAccelerationInInchesPerSecondSquared() {
-    double EncoderTicksPerRotation = UnitConversion.convertPositionInInchesToRotations(1.0, kDrumDiameter);
-    double EncoderTicksPerInch = UnitConversion.convertRotationsToSRXUnits(EncoderTicksPerRotation);
-    double activeTrajectoryAccelerationInInchesPerSecondSquared;
-
-    if (getVelocityInInchesPerSecond() > 5.0) {
-      activeTrajectoryAccelerationInInchesPerSecondSquared = kMaxAcceleration * 10.0 / (EncoderTicksPerInch * 386.09); // 10 ~ Gravity, 386.09 = Gravity Constant
-    }
-    else if (getVelocityInInchesPerSecond() < -5.0) {
-      activeTrajectoryAccelerationInInchesPerSecondSquared = -kMaxAcceleration * 10.0 / (EncoderTicksPerInch * 386.09); // 10 ~ Gravity, 386.09 = Gravity Constant
-    }
-    else {
-      activeTrajectoryAccelerationInInchesPerSecondSquared = 0.0;
-    }
-    return activeTrajectoryAccelerationInInchesPerSecondSquared;
   }
 
   public void setPercentOutput(double output) {

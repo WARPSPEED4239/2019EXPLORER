@@ -3,14 +3,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class HatchGrabberExtend extends Command {
-  public HatchGrabberExtend() {
-    requires(Robot.m_hatchGrabber);
+public class LiftRodBackRetract extends Command {
+  public LiftRodBackRetract() {
+    requires(Robot.m_liftRodBack);
   }
 
   @Override
   protected void initialize() {
-    Robot.m_hatchGrabber.extend();
+    Robot.m_liftRodBack.retract();
   }
 
   @Override

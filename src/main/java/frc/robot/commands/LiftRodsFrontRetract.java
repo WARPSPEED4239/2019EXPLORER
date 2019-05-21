@@ -3,18 +3,18 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftWheelsMotorForward extends Command {
-  public LiftWheelsMotorForward() {
-    requires(Robot.m_liftWheelsMotor);
+public class LiftRodsFrontRetract extends Command {
+  public LiftRodsFrontRetract() {
+    requires(Robot.m_liftRodsFront);
   }
 
   @Override
   protected void initialize() {
+    Robot.m_liftRodsFront.retract();
   }
 
   @Override
   protected void execute() {
-    Robot.m_liftWheelsMotor.forward();
   }
 
   @Override
@@ -28,5 +28,6 @@ public class LiftWheelsMotorForward extends Command {
 
   @Override
   protected void interrupted() {
+    end();
   }
 }

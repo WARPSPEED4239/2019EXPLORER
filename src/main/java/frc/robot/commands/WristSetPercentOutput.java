@@ -15,7 +15,6 @@ public class WristSetPercentOutput extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_wrist.lockRetract();
   }
 
   @Override
