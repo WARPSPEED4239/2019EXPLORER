@@ -10,7 +10,7 @@ public class DrivetrainVisionAssist extends Command {
   NetworkTableEntry tx = Robot.m_drivetrain.getLimelightTable().getEntry("tx");
   NetworkTableEntry tv = Robot.m_drivetrain.getLimelightTable().getEntry("tv");
 
-  private final double Kp = 0.0335; //TODO tune this number more than likely
+  private final double Kp = 0.015; //TODO tune this number more than likely
 
   public DrivetrainVisionAssist() {
     requires(Robot.m_drivetrain);

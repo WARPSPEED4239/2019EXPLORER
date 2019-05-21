@@ -42,8 +42,6 @@ public class Elevator extends Subsystem {
     mMaster.configFactoryDefault();
     mSlave.configFactoryDefault();
 
-    mSlave.follow(mMaster);
-
     mMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
   
     mMaster.setNeutralMode(NeutralMode.Brake);
@@ -82,6 +80,8 @@ public class Elevator extends Subsystem {
   public static Elevator create() {
     WPI_TalonSRX master = new WPI_TalonSRX(RobotMap.elevatorMotorOne);
     WPI_TalonSRX slave = new WPI_TalonSRX(RobotMap.elevatorMotorTwo);
+
+    slave.follow(master);
 
     DigitalInput bottom = new DigitalInput(RobotMap.liftBottomLimitSwitch);
     DigitalInput top2To1 = new DigitalInput(RobotMap.liftTop2To1LimitSwitch);
