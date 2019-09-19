@@ -51,7 +51,7 @@ public class Wrist extends Subsystem {
 
     mMotor.selectProfileSlot(kSlotIdx, kPIDIdx);
     mMotor.config_kF(kSlotIdx, 1023.0 / 550.0); //1023.0 / 550.0
-    mMotor.config_kP(kSlotIdx, 11.0);
+    mMotor.config_kP(kSlotIdx, 11.0); //TODO Tune This
     mMotor.config_kI(kSlotIdx, 0.0);
     mMotor.config_kD(kSlotIdx, 50.0);
 
