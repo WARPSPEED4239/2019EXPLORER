@@ -169,7 +169,7 @@ public class Robot extends TimedRobot {
       m_pneumaticController.turnOffCompressor();
     }
 
-    //TODO Test compressor code above and below
+    //TODO Test compressor code below
 
     /*if (m_pneumaticController.getTankPressure() <= 65.0 && RobotController.getBatteryVoltage() >= 12.2) {
       m_pneumaticController.turnOnCompressor();
