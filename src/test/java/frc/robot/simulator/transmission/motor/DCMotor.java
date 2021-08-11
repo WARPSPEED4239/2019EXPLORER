@@ -1,4 +1,4 @@
-package frc.simulator.transmission.motor;
+package frc.robot.simulator.transmission.motor;
 
 public interface DCMotor {
     public double getNominalVoltage();

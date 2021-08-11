@@ -1,6 +1,6 @@
-package frc.simulator.transmission.motor;
+package frc.robot.simulator.transmission.motor;;
 
-public class BagMotor implements DCMotor {
+public class NeoMotor implements DCMotor {
 
     @Override
     public double getNominalVoltage() {
@@ -9,7 +9,7 @@ public class BagMotor implements DCMotor {
 
     @Override
     public double getFreeSpeed() {
-        return 13180.0;
+        return 5676.0;
     }
 
     @Override
@@ -19,12 +19,12 @@ public class BagMotor implements DCMotor {
 
     @Override
     public double getStallCurrent() {
-        return 53.0;
+        return 105.0;
     }
 
     @Override
     public double getStallTorque() {
-        return 0.43;
+        return 2.6;
     }
     
 }
